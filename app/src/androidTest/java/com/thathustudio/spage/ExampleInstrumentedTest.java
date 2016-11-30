@@ -1,4 +1,4 @@
-package com.thathustudio.ryanlvu.spage;
+package com.thathustudio.spage;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.thathustudio.ryanlvu.spage", appContext.getPackageName());
+        assertEquals("com.thathustudio.spage", appContext.getPackageName());
     }
 }

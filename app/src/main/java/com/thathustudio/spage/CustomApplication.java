@@ -1,4 +1,4 @@
-package com.thathustudio.ryanlvu.spage;
+package com.thathustudio.spage;
 
 import android.app.Application;
 import android.content.Context;

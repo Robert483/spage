@@ -1,15 +1,15 @@
-package com.thathustudio.ryanlvu.spage.activities;
+package com.thathustudio.spage.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.thathustudio.ryanlvu.spage.R;
+import com.thathustudio.spage.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class QuestionsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_questions);
     }
 }

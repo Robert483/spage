@@ -1,4 +1,4 @@
-package com.thathustudio.ryanlvu.spage;
+package com.thathustudio.spage;
 
 import org.junit.Test;
 
