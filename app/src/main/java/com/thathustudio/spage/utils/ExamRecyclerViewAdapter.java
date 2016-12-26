@@ -17,6 +17,7 @@ import com.thathustudio.spage.model.Exam;
 import java.util.List;
 
 public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder> {
+    private ExamViewHolder pinnedViewHolder;
     private final List<Exam> exams;
     private final OnExamViewInteractionListener listener;
 
@@ -48,7 +49,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         // set swiping properties
         holder.setMaxLeftSwipeAmount(-0.5f);
         holder.setMaxRightSwipeAmount(0);
-        holder.setSwipeItemHorizontalSlideAmount(holder.exam.isPinned() ? -0.5f : 0);
+        holder.setSwipeItemHorizontalSlideAmount(holder.isPinned() ? -0.5f : 0);
     }
 
     @Override
@@ -58,6 +59,10 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
 
     @Override
     public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
+        if (pinnedViewHolder != null) {
+            pinnedViewHolder.setPinned(false);
+            pinnedViewHolder = null;
+        }
         return SwipeableItemConstants.REACTION_CAN_SWIPE_LEFT;
     }
 
@@ -70,17 +75,23 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     public SwipeResultAction onSwipeItem(ExamViewHolder holder, int position, int result) {
         switch (result) {
             case SwipeableItemConstants.RESULT_SWIPED_LEFT:
-                holder.exam.setPinned(true);
+                pinnedViewHolder = holder;
+                holder.setPinned(true);
                 break;
             default:
-                holder.exam.setPinned(false);
+                holder.setPinned(false);
                 break;
         }
 
         return null;
     }
 
+    public interface OnExamViewInteractionListener {
+
+    }
+
     public static class ExamViewHolder extends AbstractSwipeableItemViewHolder {
+        private boolean pinned;
         public Exam exam;
         public final FrameLayout frameLayoutContainer;
         public final TextView textViewExamName;
@@ -95,9 +106,13 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public View getSwipeableContainerView() {
             return frameLayoutContainer;
         }
-    }
 
-    public interface OnExamViewInteractionListener {
+        public boolean isPinned() {
+            return pinned;
+        }
 
+        public void setPinned(boolean pinned) {
+            this.pinned = pinned;
+        }
     }
 }
