@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.activities.LoginActivity;
+import com.thathustudio.spage.fragments.ExamsFragment;
 
 public class TempActivity extends AppCompatActivity {
 
@@ -15,9 +16,14 @@ public class TempActivity extends AppCompatActivity {
         setContentView(R.layout.activity_temp);
 
         // Redirect or show fragment
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        // -------------------------
 
-        finish();
+        // - Redirect
+        /*startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();*/
+
+        // - Show fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExamsFragment.newInstance()).commitAllowingStateLoss();
+
+        // -------------------------
     }
 }
