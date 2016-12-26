@@ -3,7 +3,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="64dp">
+             android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+            android:layout_weight="4"/>
 
         <ImageButton
             android:layout_width="0dp"
@@ -22,8 +22,9 @@
             android:adjustViewBounds="true"
             android:background="@drawable/btn_exam_info"
             android:contentDescription="@string/exam_info"
-            android:padding="@dimen/activity_vertical_margin"
-            android:scaleType="fitCenter"
+            android:cropToPadding="false"
+            android:padding="@dimen/btn_exam_padding"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_info_outline"/>
 
         <ImageButton
@@ -33,7 +34,7 @@
             android:adjustViewBounds="true"
             android:background="@drawable/btn_start_exam"
             android:contentDescription="@string/start_exam"
-            android:padding="@dimen/activity_vertical_margin"
+            android:padding="@dimen/btn_exam_padding"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_create"/>
 

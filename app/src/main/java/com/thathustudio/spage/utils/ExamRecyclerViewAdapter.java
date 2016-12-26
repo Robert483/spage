@@ -18,6 +18,7 @@ import java.util.List;
 
 public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder> {
     private ExamViewHolder pinnedViewHolder;
+    private int pinnedPosition = -1;
     private final List<Exam> exams;
     private final OnExamViewInteractionListener listener;
 
@@ -47,9 +48,9 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         holder.textViewExamName.setText(holder.exam.getName());
 
         // set swiping properties
-        holder.setMaxLeftSwipeAmount(-0.5f);
+        holder.setMaxLeftSwipeAmount(-2f / 6);
         holder.setMaxRightSwipeAmount(0);
-        holder.setSwipeItemHorizontalSlideAmount(holder.isPinned() ? -0.5f : 0);
+        holder.setSwipeItemHorizontalSlideAmount(holder.isPinned() ? -2f / 6 : 0);
     }
 
     @Override
@@ -61,7 +62,9 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
         if (pinnedViewHolder != null) {
             pinnedViewHolder.setPinned(false);
+            notifyItemChanged(pinnedPosition);
             pinnedViewHolder = null;
+            pinnedPosition = -1;
         }
         return SwipeableItemConstants.REACTION_CAN_SWIPE_LEFT;
     }
@@ -76,6 +79,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         switch (result) {
             case SwipeableItemConstants.RESULT_SWIPED_LEFT:
                 pinnedViewHolder = holder;
+                pinnedPosition = position;
                 holder.setPinned(true);
                 break;
             default:
