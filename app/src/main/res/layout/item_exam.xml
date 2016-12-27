@@ -1,63 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content">
+             android:layout_height="@dimen/recommended_2lines_size">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/lnLyot_underContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"/>
-
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
+            android:id="@+id/imgBtn_examInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/btn_exam_info"
             android:contentDescription="@string/exam_info"
-            android:cropToPadding="false"
-            android:padding="@dimen/btn_exam_padding"
-            android:scaleType="centerCrop"
+            android:paddingLeft="@dimen/recommended_padding"
+            android:paddingRight="@dimen/recommended_padding"
             app:srcCompat="@drawable/ic_info_outline"/>
 
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
+            android:id="@+id/imgBtn_examStart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/btn_start_exam"
             android:contentDescription="@string/start_exam"
-            android:padding="@dimen/btn_exam_padding"
-            android:scaleType="fitCenter"
+            android:paddingLeft="@dimen/recommended_padding"
+            android:paddingRight="@dimen/recommended_padding"
             app:srcCompat="@drawable/ic_create"/>
 
     </LinearLayout>
 
-
-    <FrameLayout
-        android:id="@+id/container"
+    <RelativeLayout
+        android:id="@+id/lnLyot_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        tools:visibility="invisible">
+        android:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/txtV_examName"
+        <ImageView
+            android:id="@+id/imgV_examSubject"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="top|left"
-            android:gravity="center"
-            tools:ignore="RtlHardcoded"/>
+            android:layout_marginLeft="@dimen/recommended_padding"
+            android:layout_marginStart="@dimen/recommended_padding"
+            android:layout_toLeftOf="@+id/txtV_examName"
+            android:layout_toStartOf="@id/txtV_examName"
+            android:contentDescription="@string/exam_subject"/>
 
-    </FrameLayout>
+        <TextView
+            android:id="@id/txtV_examName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtV_dump"
+            android:layout_alignEnd="@id/txtV_dump"
+            android:layout_alignLeft="@id/txtV_dump"
+            android:layout_alignRight="@id/txtV_dump"
+            android:layout_alignStart="@id/txtV_dump"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@id/txtV_dump"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/recommended_padding"
+            android:layout_marginLeft="@dimen/recommended_2lines_size"
+            android:layout_marginRight="@dimen/recommended_padding"
+            android:layout_marginStart="@dimen/recommended_2lines_size"/>
+
+        <TextView
+            android:id="@+id/txtV_examDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/txtV_dump"
+            android:layout_alignLeft="@id/txtV_dump"
+            android:layout_alignRight="@id/txtV_dump"
+            android:layout_alignStart="@id/txtV_dump"
+            android:layout_below="@id/txtV_dump"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

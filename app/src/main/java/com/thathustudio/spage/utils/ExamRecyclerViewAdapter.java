@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter;
@@ -17,14 +16,14 @@ import com.thathustudio.spage.model.Exam;
 import java.util.List;
 
 public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder> {
-    private ExamViewHolder pinnedViewHolder;
-    private int pinnedPosition = -1;
+    private int pinnedPosition;
     private final List<Exam> exams;
     private final OnExamViewInteractionListener listener;
 
     public ExamRecyclerViewAdapter(List<Exam> exams, OnExamViewInteractionListener listener) {
         this.exams = exams;
         this.listener = listener;
+        this.pinnedPosition = RecyclerView.NO_POSITION;
 
         // SwipeableItemAdapter requires stable ID, and also
         // have to implement the getItemId() method appropriately.
@@ -48,9 +47,10 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         holder.textViewExamName.setText(holder.exam.getName());
 
         // set swiping properties
-        holder.setMaxLeftSwipeAmount(-2f / 6);
+        int underContainerWidth = holder.viewUnderContainer.getWidth();
+        holder.setMaxLeftSwipeAmount(-underContainerWidth);
         holder.setMaxRightSwipeAmount(0);
-        holder.setSwipeItemHorizontalSlideAmount(holder.isPinned() ? -2f / 6 : 0);
+        holder.setSwipeItemHorizontalSlideAmount(pinnedPosition == position ? -underContainerWidth : 0);
     }
 
     @Override
@@ -60,11 +60,10 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
 
     @Override
     public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
-        if (pinnedViewHolder != null) {
-            pinnedViewHolder.setPinned(false);
-            notifyItemChanged(pinnedPosition);
-            pinnedViewHolder = null;
-            pinnedPosition = -1;
+        if (pinnedPosition != RecyclerView.NO_POSITION && pinnedPosition != position) {
+            int temp = pinnedPosition;
+            pinnedPosition = RecyclerView.NO_POSITION;
+            notifyItemChanged(temp);
         }
         return SwipeableItemConstants.REACTION_CAN_SWIPE_LEFT;
     }
@@ -78,12 +77,10 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     public SwipeResultAction onSwipeItem(ExamViewHolder holder, int position, int result) {
         switch (result) {
             case SwipeableItemConstants.RESULT_SWIPED_LEFT:
-                pinnedViewHolder = holder;
                 pinnedPosition = position;
-                holder.setPinned(true);
                 break;
             default:
-                holder.setPinned(false);
+                pinnedPosition = RecyclerView.NO_POSITION;
                 break;
         }
 
@@ -95,28 +92,22 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     }
 
     public static class ExamViewHolder extends AbstractSwipeableItemViewHolder {
-        private boolean pinned;
         public Exam exam;
-        public final FrameLayout frameLayoutContainer;
+        public final View viewUnderContainer;
+        public final View viewContainer;
         public final TextView textViewExamName;
 
         public ExamViewHolder(View itemView) {
             super(itemView);
-            frameLayoutContainer = (FrameLayout) itemView.findViewById(R.id.container);
+            viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
+            viewContainer = itemView.findViewById(R.id.lnLyot_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
+            setProportionalSwipeAmountModeEnabled(false);
         }
 
         @Override
         public View getSwipeableContainerView() {
-            return frameLayoutContainer;
-        }
-
-        public boolean isPinned() {
-            return pinned;
-        }
-
-        public void setPinned(boolean pinned) {
-            this.pinned = pinned;
+            return viewContainer;
         }
     }
 }

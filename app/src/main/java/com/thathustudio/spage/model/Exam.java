@@ -3,7 +3,6 @@ package com.thathustudio.spage.model;
 public class Exam {
     private int id;
     private String name;
-    //private boolean pinned;
 
     public Exam() {}
 
@@ -27,12 +26,4 @@ public class Exam {
     public void setName(String name) {
         this.name = name;
     }
-
-    /*public boolean isPinned() {
-        return pinned;
-    }
-
-    public void setPinned(boolean pinned) {
-        this.pinned = pinned;
-    }*/
 }
