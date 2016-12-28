@@ -1,9 +1,11 @@
 package com.thathustudio.spage.utils;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemAdapter;
@@ -45,6 +47,8 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     public void onBindViewHolder(final ExamViewHolder holder, int position) {
         holder.exam = exams.get(position);
         holder.textViewExamName.setText(holder.exam.getName());
+        holder.textViewExamDescription.setText(holder.exam.getDescription());
+        holder.imageViewSubject.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), holder.exam.getSubject()));
 
         // set swiping properties
         int underContainerWidth = holder.viewUnderContainer.getMeasuredWidth();
@@ -115,12 +119,16 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public final View viewUnderContainer;
         public final View viewContainer;
         public final TextView textViewExamName;
+        public final TextView textViewExamDescription;
+        public final ImageView imageViewSubject;
 
         public ExamViewHolder(View itemView, View.OnClickListener l) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
             viewContainer = itemView.findViewById(R.id.lnLyot_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
+            textViewExamDescription = (TextView) itemView.findViewById(R.id.txtV_examDescription);
+            imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_examSubject);
 
             itemView.findViewById(R.id.imgBtn_examInfo).setOnClickListener(l);
             itemView.findViewById(R.id.imgBtn_examStart).setOnClickListener(l);

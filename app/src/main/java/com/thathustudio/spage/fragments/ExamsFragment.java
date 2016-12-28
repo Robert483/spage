@@ -38,8 +38,16 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
     private void recyclerViewInit(RecyclerView recyclerView) {
         // TODO: delete this and use Retrofit instead
         List<Exam> exams = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            exams.add(new Exam(i, "Test" + i));
+        String[] subjects = {"Art", "Biology", "Chemistry", "Civic Education",
+                "English", "Geography", "History", "Informatics", "Literature",
+                "Mathematics", "Music", "Physical Education", "Physics", "Technology"};
+        int[] ids = {R.drawable.ic_sbj_art, R.drawable.ic_sbj_biology, R.drawable.ic_sbj_chemistry,
+                R.drawable.ic_sbj_civic_education, R.drawable.ic_sbj_english, R.drawable.ic_sbj_geography,
+                R.drawable.ic_sbj_history, R.drawable.ic_sbj_informatics, R.drawable.ic_sbj_literature,
+                R.drawable.ic_sbj_mathematics, R.drawable.ic_sbj_music, R.drawable.ic_sbj_physical_education, R.drawable.ic_sbj_physics,
+                R.drawable.ic_sbj_technology};
+        for (int i = 0, len = subjects.length; i < len; i++) {
+            exams.add(new Exam(i, subjects[i], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a gravida orci, id malesuada diam", ids[i]));
         }
 
         // touch guard manager  (this class is required to suppress scrolling while swipe-dismiss animation is running)
@@ -65,7 +73,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
 
         // additional decorations
         // Lollipop or later has native drop shadow feature. ItemShadowDecorator is not required.
-        if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             recyclerView.addItemDecoration(new ItemShadowDecorator((NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.nine_patch_material_shadow_z1)));
         }
 

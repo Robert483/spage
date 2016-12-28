@@ -3,12 +3,16 @@ package com.thathustudio.spage.model;
 public class Exam {
     private int id;
     private String name;
+    private String description;
+    private int subject;
 
     public Exam() {}
 
-    public Exam(int id, String name) {
+    public Exam(int id, String name, String description, int subject) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.subject = subject;
     }
 
     public int getId() {
@@ -25,5 +29,21 @@ public class Exam {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getSubject() {
+        return subject;
+    }
+
+    public void setSubject(int subject) {
+        this.subject = subject;
     }
 }
