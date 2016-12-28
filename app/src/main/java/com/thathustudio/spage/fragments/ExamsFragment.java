@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.SwipeDismissItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
-import com.h6ah4i.android.widget.advrecyclerview.decoration.SimpleListDividerDecorator;
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager;
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.thathustudio.spage.R;
@@ -29,23 +29,10 @@ import java.util.List;
  * Use the {@link ExamsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExamsFragment extends BaseFragment {
+public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapter.OnExamViewInteractionListener {
 
     public static ExamsFragment newInstance() {
         return new ExamsFragment();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_exams, container, false);
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrView_exams);
-        if (recyclerView != null) {
-            recyclerViewInit(recyclerView);
-        }
-
-        return view;
     }
 
     private void recyclerViewInit(RecyclerView recyclerView) {
@@ -64,7 +51,7 @@ public class ExamsFragment extends BaseFragment {
         RecyclerViewSwipeManager swipeManager = new RecyclerViewSwipeManager();
 
         // adapter
-        RecyclerView.Adapter adapter = new ExamRecyclerViewAdapter(exams, null);
+        RecyclerView.Adapter adapter = new ExamRecyclerViewAdapter(exams, this);
         RecyclerView.Adapter wrappedAdapter = swipeManager.createWrappedAdapter(adapter); // wrap for swiping
 
         // Change animations are enabled by default since support-v7-recyclerview v22.
@@ -81,7 +68,6 @@ public class ExamsFragment extends BaseFragment {
         if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)) {
             recyclerView.addItemDecoration(new ItemShadowDecorator((NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.nine_patch_material_shadow_z1)));
         }
-        recyclerView.addItemDecoration(new SimpleListDividerDecorator(ContextCompat.getDrawable(getContext(), R.drawable.list_divider_h), true));
 
         // NOTE:
         // The initialization order is very important! This order determines the priority of touch event handling.
@@ -91,4 +77,26 @@ public class ExamsFragment extends BaseFragment {
         swipeManager.attachRecyclerView(recyclerView);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_exams, container, false);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrView_exams);
+        if (recyclerView != null) {
+            recyclerViewInit(recyclerView);
+        }
+
+        return view;
+    }
+
+    @Override
+    public void onExamInfoClick(Exam exam) {
+        Log.v("My tag", "Exam info with id = " + exam.getId() + " clicked");
+    }
+
+    @Override
+    public void onExamStartClick(Exam exam) {
+        Log.v("My tag", "Exam start with id = " + exam.getId() + " clicked");
+    }
 }

@@ -15,7 +15,7 @@ import com.thathustudio.spage.model.Exam;
 
 import java.util.List;
 
-public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder> {
+public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder>, View.OnClickListener {
     private int pinnedPosition;
     private final List<Exam> exams;
     private final OnExamViewInteractionListener listener;
@@ -38,7 +38,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     @Override
     public ExamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exam, parent, false);
-        return new ExamViewHolder(view);
+        return new ExamViewHolder(view, this);
     }
 
     @Override
@@ -47,7 +47,8 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         holder.textViewExamName.setText(holder.exam.getName());
 
         // set swiping properties
-        int underContainerWidth = holder.viewUnderContainer.getWidth();
+        int underContainerWidth = holder.viewUnderContainer.getMeasuredWidth();
+        holder.setProportionalSwipeAmountModeEnabled(false);
         holder.setMaxLeftSwipeAmount(-underContainerWidth);
         holder.setMaxRightSwipeAmount(0);
         holder.setSwipeItemHorizontalSlideAmount(pinnedPosition == position ? -underContainerWidth : 0);
@@ -87,8 +88,26 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         return null;
     }
 
-    public interface OnExamViewInteractionListener {
+    @Override
+    public void onClick(View v) {
+        if (listener != null) {
+            Exam exam = exams.get(pinnedPosition);
 
+            switch (v.getId()) {
+                case R.id.imgBtn_examInfo:
+                    listener.onExamInfoClick(exam);
+                    break;
+                case R.id.imgBtn_examStart:
+                    listener.onExamStartClick(exam);
+                    break;
+            }
+        }
+    }
+
+    public interface OnExamViewInteractionListener {
+        void onExamInfoClick(Exam exam);
+
+        void onExamStartClick(Exam exam);
     }
 
     public static class ExamViewHolder extends AbstractSwipeableItemViewHolder {
@@ -97,12 +116,14 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public final View viewContainer;
         public final TextView textViewExamName;
 
-        public ExamViewHolder(View itemView) {
+        public ExamViewHolder(View itemView, View.OnClickListener l) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
             viewContainer = itemView.findViewById(R.id.lnLyot_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
-            setProportionalSwipeAmountModeEnabled(false);
+
+            itemView.findViewById(R.id.imgBtn_examInfo).setOnClickListener(l);
+            itemView.findViewById(R.id.imgBtn_examStart).setOnClickListener(l);
         }
 
         @Override

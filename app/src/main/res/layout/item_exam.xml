@@ -17,8 +17,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/btn_exam_info"
             android:contentDescription="@string/exam_info"
-            android:paddingLeft="@dimen/recommended_padding"
-            android:paddingRight="@dimen/recommended_padding"
+            android:paddingLeft="@dimen/recommended_spacing"
+            android:paddingRight="@dimen/recommended_spacing"
             app:srcCompat="@drawable/ic_info_outline"/>
 
         <ImageButton
@@ -27,8 +27,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/btn_start_exam"
             android:contentDescription="@string/start_exam"
-            android:paddingLeft="@dimen/recommended_padding"
-            android:paddingRight="@dimen/recommended_padding"
+            android:paddingLeft="@dimen/recommended_spacing"
+            android:paddingRight="@dimen/recommended_spacing"
             app:srcCompat="@drawable/ic_create"/>
 
     </LinearLayout>
@@ -43,8 +43,8 @@
             android:id="@+id/imgV_examSubject"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/recommended_padding"
-            android:layout_marginStart="@dimen/recommended_padding"
+            android:layout_marginLeft="@dimen/recommended_spacing"
+            android:layout_marginStart="@dimen/recommended_spacing"
             android:layout_toLeftOf="@+id/txtV_examName"
             android:layout_toStartOf="@id/txtV_examName"
             android:contentDescription="@string/exam_subject"/>
@@ -67,9 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/recommended_padding"
+            android:layout_marginEnd="@dimen/recommended_spacing"
             android:layout_marginLeft="@dimen/recommended_2lines_size"
-            android:layout_marginRight="@dimen/recommended_padding"
+            android:layout_marginRight="@dimen/recommended_spacing"
             android:layout_marginStart="@dimen/recommended_2lines_size"/>
 
         <TextView
@@ -84,6 +84,16 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/recommended_spacing"
+            android:layout_marginLeft="@dimen/recommended_spacing"
+            android:layout_marginRight="@dimen/recommended_spacing"
+            android:layout_marginStart="@dimen/recommended_spacing"
+            android:background="#20000000"/>
 
     </RelativeLayout>
 
