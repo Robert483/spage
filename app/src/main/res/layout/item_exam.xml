@@ -34,10 +34,11 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/lnLyot_container"
+        android:id="@+id/crdV_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/imgV_examSubject"
@@ -68,7 +69,7 @@
         <TextView
             android:id="@id/txtV_dump"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/recommended_spacing"
             android:layout_marginLeft="@dimen/recommended_2lines_size"

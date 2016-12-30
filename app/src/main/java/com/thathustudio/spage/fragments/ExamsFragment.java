@@ -1,6 +1,7 @@
 package com.thathustudio.spage.fragments;
 
 
+import android.content.Intent;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager;
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.thathustudio.spage.R;
+import com.thathustudio.spage.activities.QuestionsActivity;
 import com.thathustudio.spage.model.Exam;
 import com.thathustudio.spage.utils.ExamRecyclerViewAdapter;
 
@@ -91,9 +93,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
         View view = inflater.inflate(R.layout.fragment_exams, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrView_exams);
-        if (recyclerView != null) {
-            recyclerViewInit(recyclerView);
-        }
+        recyclerViewInit(recyclerView);
 
         return view;
     }
@@ -106,5 +106,8 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
     @Override
     public void onExamStartClick(Exam exam) {
         Log.v("My tag", "Exam start with id = " + exam.getId() + " clicked");
+        Intent intent = new Intent(getContext().getApplicationContext(), QuestionsActivity.class);
+        intent.putExtra(QuestionsActivity.EXAM_ID, exam.getId());
+        startActivity(intent);
     }
 }

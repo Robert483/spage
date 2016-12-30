@@ -8,6 +8,8 @@
         android:id="@+id/rclrView_exams"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/recommended_spacing_above_list"/>
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/recommended_vertical_spacing_list"
+        android:paddingTop="@dimen/recommended_vertical_spacing_list"/>
 
 </FrameLayout>

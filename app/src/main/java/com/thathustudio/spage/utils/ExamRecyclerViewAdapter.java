@@ -19,6 +19,7 @@ import java.util.List;
 
 public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder>, View.OnClickListener {
     private int pinnedPosition;
+    private int currentPosition;
     private final List<Exam> exams;
     private final OnExamViewInteractionListener listener;
 
@@ -26,6 +27,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         this.exams = exams;
         this.listener = listener;
         this.pinnedPosition = RecyclerView.NO_POSITION;
+        this.currentPosition = RecyclerView.NO_POSITION;
 
         // SwipeableItemAdapter requires stable ID, and also
         // have to implement the getItemId() method appropriately.
@@ -44,7 +46,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(final ExamViewHolder holder, int position) {
+    public void onBindViewHolder(ExamViewHolder holder, int position) {
         holder.exam = exams.get(position);
         holder.textViewExamName.setText(holder.exam.getName());
         holder.textViewExamDescription.setText(holder.exam.getDescription());
@@ -65,6 +67,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
 
     @Override
     public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
+        currentPosition = position;
         if (pinnedPosition != RecyclerView.NO_POSITION && pinnedPosition != position) {
             int temp = pinnedPosition;
             pinnedPosition = RecyclerView.NO_POSITION;
@@ -95,7 +98,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     @Override
     public void onClick(View v) {
         if (listener != null) {
-            Exam exam = exams.get(pinnedPosition);
+            Exam exam = exams.get(currentPosition);
 
             switch (v.getId()) {
                 case R.id.imgBtn_examInfo:
@@ -125,7 +128,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public ExamViewHolder(View itemView, View.OnClickListener l) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
-            viewContainer = itemView.findViewById(R.id.lnLyot_container);
+            viewContainer = itemView.findViewById(R.id.crdV_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
             textViewExamDescription = (TextView) itemView.findViewById(R.id.txtV_examDescription);
             imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_examSubject);
