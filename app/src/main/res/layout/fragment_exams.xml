@@ -5,11 +5,11 @@
              tools:context="com.thathustudio.spage.fragments.ExamsFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rclrView_exams"
+        android:id="@+id/rclrV_exams"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/recommended_vertical_spacing_list"
-        android:paddingTop="@dimen/recommended_vertical_spacing_list"/>
+        android:paddingBottom="@dimen/recommended_half_spacing"
+        android:paddingTop="@dimen/recommended_half_spacing"/>
 
 </FrameLayout>

@@ -92,7 +92,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exams, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrView_exams);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exams);
         recyclerViewInit(recyclerView);
 
         return view;

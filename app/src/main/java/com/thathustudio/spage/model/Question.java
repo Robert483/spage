@@ -5,15 +5,15 @@ import java.util.List;
 
 public class Question {
     private String content;
-    private List<String> answers;
-    private String correctAnswer;
+    private List<String> choices;
+    private String answer;
 
     public Question() {
     }
 
-    public Question(String content, List<String> answers) {
+    public Question(String content, List<String> choices) {
         this.content = content;
-        this.answers = answers;
+        setChoices(choices);
     }
 
     public String getContent() {
@@ -24,17 +24,17 @@ public class Question {
         this.content = content;
     }
 
-    public List<String> getAnswers() {
-        return answers;
+    public List<String> getChoices() {
+        return choices;
     }
 
-    public void setAnswers(List<String> answers) {
-        correctAnswer = answers.get(0);
-        Collections.shuffle(answers);
-        this.answers = answers;
+    public void setChoices(List<String> choices) {
+        answer = choices.get(0);
+        Collections.shuffle(choices);
+        this.choices = choices;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public String getAnswer() {
+        return answer;
     }
 }

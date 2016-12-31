@@ -42,7 +42,9 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     @Override
     public ExamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exam, parent, false);
-        return new ExamViewHolder(view, this);
+        view.findViewById(R.id.imgBtn_examInfo).setOnClickListener(this);
+        view.findViewById(R.id.imgBtn_examStart).setOnClickListener(this);
+        return new ExamViewHolder(view);
     }
 
     @Override
@@ -125,16 +127,13 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public final TextView textViewExamDescription;
         public final ImageView imageViewSubject;
 
-        public ExamViewHolder(View itemView, View.OnClickListener l) {
+        public ExamViewHolder(View itemView) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
             viewContainer = itemView.findViewById(R.id.crdV_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
             textViewExamDescription = (TextView) itemView.findViewById(R.id.txtV_examDescription);
             imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_examSubject);
-
-            itemView.findViewById(R.id.imgBtn_examInfo).setOnClickListener(l);
-            itemView.findViewById(R.id.imgBtn_examStart).setOnClickListener(l);
         }
 
         @Override

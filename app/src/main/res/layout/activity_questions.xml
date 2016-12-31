@@ -8,11 +8,10 @@
     tools:context="com.thathustudio.spage.activities.QuestionsActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rclrView_questions"
+        android:id="@+id/rclrV_questions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/recommended_vertical_spacing_list"
-        android:paddingTop="@dimen/recommended_vertical_spacing_list"/>
+        android:paddingTop="@dimen/recommended_half_spacing"/>
 
 </FrameLayout>

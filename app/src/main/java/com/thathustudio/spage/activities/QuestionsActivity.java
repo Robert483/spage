@@ -11,6 +11,7 @@ import com.thathustudio.spage.utils.QuestionRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class QuestionsActivity extends AppCompatActivity {
 
@@ -24,13 +25,18 @@ public class QuestionsActivity extends AppCompatActivity {
         int examId = getIntent().getIntExtra(QuestionsActivity.EXAM_ID, -1);
 
         // TODO: delete this and use Retrofit instead
+        Random random = new Random(System.currentTimeMillis());
         List<Question> questions = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
-            questions.add(new Question("Test " + i, null));
+            List<String> choices = new ArrayList<>();
+            for (int j = 0, len = random.nextInt(4) + 1; j < len; j++) {
+                choices.add("Test " + i + " - Choice " + j);
+            }
+            questions.add(new Question("Test " + i, choices));
         }
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rclrView_questions);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rclrV_questions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new QuestionRecyclerViewAdapter(questions, null));
+        recyclerView.setAdapter(new QuestionRecyclerViewAdapter(questions));
     }
 }
