@@ -130,7 +130,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         public ExamViewHolder(View itemView) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
-            viewContainer = itemView.findViewById(R.id.crdV_container);
+            viewContainer = itemView.findViewById(R.id.rltLyot_container);
             textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
             textViewExamDescription = (TextView) itemView.findViewById(R.id.txtV_examDescription);
             imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_examSubject);

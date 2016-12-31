@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Question;
 import com.thathustudio.spage.utils.QuestionRecyclerViewAdapter;
+import com.turingtechnologies.materialscrollbar.TouchScrollBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     public static final String EXAM_ID = "Exam ID";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_questions);
-
-        int examId = getIntent().getIntExtra(QuestionsActivity.EXAM_ID, -1);
-
+    private void recyclerViewInit() {
         // TODO: delete this and use Retrofit instead
         Random random = new Random(System.currentTimeMillis());
         List<Question> questions = new ArrayList<>();
@@ -38,5 +33,18 @@ public class QuestionsActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rclrV_questions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new QuestionRecyclerViewAdapter(questions));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_questions);
+
+        int examId = getIntent().getIntExtra(QuestionsActivity.EXAM_ID, -1);
+
+        recyclerViewInit();
+
+        TouchScrollBar touchScrollBar = (TouchScrollBar) findViewById(R.id.tchSrlBr);
+        touchScrollBar.setHideDuration(1000);
     }
 }

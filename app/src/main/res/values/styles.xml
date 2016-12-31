@@ -14,4 +14,8 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="FlatButton">
+        <item name="colorControlHighlight">#6533B5E5</item>
+    </style>
+
 </resources>

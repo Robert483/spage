@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_questions"
     android:layout_width="match_parent"
@@ -11,7 +12,60 @@
         android:id="@+id/rclrV_questions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/lnLyot_ctrl"
         android:clipToPadding="false"
         android:paddingTop="@dimen/half_spacing"/>
 
-</FrameLayout>
+    <com.turingtechnologies.materialscrollbar.TouchScrollBar
+        android:id="@+id/tchSrlBr"
+        android:layout_width="@dimen/half_spacing"
+        android:layout_height="match_parent"
+        android:layout_above="@id/lnLyot_ctrl"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:paddingEnd="@dimen/zero"
+        android:paddingLeft="@dimen/quarter_spacing"
+        android:paddingRight="@dimen/zero"
+        android:paddingStart="@dimen/quarter_spacing"
+        app:msb_lightOnTouch="false"
+        app:msb_recyclerView="@id/rclrV_questions"/>
+
+    <LinearLayout
+        android:id="@id/lnLyot_ctrl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_height"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginEnd="@dimen/half_spacing"
+            android:layout_marginRight="@dimen/half_spacing"
+            android:background="?attr/selectableItemBackground"
+            android:minWidth="88dp"
+            android:paddingEnd="@dimen/half_spacing"
+            android:paddingLeft="@dimen/half_spacing"
+            android:paddingRight="@dimen/half_spacing"
+            android:paddingStart="@dimen/half_spacing"
+            android:text="@string/finish"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="@dimen/body_text_size"
+            android:theme="@style/FlatButton"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_alignTop="@id/lnLyot_ctrl"
+        android:background="@color/dividerDark"/>
+
+</RelativeLayout>

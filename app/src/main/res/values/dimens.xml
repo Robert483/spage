@@ -11,4 +11,5 @@
     <dimen name="divider_height">1dp</dimen>
     <dimen name="quarter_spacing">4dp</dimen>
     <dimen name="button_height">36dp</dimen>
+    <dimen name="footer_height">48dp</dimen>
 </resources>
