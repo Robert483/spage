@@ -30,10 +30,11 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
 
     @Override
     public void onBindViewHolder(QuestionViewHolder holder, int position) {
+        ChoiceRecyclerViewAdapter adapter = (ChoiceRecyclerViewAdapter) holder.recyclerViewChoices.getAdapter();
+        holder.question.setUserChoice(adapter.getUserChoiceIndex());
         holder.question = questions.get(position);
         holder.textViewQuestionContent.setText(holder.question.getContent());
-        ChoiceRecyclerViewAdapter adapter = (ChoiceRecyclerViewAdapter) holder.recyclerViewChoices.getAdapter();
-        adapter.replaceChoices(holder.question.getChoices());
+        adapter.replaceChoices(holder.question.getChoices(), holder.question.getUserChoice());
     }
 
     @Override
@@ -48,6 +49,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
 
         public QuestionViewHolder(View itemView) {
             super(itemView);
+            question = new Question(); // temp question to surpress first time null pointer
             textViewQuestionContent = (TextView) itemView.findViewById(R.id.txtV_questionContent);
             recyclerViewChoices = (RecyclerView) itemView.findViewById(R.id.rclrV_choices);
         }

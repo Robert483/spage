@@ -35,10 +35,15 @@ public class ChoiceRecyclerViewAdapter extends RecyclerView.Adapter<ChoiceRecycl
         return alphabetId;
     }
 
-    public void replaceChoices(List<String> choices) {
+    public void replaceChoices(List<String> choices, int userChoice) {
         this.choices.clear();
         this.choices.addAll(choices);
+        this.checkedPosition = userChoice;
         notifyDataSetChanged();
+    }
+
+    public int getUserChoiceIndex() {
+        return checkedPosition;
     }
 
     @Override

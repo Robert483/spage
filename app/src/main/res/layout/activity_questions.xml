@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/recommended_half_spacing"/>
+        android:paddingTop="@dimen/half_spacing"/>
 
 </FrameLayout>
