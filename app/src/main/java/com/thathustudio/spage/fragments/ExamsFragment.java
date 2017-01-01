@@ -32,6 +32,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapter.OnExamViewInteractionListener {
+    private ExamRecyclerViewAdapter adapter;
 
     public static ExamsFragment newInstance() {
         return new ExamsFragment();
@@ -61,7 +62,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
         RecyclerViewSwipeManager swipeManager = new RecyclerViewSwipeManager();
 
         // adapter
-        RecyclerView.Adapter adapter = new ExamRecyclerViewAdapter(exams, this);
+        adapter = new ExamRecyclerViewAdapter(exams, this);
         RecyclerView.Adapter wrappedAdapter = swipeManager.createWrappedAdapter(adapter); // wrap for swiping
 
         // Change animations are enabled by default since support-v7-recyclerview v22.
@@ -106,6 +107,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
     @Override
     public void onExamStartClick(Exam exam) {
         Log.v("My tag", "Exam start with id = " + exam.getId() + " clicked");
+        adapter.unpinPinnedExam();
         Intent intent = new Intent(getContext().getApplicationContext(), QuestionsActivity.class);
         intent.putExtra(QuestionsActivity.EXAM_ID, exam.getId());
         startActivity(intent);

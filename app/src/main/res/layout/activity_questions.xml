@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/lnLyot_ctrl"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/half_spacing"/>
+        android:paddingBottom="@dimen/half_spacing"/>
 
     <com.turingtechnologies.materialscrollbar.TouchScrollBar
         android:id="@+id/tchSrlBr"

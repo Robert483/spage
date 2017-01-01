@@ -1,43 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/half_spacing"
-                                    android:layout_marginEnd="@dimen/half_spacing"
-                                    android:layout_marginLeft="@dimen/half_spacing"
-                                    android:layout_marginRight="@dimen/half_spacing"
-                                    android:layout_marginStart="@dimen/half_spacing"
-                                    android:focusable="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/FakeCard"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="@dimen/half_spacing"
+              android:layout_marginLeft="@dimen/half_spacing"
+              android:layout_marginRight="@dimen/half_spacing"
+              android:layout_marginStart="@dimen/half_spacing"
+              android:layout_marginTop="@dimen/half_spacing"
+              android:background="@drawable/fake_card_top"
+              android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtV_questionContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:padding="@dimen/spacing"
+        android:textColor="@color/primaryTextDark"
+        android:textSize="@dimen/subheading_text_size"/>
 
-        <TextView
-            android:id="@+id/txtV_questionContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/spacing"
-            android:textColor="@color/primaryTextDark"
-            android:textSize="@dimen/subheading_text_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/quarter_spacing"
+        android:layout_marginEnd="@dimen/spacing"
+        android:layout_marginLeft="@dimen/spacing"
+        android:layout_marginRight="@dimen/spacing"
+        android:layout_marginStart="@dimen/spacing"
+        android:background="@color/dividerDark"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
-            android:layout_marginEnd="@dimen/spacing"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_marginRight="@dimen/spacing"
-            android:layout_marginStart="@dimen/spacing"
-            android:background="@color/dividerDark"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rclrV_choices"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/quarter_spacing"
-            android:layout_marginTop="@dimen/half_spacing"/>
-
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+</LinearLayout>

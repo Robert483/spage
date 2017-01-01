@@ -34,6 +34,18 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         setHasStableIds(true);
     }
 
+    private void unpinPinnedItem() {
+        int temp = pinnedPosition;
+        pinnedPosition = RecyclerView.NO_POSITION;
+        notifyItemChanged(temp);
+    }
+
+    public void unpinPinnedExam() {
+        if (pinnedPosition != RecyclerView.NO_POSITION) {
+            unpinPinnedItem();
+        }
+    }
+
     @Override
     public long getItemId(int position) {
         return exams.get(position).getId();
@@ -71,9 +83,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
         currentPosition = position;
         if (pinnedPosition != RecyclerView.NO_POSITION && pinnedPosition != position) {
-            int temp = pinnedPosition;
-            pinnedPosition = RecyclerView.NO_POSITION;
-            notifyItemChanged(temp);
+            unpinPinnedItem();
         }
         return SwipeableItemConstants.REACTION_CAN_SWIPE_LEFT;
     }

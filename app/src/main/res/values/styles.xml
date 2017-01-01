@@ -18,4 +18,6 @@
         <item name="colorControlHighlight">#6533B5E5</item>
     </style>
 
+    <style name="FakeCard"/>
+
 </resources>
