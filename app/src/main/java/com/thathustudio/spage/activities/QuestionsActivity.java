@@ -1,12 +1,17 @@
 package com.thathustudio.spage.activities;
 
+import android.content.Intent;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
@@ -21,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class QuestionsActivity extends AppCompatActivity {
-
-    public static final String EXAM_ID = "Exam ID";
+public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String EXERCISE_ID = "Exercise ID";
+    private QuestionRecyclerViewAdapter adapter;
 
     private void recyclerViewInit(Bundle savedInstanceState) {
         // TODO: delete this and use Retrofit instead
@@ -44,7 +49,7 @@ public class QuestionsActivity extends AppCompatActivity {
         recyclerViewExpandableItemManager.setDefaultGroupsExpandedState(true);
 
         //adapter
-        RecyclerView.Adapter adapter = new QuestionRecyclerViewAdapter(recyclerViewExpandableItemManager, questions);
+        adapter = new QuestionRecyclerViewAdapter(this, recyclerViewExpandableItemManager, questions);
         RecyclerView.Adapter wrappedAdapter = recyclerViewExpandableItemManager.createWrappedAdapter(adapter);       // wrap for expanding
 
         // Change animations are enabled by default since support-v7-recyclerview v22.
@@ -70,11 +75,42 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        int examId = getIntent().getIntExtra(QuestionsActivity.EXAM_ID, -1);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        int exerciseId = getIntent().getIntExtra(QuestionsActivity.EXERCISE_ID, -1);
 
         recyclerViewInit(savedInstanceState);
 
         TouchScrollBar touchScrollBar = (TouchScrollBar) findViewById(R.id.tchSrlBr);
         touchScrollBar.setHideDuration(1000);
+
+        findViewById(R.id.btn_finish).setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_finish:
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBooleanArray(ResultActivity.RESULT, adapter.getResult());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+        }
     }
 }

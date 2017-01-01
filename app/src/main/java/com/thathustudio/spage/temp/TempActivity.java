@@ -1,12 +1,10 @@
 package com.thathustudio.spage.temp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.thathustudio.spage.R;
-import com.thathustudio.spage.activities.LoginActivity;
-import com.thathustudio.spage.fragments.ExamsFragment;
+import com.thathustudio.spage.fragments.ExercisesFragment;
 
 public class TempActivity extends AppCompatActivity {
 
@@ -22,7 +20,7 @@ public class TempActivity extends AppCompatActivity {
         finish();*/
 
         // - Show fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExamsFragment.newInstance()).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExercisesFragment.newInstance()).commitAllowingStateLoss();
 
         // -------------------------
     }

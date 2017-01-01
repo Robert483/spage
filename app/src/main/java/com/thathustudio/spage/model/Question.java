@@ -40,8 +40,8 @@ public class Question {
         this.choices = choices;
     }
 
-    public String getAnswer() {
-        return answer;
+    public boolean isCorrect() {
+        return userChoice != NO_CHOICE_SELECTED && choices.get(userChoice).equals(answer);
     }
 
     public int getUserChoice() {

@@ -2,12 +2,14 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.thathustudio.spage.fragments.QuestionFragment">
+             tools:context="com.thathustudio.spage.fragments.ExercisesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rclrV_exercises"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/half_spacing"
+        android:paddingTop="@dimen/half_spacing"/>
 
 </FrameLayout>

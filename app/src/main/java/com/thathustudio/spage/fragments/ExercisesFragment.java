@@ -20,27 +20,27 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeMana
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.activities.QuestionsActivity;
-import com.thathustudio.spage.model.Exam;
-import com.thathustudio.spage.utils.ExamRecyclerViewAdapter;
+import com.thathustudio.spage.model.Exercise;
+import com.thathustudio.spage.utils.ExerciseRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link BaseFragment} subclass.
- * Use the {@link ExamsFragment#newInstance} factory method to
+ * Use the {@link ExercisesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapter.OnExamViewInteractionListener {
-    private ExamRecyclerViewAdapter adapter;
+public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerViewAdapter.OnExerciseViewInteractionListener {
+    private ExerciseRecyclerViewAdapter adapter;
 
-    public static ExamsFragment newInstance() {
-        return new ExamsFragment();
+    public static ExercisesFragment newInstance() {
+        return new ExercisesFragment();
     }
 
     private void recyclerViewInit(RecyclerView recyclerView) {
         // TODO: delete this and use Retrofit instead
-        List<Exam> exams = new ArrayList<>();
+        List<Exercise> exercises = new ArrayList<>();
         String[] subjects = {"Art", "Biology", "Chemistry", "Civic Education",
                 "English", "Geography", "History", "Informatics", "Literature",
                 "Mathematics", "Music", "Physical Education", "Physics", "Technology"};
@@ -50,7 +50,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
                 R.drawable.ic_sbj_mathematics, R.drawable.ic_sbj_music, R.drawable.ic_sbj_physical_education, R.drawable.ic_sbj_physics,
                 R.drawable.ic_sbj_technology};
         for (int i = 0, len = subjects.length; i < len; i++) {
-            exams.add(new Exam(i, subjects[i], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a gravida orci, id malesuada diam", ids[i]));
+            exercises.add(new Exercise(i, subjects[i], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a gravida orci, id malesuada diam", ids[i]));
         }
 
         // touch guard manager  (this class is required to suppress scrolling while swipe-dismiss animation is running)
@@ -62,7 +62,7 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
         RecyclerViewSwipeManager swipeManager = new RecyclerViewSwipeManager();
 
         // adapter
-        adapter = new ExamRecyclerViewAdapter(exams, this);
+        adapter = new ExerciseRecyclerViewAdapter(exercises, this);
         RecyclerView.Adapter wrappedAdapter = swipeManager.createWrappedAdapter(adapter); // wrap for swiping
 
         // Change animations are enabled by default since support-v7-recyclerview v22.
@@ -91,25 +91,25 @@ public class ExamsFragment extends BaseFragment implements ExamRecyclerViewAdapt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_exams, container, false);
+        View view = inflater.inflate(R.layout.fragment_exercises, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exams);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exercises);
         recyclerViewInit(recyclerView);
 
         return view;
     }
 
     @Override
-    public void onExamInfoClick(Exam exam) {
-        Log.v("My tag", "Exam info with id = " + exam.getId() + " clicked");
+    public void onExerciseInfoClick(Exercise exercise) {
+        Log.v("My tag", "Exercise info with id = " + exercise.getId() + " clicked");
     }
 
     @Override
-    public void onExamStartClick(Exam exam) {
-        Log.v("My tag", "Exam start with id = " + exam.getId() + " clicked");
-        adapter.unpinPinnedExam();
+    public void onExerciseStartClick(Exercise exercise) {
+        Log.v("My tag", "Exercise start with id = " + exercise.getId() + " clicked");
+        adapter.unpinPinnedExercise();
         Intent intent = new Intent(getContext().getApplicationContext(), QuestionsActivity.class);
-        intent.putExtra(QuestionsActivity.EXAM_ID, exam.getId());
+        intent.putExtra(QuestionsActivity.EXERCISE_ID, exercise.getId());
         startActivity(intent);
     }
 }

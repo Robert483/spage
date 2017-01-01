@@ -12,21 +12,21 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imgBtn_examInfo"
+            android:id="@+id/imgBtn_exerciseInfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_exam_info"
-            android:contentDescription="@string/exam_info"
+            android:background="@drawable/btn_exercise_info"
+            android:contentDescription="@string/exercise_info"
             android:paddingLeft="@dimen/spacing"
             android:paddingRight="@dimen/spacing"
             app:srcCompat="@drawable/ic_info_outline"/>
 
         <ImageButton
-            android:id="@+id/imgBtn_examStart"
+            android:id="@+id/imgBtn_exerciseStart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_start_exam"
-            android:contentDescription="@string/start_exam"
+            android:background="@drawable/btn_start_exercise"
+            android:contentDescription="@string/start_exercise"
             android:paddingLeft="@dimen/spacing"
             android:paddingRight="@dimen/spacing"
             app:srcCompat="@drawable/ic_create"/>
@@ -41,19 +41,19 @@
         android:clickable="true">
 
         <ImageView
-            android:id="@+id/imgV_examSubject"
+            android:id="@+id/imgV_exerciseSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/spacing"
             android:layout_marginStart="@dimen/spacing"
-            android:layout_toLeftOf="@+id/txtV_examName"
-            android:layout_toStartOf="@id/txtV_examName"
-            android:contentDescription="@string/exam_subject"
+            android:layout_toLeftOf="@+id/txtV_exerciseName"
+            android:layout_toStartOf="@id/txtV_exerciseName"
+            android:contentDescription="@string/exercise_subject"
             android:scaleType="fitStart"/>
 
         <TextView
-            android:id="@id/txtV_examName"
+            android:id="@id/txtV_exerciseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/txtV_dump"
@@ -78,7 +78,7 @@
             android:visibility="invisible"/>
 
         <TextView
-            android:id="@+id/txtV_examDescription"
+            android:id="@+id/txtV_exerciseDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@id/txtV_dump"

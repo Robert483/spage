@@ -13,18 +13,18 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.SwipeableItemConstant
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAction;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractSwipeableItemViewHolder;
 import com.thathustudio.spage.R;
-import com.thathustudio.spage.model.Exam;
+import com.thathustudio.spage.model.Exercise;
 
 import java.util.List;
 
-public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerViewAdapter.ExamViewHolder> implements SwipeableItemAdapter<ExamRecyclerViewAdapter.ExamViewHolder>, View.OnClickListener {
+public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ExerciseViewHolder> implements SwipeableItemAdapter<ExerciseRecyclerViewAdapter.ExerciseViewHolder>, View.OnClickListener {
     private int pinnedPosition;
     private int currentPosition;
-    private final List<Exam> exams;
-    private final OnExamViewInteractionListener listener;
+    private final List<Exercise> exercises;
+    private final OnExerciseViewInteractionListener listener;
 
-    public ExamRecyclerViewAdapter(List<Exam> exams, OnExamViewInteractionListener listener) {
-        this.exams = exams;
+    public ExerciseRecyclerViewAdapter(List<Exercise> exercises, OnExerciseViewInteractionListener listener) {
+        this.exercises = exercises;
         this.listener = listener;
         this.pinnedPosition = RecyclerView.NO_POSITION;
         this.currentPosition = RecyclerView.NO_POSITION;
@@ -40,7 +40,7 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
         notifyItemChanged(temp);
     }
 
-    public void unpinPinnedExam() {
+    public void unpinPinnedExercise() {
         if (pinnedPosition != RecyclerView.NO_POSITION) {
             unpinPinnedItem();
         }
@@ -48,23 +48,23 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
 
     @Override
     public long getItemId(int position) {
-        return exams.get(position).getId();
+        return exercises.get(position).getId();
     }
 
     @Override
-    public ExamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exam, parent, false);
-        view.findViewById(R.id.imgBtn_examInfo).setOnClickListener(this);
-        view.findViewById(R.id.imgBtn_examStart).setOnClickListener(this);
-        return new ExamViewHolder(view);
+    public ExerciseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise, parent, false);
+        view.findViewById(R.id.imgBtn_exerciseInfo).setOnClickListener(this);
+        view.findViewById(R.id.imgBtn_exerciseStart).setOnClickListener(this);
+        return new ExerciseViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ExamViewHolder holder, int position) {
-        holder.exam = exams.get(position);
-        holder.textViewExamName.setText(holder.exam.getName());
-        holder.textViewExamDescription.setText(holder.exam.getDescription());
-        holder.imageViewSubject.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), holder.exam.getSubject()));
+    public void onBindViewHolder(ExerciseViewHolder holder, int position) {
+        holder.exercise = exercises.get(position);
+        holder.textViewExerciseName.setText(holder.exercise.getName());
+        holder.textViewExerciseDescription.setText(holder.exercise.getDescription());
+        holder.imageViewSubject.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), holder.exercise.getSubject()));
 
         // set swiping properties
         int underContainerWidth = holder.viewUnderContainer.getMeasuredWidth();
@@ -76,11 +76,11 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
 
     @Override
     public int getItemCount() {
-        return exams.size();
+        return exercises.size();
     }
 
     @Override
-    public int onGetSwipeReactionType(ExamViewHolder holder, int position, int x, int y) {
+    public int onGetSwipeReactionType(ExerciseViewHolder holder, int position, int x, int y) {
         currentPosition = position;
         if (pinnedPosition != RecyclerView.NO_POSITION && pinnedPosition != position) {
             unpinPinnedItem();
@@ -89,12 +89,12 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     }
 
     @Override
-    public void onSetSwipeBackground(ExamViewHolder holder, int position, int type) {
+    public void onSetSwipeBackground(ExerciseViewHolder holder, int position, int type) {
         // TODO
     }
 
     @Override
-    public SwipeResultAction onSwipeItem(ExamViewHolder holder, int position, int result) {
+    public SwipeResultAction onSwipeItem(ExerciseViewHolder holder, int position, int result) {
         switch (result) {
             case SwipeableItemConstants.RESULT_SWIPED_LEFT:
                 pinnedPosition = position;
@@ -110,40 +110,40 @@ public class ExamRecyclerViewAdapter extends RecyclerView.Adapter<ExamRecyclerVi
     @Override
     public void onClick(View v) {
         if (listener != null) {
-            Exam exam = exams.get(currentPosition);
+            Exercise exercise = exercises.get(currentPosition);
 
             switch (v.getId()) {
-                case R.id.imgBtn_examInfo:
-                    listener.onExamInfoClick(exam);
+                case R.id.imgBtn_exerciseInfo:
+                    listener.onExerciseInfoClick(exercise);
                     break;
-                case R.id.imgBtn_examStart:
-                    listener.onExamStartClick(exam);
+                case R.id.imgBtn_exerciseStart:
+                    listener.onExerciseStartClick(exercise);
                     break;
             }
         }
     }
 
-    public interface OnExamViewInteractionListener {
-        void onExamInfoClick(Exam exam);
+    public interface OnExerciseViewInteractionListener {
+        void onExerciseInfoClick(Exercise exercise);
 
-        void onExamStartClick(Exam exam);
+        void onExerciseStartClick(Exercise exercise);
     }
 
-    public static class ExamViewHolder extends AbstractSwipeableItemViewHolder {
-        public Exam exam;
+    public static class ExerciseViewHolder extends AbstractSwipeableItemViewHolder {
+        public Exercise exercise;
         public final View viewUnderContainer;
         public final View viewContainer;
-        public final TextView textViewExamName;
-        public final TextView textViewExamDescription;
+        public final TextView textViewExerciseName;
+        public final TextView textViewExerciseDescription;
         public final ImageView imageViewSubject;
 
-        public ExamViewHolder(View itemView) {
+        public ExerciseViewHolder(View itemView) {
             super(itemView);
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
             viewContainer = itemView.findViewById(R.id.rltLyot_container);
-            textViewExamName = (TextView) itemView.findViewById(R.id.txtV_examName);
-            textViewExamDescription = (TextView) itemView.findViewById(R.id.txtV_examDescription);
-            imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_examSubject);
+            textViewExerciseName = (TextView) itemView.findViewById(R.id.txtV_exerciseName);
+            textViewExerciseDescription = (TextView) itemView.findViewById(R.id.txtV_exerciseDescription);
+            imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_exerciseSubject);
         }
 
         @Override

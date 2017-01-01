@@ -1,5 +1,8 @@
 package com.thathustudio.spage.utils;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +21,22 @@ import java.util.List;
 public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<QuestionRecyclerViewAdapter.QuestionContentViewHolder, QuestionRecyclerViewAdapter.ChoiceViewHolder> implements View.OnClickListener {
     private RecyclerViewExpandableItemManager manager;
     private final List<Question> questions;
+    private final int fakeCardColor;
+    private final Drawable fakeCardBottomDrawable;
+    private final String questionPrefix;
 
-    public QuestionRecyclerViewAdapter(RecyclerViewExpandableItemManager manager, List<Question> questions) {
+    public QuestionRecyclerViewAdapter(Context context, RecyclerViewExpandableItemManager manager, List<Question> questions) {
         this.manager = manager;
         this.questions = questions;
+
+        int fakeCardTopColor = ContextCompat.getColor(context, R.color.colorPrimaryDark);
+        GradientDrawable fakeCardTopDrawable = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.fake_card_top);
+        fakeCardTopDrawable.setColor(fakeCardTopColor);
+
+        this.fakeCardColor = ContextCompat.getColor(context, android.R.color.white);
+        this.fakeCardBottomDrawable = ContextCompat.getDrawable(context, R.drawable.fake_card_bottom);
+
+        this.questionPrefix = context.getResources().getString(R.string.question) + " ";
 
         // ExpandableItemAdapter requires stable ID, and also
         // have to implement the getGroupItemId()/getChildItemId() methods appropriately.
@@ -41,6 +56,14 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
         }
 
         return alphabetId;
+    }
+
+    public boolean[] getResult() {
+        boolean[] result = new boolean[questions.size()];
+        for (int i = 0, len = questions.size(); i < len; i++) {
+            result[i] = questions.get(i).isCorrect();
+        }
+        return result;
     }
 
     @Override
@@ -79,7 +102,7 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     @Override
     public void onBindGroupViewHolder(QuestionContentViewHolder holder, int groupPosition, int viewType) {
         holder.question = questions.get(groupPosition);
-        holder.textViewQuestionContent.setText(holder.question.getContent());
+        holder.textViewQuestionContent.setText(questionPrefix + groupPosition + holder.question.getContent());
     }
 
     @Override
@@ -91,9 +114,9 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
         holder.radioButtonChoice.setChecked(question.getUserChoice() == childPosition);
 
         if (childPosition == question.getChoices().size() - 1) {
-            holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.fake_card_bottom));
+            holder.itemView.setBackground(fakeCardBottomDrawable);
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.white));
+            holder.itemView.setBackgroundColor(fakeCardColor);
         }
     }
 

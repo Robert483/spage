@@ -1,14 +1,15 @@
 package com.thathustudio.spage.model;
 
-public class Exam {
+public class Exercise {
     private int id;
     private String name;
     private String description;
     private int subject;
 
-    public Exam() {}
+    public Exercise() {
+    }
 
-    public Exam(int id, String name, String description, int subject) {
+    public Exercise(int id, String name, String description, int subject) {
         this.id = id;
         this.name = name;
         this.description = description;

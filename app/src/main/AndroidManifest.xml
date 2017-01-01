@@ -31,9 +31,20 @@
         </activity>
         <activity android:name=".activities.SubjectPostsActivity">
         </activity>
-        <activity android:name=".activities.QuestionsActivity">
+        <activity
+            android:name=".activities.QuestionsActivity"
+            android:label="@string/exercise"
+            android:noHistory="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity"/>
         </activity>
-        <activity android:name=".activities.ResultActivity">
+        <activity
+            android:name=".activities.ResultActivity"
+            android:label="@string/result">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity"/>
         </activity>
         <activity android:name=".temp.TempActivity">
             <intent-filter>
