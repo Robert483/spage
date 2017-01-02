@@ -31,6 +31,7 @@ public class ArcProgressBar extends View {
     private static final String INSTANCE_PROGRESS = "progress";
     private static final String INSTANCE_MAX = "max";
     private static final String INSTANCE_FINISHED_STROKE_START_COLOR = "finished_stroke_start_color";
+    private static final String INSTANCE_FINISHED_STROKE_MIDDLE_COLOR = "finished_stroke_middle_color";
     private static final String INSTANCE_FINISHED_STROKE_END_COLOR = "finished_stroke_end_color";
     private static final String INSTANCE_UNFINISHED_STROKE_COLOR = "unfinished_stroke_color";
     private static final String INSTANCE_ARC_ANGLE = "arc_angle";
@@ -47,6 +48,7 @@ public class ArcProgressBar extends View {
     private int progress = 0;
     private int max;
     private int finishedStrokeStartColor;
+    private int finishedStrokeMiddleColor;
     private int finishedStrokeEndColor;
     private int unfinishedStrokeColor;
     private float arcAngle;
@@ -62,7 +64,6 @@ public class ArcProgressBar extends View {
     private final float default_suffix_padding;
     private final float default_bottom_text_size;
     private final float default_stroke_width;
-    private final String default_suffix_text;
     private final int default_max = 100;
     private final float default_arc_angle = 360 * 0.8f;
     private final int min_size;
@@ -84,7 +85,6 @@ public class ArcProgressBar extends View {
         default_text_size = Utils.sp2px(getResources(), 40);
         default_suffix_text_size = Utils.sp2px(getResources(), 15);
         default_suffix_padding = Utils.dp2px(getResources(), 4);
-        default_suffix_text = "%";
         default_bottom_text_size = Utils.sp2px(getResources(), 10);
         default_stroke_width = Utils.dp2px(getResources(), 4);
 
@@ -97,14 +97,15 @@ public class ArcProgressBar extends View {
 
     private void updateGradient(int w, int h) {
         float secondPosition = 0.5f - (arcAngle / 720) % 0.5f;
-        gradient = new SweepGradient(w / 2, h / 2, new int[]{finishedStrokeStartColor, finishedStrokeStartColor, finishedStrokeEndColor, finishedStrokeEndColor}, new float[]{0, secondPosition, (1 - 2 * secondPosition) * 0.7f + secondPosition, 1});
+        gradient = new SweepGradient(w / 2, h / 2, new int[]{finishedStrokeStartColor, finishedStrokeStartColor, finishedStrokeMiddleColor, finishedStrokeEndColor, finishedStrokeEndColor}, new float[]{0, secondPosition, 0.5f, 1 - secondPosition, 1});
         Matrix gradientMatrix = new Matrix();
-        gradientMatrix.preRotate(90, 0, 0);
+        gradientMatrix.preRotate(90, w / 2, h / 2);
         gradient.setLocalMatrix(gradientMatrix);
     }
 
     protected void initByAttributes(TypedArray attributes) {
         finishedStrokeStartColor = attributes.getColor(R.styleable.ArcProgress_arc_finished_color_start, default_finished_color);
+        finishedStrokeMiddleColor = attributes.getColor(R.styleable.ArcProgress_arc_finished_color_middle, default_finished_color);
         finishedStrokeEndColor = attributes.getColor(R.styleable.ArcProgress_arc_finished_color_end, default_finished_color);
         unfinishedStrokeColor = attributes.getColor(R.styleable.ArcProgress_arc_unfinished_color, default_unfinished_color);
         progressTextColor = attributes.getColor(R.styleable.ArcProgress_arc_progress_text_color, default_text_color);
@@ -217,6 +218,7 @@ public class ArcProgressBar extends View {
         bundle.putInt(INSTANCE_PROGRESS, getProgress());
         bundle.putInt(INSTANCE_MAX, getMax());
         bundle.putInt(INSTANCE_FINISHED_STROKE_START_COLOR, getFinishedStrokeStartColor());
+        bundle.putInt(INSTANCE_FINISHED_STROKE_MIDDLE_COLOR, getFinishedStrokeMiddleColor());
         bundle.putInt(INSTANCE_FINISHED_STROKE_END_COLOR, getFinishedStrokeEndColor());
         bundle.putInt(INSTANCE_UNFINISHED_STROKE_COLOR, getUnfinishedStrokeColor());
         bundle.putFloat(INSTANCE_ARC_ANGLE, getArcAngle());
@@ -239,6 +241,7 @@ public class ArcProgressBar extends View {
             setMax(bundle.getInt(INSTANCE_MAX));
             setProgress(bundle.getInt(INSTANCE_PROGRESS));
             finishedStrokeStartColor = bundle.getInt(INSTANCE_FINISHED_STROKE_START_COLOR);
+            finishedStrokeMiddleColor = bundle.getInt(INSTANCE_FINISHED_STROKE_MIDDLE_COLOR);
             finishedStrokeEndColor = bundle.getInt(INSTANCE_FINISHED_STROKE_END_COLOR);
             unfinishedStrokeColor = bundle.getInt(INSTANCE_UNFINISHED_STROKE_COLOR);
             suffixText = bundle.getString(INSTANCE_SUFFIX);
@@ -384,6 +387,16 @@ public class ArcProgressBar extends View {
 
     public void setFinishedStrokeStartColor(int finishedStrokeStartColor) {
         this.finishedStrokeStartColor = finishedStrokeStartColor;
+        updateGradient(getWidth(), getHeight());
+        this.invalidate();
+    }
+
+    public int getFinishedStrokeMiddleColor() {
+        return finishedStrokeMiddleColor;
+    }
+
+    public void setFinishedStrokeMiddleColor(int finishedStrokeMiddleColor) {
+        this.finishedStrokeMiddleColor = finishedStrokeMiddleColor;
         updateGradient(getWidth(), getHeight());
         this.invalidate();
     }

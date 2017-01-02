@@ -13,18 +13,24 @@
         android:layout_height="wrap_content">
 
         <android.support.percent.PercentFrameLayout
-            android:id="@+id/arpgr_result"
+            android:id="@+id/frmLyot_container"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingTop="@dimen/spacing"
             app:layout_aspectRatio="133%"
             app:layout_widthPercent="100%">
 
+            <requestFocus/>
+
             <com.thathustudio.spage.widgets.ArcProgressBar
+                android:id="@+id/arPrgrBr_result"
                 android:layout_gravity="center"
                 app:arc_angle="245"
                 app:arc_bottom_text_color="@color/secondaryTextDark"
                 app:arc_bottom_text_size="56sp"
                 app:arc_finished_color_end="#00E676"
-                app:arc_finished_color_start="#D50000"
+                app:arc_finished_color_middle="#00C853"
+                app:arc_finished_color_start="#F44336"
                 app:arc_progress_text_color="@color/primaryTextDark"
                 app:arc_stroke_width="40dp"
                 app:arc_suffix_text=""
@@ -36,9 +42,10 @@
         </android.support.percent.PercentFrameLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rclrV_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/arpgr_result"
+            android:layout_below="@id/frmLyot_container"
             android:nestedScrollingEnabled="false"
             tools:ignore="UnusedAttribute"/>
 

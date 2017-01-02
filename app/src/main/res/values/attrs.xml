@@ -8,6 +8,7 @@
 
         <attr name="arc_unfinished_color" format="color"/>
         <attr name="arc_finished_color_start" format="color"/>
+        <attr name="arc_finished_color_middle" format="color"/>
         <attr name="arc_finished_color_end" format="color"/>
 
         <attr name="arc_text_size" format="dimension"/>
