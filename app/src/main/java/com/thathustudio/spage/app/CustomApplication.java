@@ -14,18 +14,17 @@ import org.slf4j.LoggerFactory;
 
 public class CustomApplication extends Application {
 
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
     private SpageService spageService;
-
     private RefWatcher refWatcher;
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-    @Override public void onCreate() {
-        super.onCreate();
+    public static RefWatcher getRefWatcher(Context context) {
+        CustomApplication application = (CustomApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
 
-        setUpLeakCanary();
-
-        setUpSpageService();
-
+    public static boolean isInDebugMode() {
+        return BuildConfig.DEBUG;
     }
 
     private void setUpSpageService() {
@@ -41,13 +40,14 @@ public class CustomApplication extends Application {
         refWatcher = LeakCanary.install(this);
     }
 
-    public static RefWatcher getRefWatcher(Context context) {
-        CustomApplication application = (CustomApplication)context.getApplicationContext();
-        return application.refWatcher;
-    }
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    public static boolean isInDebugMode() {
-        return BuildConfig.DEBUG;
+        setUpLeakCanary();
+
+        setUpSpageService();
+
     }
 
     public SpageService getSpageService() {

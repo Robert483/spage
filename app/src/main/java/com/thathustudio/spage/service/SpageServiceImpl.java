@@ -1,6 +1,5 @@
 package com.thathustudio.spage.service;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -28,25 +27,18 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Phung on 16/12/2016.
- */
-
 public class SpageServiceImpl implements SpageService {
-
-    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     private Context context;
     private SpageRetrofitService defaultService;
     private final HttpLoggingInterceptor defaultLogging;
     private final Gson defaultGson;
-
     private final int connectTimeOut = 10;
     private final int readTimeOut = 10;
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     //region Initialize
     private SpageServiceImpl() {
@@ -110,10 +102,9 @@ public class SpageServiceImpl implements SpageService {
             public void onFinish(Call<CommentResponse> call, CommentResponse responseObject, SpageException exception) {
                 super.onFinish(call, responseObject, exception);
 
-                if(exception == null && responseObject != null){
+                if (exception == null && responseObject != null) {
                     callback.onPostExcute(responseObject.getResponse(), null);
-                }
-                else {
+                } else {
                     callback.onPostExcute(null, exception);
                 }
             }
@@ -121,7 +112,7 @@ public class SpageServiceImpl implements SpageService {
     }
 
     @Override
-    public void readComment(@NonNull int commentId, @NonNull final SpageServiceCallback<Comment> callback) {
+    public void readComment(int commentId, @NonNull final SpageServiceCallback<Comment> callback) {
         Call<CommentResponse> callCreateComment = getService().readComment(commentId);
         callback.setCall(callCreateComment);
 
@@ -131,10 +122,9 @@ public class SpageServiceImpl implements SpageService {
             public void onFinish(Call<CommentResponse> call, CommentResponse responseObject, SpageException exception) {
                 super.onFinish(call, responseObject, exception);
 
-                if(exception == null && responseObject != null){
+                if (exception == null && responseObject != null) {
                     callback.onPostExcute(responseObject.getResponse(), null);
-                }
-                else {
+                } else {
                     callback.onPostExcute(null, exception);
                 }
             }
@@ -142,7 +132,7 @@ public class SpageServiceImpl implements SpageService {
     }
 
     @Override
-    public void readCommentsOfPost(@NonNull int postId, @NonNull final SpageServiceCallback<List<Comment>> callback) {
+    public void readCommentsOfPost(int postId, @NonNull final SpageServiceCallback<List<Comment>> callback) {
         Call<CommentListResponse> callReadCommentsOfPost = getService().readCommentsOfPost(postId);
         callback.setCall(callReadCommentsOfPost);
 
@@ -152,15 +142,13 @@ public class SpageServiceImpl implements SpageService {
             public void onFinish(Call<CommentListResponse> call, CommentListResponse responseObject, SpageException exception) {
                 super.onFinish(call, responseObject, exception);
 
-                if(exception == null && responseObject != null){
-                    if(responseObject.getResponse() == null){
+                if (exception == null && responseObject != null) {
+                    if (responseObject.getResponse() == null) {
                         callback.onPostExcute(new Vector<Comment>(), null);
-                    }
-                    else {
+                    } else {
                         callback.onPostExcute(responseObject.getResponse(), null);
                     }
-                }
-                else {
+                } else {
                     callback.onPostExcute(null, exception);
                 }
             }
@@ -168,7 +156,7 @@ public class SpageServiceImpl implements SpageService {
     }
 
     @Override
-    public void updateComment(@NonNull int commentId, @NonNull Comment newComment, @NonNull final SpageServiceCallback<Comment> callback) {
+    public void updateComment(int commentId, @NonNull Comment newComment, @NonNull final SpageServiceCallback<Comment> callback) {
         Call<CommentResponse> callUpdateComment = getService().updateComment(commentId, newComment);
         callback.setCall(callUpdateComment);
 
@@ -178,10 +166,9 @@ public class SpageServiceImpl implements SpageService {
             public void onFinish(Call<CommentResponse> call, CommentResponse responseObject, SpageException exception) {
                 super.onFinish(call, responseObject, exception);
 
-                if(exception == null && responseObject != null){
+                if (exception == null && responseObject != null) {
                     callback.onPostExcute(responseObject.getResponse(), null);
-                }
-                else {
+                } else {
                     callback.onPostExcute(null, exception);
                 }
             }
@@ -189,7 +176,7 @@ public class SpageServiceImpl implements SpageService {
     }
 
     @Override
-    public void deleteComment(@NonNull int commentId, @NonNull final SpageServiceCallback<Comment> callback) {
+    public void deleteComment(int commentId, @NonNull final SpageServiceCallback<Comment> callback) {
         Call<CommentResponse> callDeleteComment = getService().deleteComment(commentId);
         callback.setCall(callDeleteComment);
 
@@ -199,10 +186,9 @@ public class SpageServiceImpl implements SpageService {
             public void onFinish(Call<CommentResponse> call, CommentResponse responseObject, SpageException exception) {
                 super.onFinish(call, responseObject, exception);
 
-                if(exception == null && responseObject != null){
+                if (exception == null && responseObject != null) {
                     callback.onPostExcute(responseObject.getResponse(), null);
-                }
-                else {
+                } else {
                     callback.onPostExcute(null, exception);
                 }
             }

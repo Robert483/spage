@@ -1,7 +1,6 @@
 package com.thathustudio.spage.exception;
 
 
-
 public class ServiceException extends SpageException {
 
     private int code;

@@ -12,7 +12,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
 public abstract class TranslateRetrofitCallback<T extends EndPointResponse> implements Callback<T> {
 
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());

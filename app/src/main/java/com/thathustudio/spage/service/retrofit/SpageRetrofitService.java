@@ -12,10 +12,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-/**
- * Created by Phung on 16/12/2016.
- */
-
 public interface SpageRetrofitService {
 
     String API_END_POINT_FORMAT = "https://forumflow.herokuapp.com/api/";

@@ -22,39 +22,26 @@ import java.util.Vector;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by Phung on 16/12/2016.
- */
-
 public abstract class SpageActivity extends AppCompatActivity {
+    protected View rootLayout;
+    protected SpageService amadService;
+    protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    protected final boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
+    protected final String TAG_PROGRESS_DIALOG = "progressDialog";
 
     @LayoutRes
     protected int getRootLayoutRes() {
         return 0;
     }
 
-    protected View rootLayout;
-
-    protected final boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
-
-    protected final String TAG_PROGRESS_DIALOG = "progressDialog";
-
-    protected SpageService amadService;
-
-    protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
-
-    public final CustomApplication getCustomApplication() {
-        return (CustomApplication)getApplication();
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (FORCE_SCREEN_ORIENTATION_PORTRAIT) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        // TODO: what is this ==> if (FORCE_SCREEN_ORIENTATION_PORTRAIT) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //}
 
         rootLayout = getLayoutInflater().inflate(getRootLayoutRes(), null);
         setContentView(rootLayout);
@@ -67,7 +54,7 @@ public abstract class SpageActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        for (ForegroundTaskDelegate delegate: listOfForegroundTaskDelegates) {
+        for (ForegroundTaskDelegate delegate : listOfForegroundTaskDelegates) {
             if (delegate != null) {
                 delegate.cancel();
             }
@@ -100,5 +87,9 @@ public abstract class SpageActivity extends AppCompatActivity {
             }
         }
         ft.commitAllowingStateLoss();
+    }
+
+    public final CustomApplication getCustomApplication() {
+        return (CustomApplication) getApplication();
     }
 }

@@ -1,9 +1,5 @@
 package com.thathustudio.spage.model.responses;
 
-/**
- * Created by Phung on 16/12/2016.
- */
-
 public class EndPointResponse {
     private String result;
     private ErrorResult error;
