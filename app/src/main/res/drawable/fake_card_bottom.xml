@@ -5,6 +5,6 @@
     <padding android:bottom="@dimen/half_spacing"/>
 
     <corners
-        android:bottomLeftRadius="@dimen/cardview_default_radius"
-        android:bottomRightRadius="@dimen/cardview_default_radius"/>
+        android:bottomLeftRadius="@dimen/fake_card_radius"
+        android:bottomRightRadius="@dimen/fake_card_radius"/>
 </shape>

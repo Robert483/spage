@@ -1,14 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.thathustudio.spage.activities.ResultActivity">
 
-</RelativeLayout>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.percent.PercentFrameLayout
+            android:id="@+id/arpgr_result"
+            android:paddingTop="@dimen/spacing"
+            app:layout_aspectRatio="133%"
+            app:layout_widthPercent="100%">
+
+            <com.thathustudio.spage.widgets.ArcProgressBar
+                android:layout_gravity="center"
+                app:arc_angle="245"
+                app:arc_bottom_text_color="@color/secondaryTextDark"
+                app:arc_bottom_text_size="56sp"
+                app:arc_finished_color_end="#00E676"
+                app:arc_finished_color_start="#D50000"
+                app:arc_progress_text_color="@color/primaryTextDark"
+                app:arc_stroke_width="40dp"
+                app:arc_suffix_text=""
+                app:arc_text_size="24sp"
+                app:arc_unfinished_color="#E0E0E0"
+                app:layout_aspectRatio="100%"
+                app:layout_heightPercent="100%"/>
+
+        </android.support.percent.PercentFrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/arpgr_result"
+            android:nestedScrollingEnabled="false"
+            tools:ignore="UnusedAttribute"/>
+
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
+    <!--<ProgressBar
+        android:id="@+id/pgrBr_result"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:background="@drawable/pgrbr_bg_result"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="80"
+        android:progressDrawable="@drawable/pgrbr_result"
+        app:layout_aspectRatio="133%"
+        app:layout_widthPercent="100%"/>-->
+
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/pgrBr_result"
+        android:layout_alignTop="@id/pgrBr_result"
+        android:gravity="center"
+        android:text="11/20"
+        android:progressTextColor="@color/secondaryTextDark"
+        android:textSize="56sp"/>-->
+
+    <!-- pgbr_bg_result.xml
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:innerRadiusRatio="3.9"
+        android:shape="ring"
+        android:thickness="15dp"
+        android:useLevel="false">
+
+        <solid android:color="#E0E0E0"/>
+
+    </shape>-->
+
+    <!-- bgbr_result.xml
+    <rotate xmlns:android="http://schemas.android.com/apk/res/android"
+            android:fromDegrees="90"
+            android:toDegrees="90">
+
+        <shape
+            android:innerRadiusRatio="4"
+            android:thickness="20dp"
+            android:shape="ring"
+            android:useLevel="true">
+
+            <gradient
+                android:angle="0"
+                android:endColor="#69F0AE"
+                android:startColor="#FF5252"
+                android:type="sweep"
+                android:useLevel="false" />
+
+        </shape>
+
+    </rotate>-->

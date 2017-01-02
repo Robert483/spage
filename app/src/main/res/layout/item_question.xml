@@ -13,16 +13,4 @@
           android:orientation="vertical"
           android:padding="@dimen/spacing"
           android:textColor="@android:color/white"
-          android:textSize="@dimen/subheading_text_size">
-
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_marginBottom="@dimen/quarter_spacing"
-        android:layout_marginEnd="@dimen/spacing"
-        android:layout_marginLeft="@dimen/spacing"
-        android:layout_marginRight="@dimen/spacing"
-        android:layout_marginStart="@dimen/spacing"
-        android:background="@color/dividerDark"/>-->
-
-</TextView>
+          android:textSize="@dimen/subheading_text_size"/>

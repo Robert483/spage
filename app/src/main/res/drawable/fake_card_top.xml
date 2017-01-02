@@ -3,6 +3,6 @@
     <solid android:color="@android:color/white"/>
 
     <corners
-        android:topLeftRadius="@dimen/cardview_default_radius"
-        android:topRightRadius="@dimen/cardview_default_radius"/>
+        android:topLeftRadius="@dimen/fake_card_radius"
+        android:topRightRadius="@dimen/fake_card_radius"/>
 </shape>

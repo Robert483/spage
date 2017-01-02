@@ -2,7 +2,7 @@
 <resources>
 
     <style name="FakeCard">
-        <item name="android:elevation">@dimen/cardview_default_elevation</item>
+        <item name="android:elevation">@dimen/fake_card_elevation</item>
         <item name="android:outlineProvider">bounds</item>
     </style>
 
