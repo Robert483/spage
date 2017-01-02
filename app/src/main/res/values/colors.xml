@@ -6,4 +6,7 @@
     <color name="primaryTextDark">#DD000000</color>
     <color name="secondaryTextDark">#89000000</color>
     <color name="dividerDark">#1F000000</color>
+    <color name="excellentResult">#00E676</color>
+    <color name="goodResult">#00C853</color>
+    <color name="badResult">#F44336</color>
 </resources>

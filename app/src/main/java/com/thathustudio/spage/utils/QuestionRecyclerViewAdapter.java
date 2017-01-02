@@ -17,6 +17,7 @@ import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Question;
 
 import java.util.List;
+import java.util.Locale;
 
 public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<QuestionRecyclerViewAdapter.QuestionContentViewHolder, QuestionRecyclerViewAdapter.ChoiceViewHolder> implements View.OnClickListener {
     private RecyclerViewExpandableItemManager manager;
@@ -24,6 +25,7 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     private final int fakeCardColor;
     private final Drawable fakeCardBottomDrawable;
     private final String questionPrefix;
+    private final Locale locale;
 
     public QuestionRecyclerViewAdapter(Context context, RecyclerViewExpandableItemManager manager, List<Question> questions) {
         this.manager = manager;
@@ -36,7 +38,8 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
         this.fakeCardColor = ContextCompat.getColor(context, android.R.color.white);
         this.fakeCardBottomDrawable = ContextCompat.getDrawable(context, R.drawable.fake_card_bottom);
 
-        this.questionPrefix = context.getResources().getString(R.string.question) + " ";
+        this.questionPrefix = context.getResources().getString(R.string.question);
+        this.locale = Locale.getDefault();
 
         // ExpandableItemAdapter requires stable ID, and also
         // have to implement the getGroupItemId()/getChildItemId() methods appropriately.
@@ -102,14 +105,14 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     @Override
     public void onBindGroupViewHolder(QuestionContentViewHolder holder, int groupPosition, int viewType) {
         holder.question = questions.get(groupPosition);
-        holder.textViewQuestionContent.setText(questionPrefix + groupPosition + holder.question.getContent());
+        holder.textViewQuestionContent.setText(String.format(locale, "%s %d: %s", questionPrefix, groupPosition + 1, holder.question.getContent()));
     }
 
     @Override
     public void onBindChildViewHolder(ChoiceViewHolder holder, int groupPosition, int childPosition, int viewType) {
         Question question = questions.get(groupPosition);
         holder.choice = question.getChoices().get(childPosition);
-        holder.radioButtonChoice.setText(getAlphabetId(childPosition + 1) + ". " + holder.choice);
+        holder.radioButtonChoice.setText(String.format(locale, "%s. %s", getAlphabetId(childPosition + 1), holder.choice));
         holder.radioButtonChoice.setTag(new Position(groupPosition, childPosition));
         holder.radioButtonChoice.setChecked(question.getUserChoice() == childPosition);
 

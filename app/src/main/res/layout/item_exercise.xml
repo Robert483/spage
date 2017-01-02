@@ -93,7 +93,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
+            android:layout_height="@dimen/one"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/item_size_2lines"
             android:layout_marginStart="@dimen/item_size_2lines"

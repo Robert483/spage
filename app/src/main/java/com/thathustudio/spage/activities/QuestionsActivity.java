@@ -23,6 +23,7 @@ import com.thathustudio.spage.utils.QuestionRecyclerViewAdapter;
 import com.turingtechnologies.materialscrollbar.TouchScrollBar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +42,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
             }
             questions.add(new Question("Test " + i + ": Lorem ipsum dolor sit amet, consectetur adipiscing elit?", choices));
         }
+        Collections.shuffle(questions);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rclrV_questions);
         RecyclerViewExpandableItemManager recyclerViewExpandableItemManager = new RecyclerViewExpandableItemManager(null);

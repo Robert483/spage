@@ -172,6 +172,7 @@ public class ArcProgressBar extends View {
         paint.setColor(unfinishedStrokeColor);
         paint.setShader(null);
         canvas.drawArc(rectF, startAngle, arcAngle, false, paint);
+        paint.setColor(Color.WHITE);
         paint.setShader(gradient);
         canvas.drawArc(rectF, finishedStartAngle, finishedSweepAngle, false, paint);
 
