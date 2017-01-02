@@ -4,7 +4,7 @@ package com.thathustudio.spage.fragments;
 import android.support.v4.app.Fragment;
 
 import com.squareup.leakcanary.RefWatcher;
-import com.thathustudio.spage.CustomApplication;
+import com.thathustudio.spage.app.CustomApplication;
 
 /**
  * A simple {@link Fragment} subclass.
