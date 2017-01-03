@@ -1,6 +1,6 @@
 package com.thathustudio.spage.utils;
 
-import android.support.v4.content.ContextCompat;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +22,14 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     private int currentPosition;
     private final List<Exercise> exercises;
     private final OnExerciseViewInteractionListener listener;
+    private final SubjectIconFactory subjectIconFactory;
 
-    public ExerciseRecyclerViewAdapter(List<Exercise> exercises, OnExerciseViewInteractionListener listener) {
+    public ExerciseRecyclerViewAdapter(Context context, List<Exercise> exercises, OnExerciseViewInteractionListener listener) {
         this.exercises = exercises;
         this.listener = listener;
         this.pinnedPosition = RecyclerView.NO_POSITION;
         this.currentPosition = RecyclerView.NO_POSITION;
+        this.subjectIconFactory = new SubjectIconFactory(context);
 
         // SwipeableItemAdapter requires stable ID, and also
         // have to implement the getItemId() method appropriately.
@@ -38,6 +40,12 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         int temp = pinnedPosition;
         pinnedPosition = RecyclerView.NO_POSITION;
         notifyItemChanged(temp);
+    }
+
+    public void replaceExercises(List<Exercise> exercises) {
+        this.exercises.clear();
+        this.exercises.addAll(exercises);
+        notifyDataSetChanged();
     }
 
     public void unpinPinnedExercise() {
@@ -63,8 +71,8 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     public void onBindViewHolder(ExerciseViewHolder holder, int position) {
         holder.exercise = exercises.get(position);
         holder.textViewExerciseName.setText(holder.exercise.getName());
-        holder.textViewExerciseDescription.setText(holder.exercise.getDescription());
-        holder.imageViewSubject.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), holder.exercise.getSubject()));
+        holder.textViewExerciseDescription.setText(holder.exercise.getContent());
+        holder.imageViewSubject.setImageDrawable(subjectIconFactory.getSubjectIcon(holder.exercise.getSubjectId()));
 
         // set swiping properties
         int underContainerWidth = holder.viewUnderContainer.getMeasuredWidth();
@@ -121,6 +129,10 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
                     break;
             }
         }
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
     }
 
     public interface OnExerciseViewInteractionListener {

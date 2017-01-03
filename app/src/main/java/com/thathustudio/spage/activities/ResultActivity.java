@@ -73,7 +73,31 @@ public class ResultActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rclrV_result);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ResultRecyclerViewAdapter(this, resultList));
+
+        /*ImageView imageView = (ImageView) findViewById(R.id.imgV_background);
+        imageView.setImageBitmap(getScaledBackground());*/
     }
+
+    /*private Bitmap getScaledBackground() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), R.drawable.bg_img, options);
+        int imageHeight = options.outHeight;
+        int imageWidth = options.outWidth;
+        float scale = 1;
+
+        if (imageHeight > imageWidth) {
+            scale = 1f * imageHeight / metrics.heightPixels;
+        } else {
+            scale = 1f * imageWidth / metrics.widthPixels;
+        }
+
+        options.inJustDecodeBounds = false;
+        return Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_img, options), (int)(1f * imageWidth / scale), (int)(1f * imageHeight / scale), false);
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

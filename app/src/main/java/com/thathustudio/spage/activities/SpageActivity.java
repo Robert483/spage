@@ -26,8 +26,8 @@ public abstract class SpageActivity extends AppCompatActivity {
     protected View rootLayout;
     protected SpageService amadService;
     protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
+    protected boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    protected final boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
     protected final String TAG_PROGRESS_DIALOG = "progressDialog";
 
     @LayoutRes
@@ -39,9 +39,9 @@ public abstract class SpageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: what is this ==> if (FORCE_SCREEN_ORIENTATION_PORTRAIT) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //}
+        if (FORCE_SCREEN_ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         rootLayout = getLayoutInflater().inflate(getRootLayoutRes(), null);
         setContentView(rootLayout);

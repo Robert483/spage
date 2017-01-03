@@ -7,6 +7,7 @@ import com.thathustudio.spage.exception.NetworkException;
 import com.thathustudio.spage.exception.ServiceException;
 import com.thathustudio.spage.exception.SpageException;
 import com.thathustudio.spage.model.responses.EndPointResponse;
+import com.thathustudio.spage.model.responses.ErrorResult;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class TranslateRetrofitException {
         LOG.trace(Log.getStackTraceString(throwable));
 
         if (throwable instanceof IOException) {
-            return new NetworkException("", throwable);
+            return new NetworkException(throwable.getMessage(), throwable);
         } else {
             return new SpageException("Undefined Exception", throwable);
         }
@@ -37,21 +38,26 @@ public class TranslateRetrofitException {
 
     public static <T extends EndPointResponse> ServiceException translateServiceException(Call<T> call,
                                                                                           Response<T> response) {
-        if (response.body() == null) {
+        T body = response.body();
+        if (body == null) {
             // This case should not happen. You must have something wrong!
-            String msg = "There is something wrong with request. Please check your request again";
-
             try {
-                EndPointResponse endPointResponse = new Gson().fromJson(response.errorBody().string(), EndPointResponse.class);
-                return new ServiceException(endPointResponse.getError().getCode(),
-                        endPointResponse.getError().getMessage(),
+                ErrorResult errorResult = new Gson().fromJson(response.errorBody().string(), ErrorResult.class);
+                return new ServiceException(errorResult.getCode(),
+                        errorResult.getResponse(),
                         null);
             } catch (Exception e) {
                 LOG.error(e.getMessage());
                 LOG.trace(Log.getStackTraceString(e));
 
-                return new ServiceException(response.code(), msg, null);
+                return new ServiceException(response.code(),
+                        "There is something wrong with request. Please check your request again.",
+                        null);
             }
+        } else if (body.getCode() != 200) {
+            return new ServiceException(body.getCode(),
+                    "Server return mismatch code",
+                    null);
         } else {
             return null;
         }

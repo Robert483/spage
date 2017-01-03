@@ -112,6 +112,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 bundle.putBooleanArray(ResultActivity.RESULT, adapter.getResult());
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

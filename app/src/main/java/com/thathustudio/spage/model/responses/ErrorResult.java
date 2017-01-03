@@ -1,14 +1,9 @@
 package com.thathustudio.spage.model.responses;
 
-public class ErrorResult {
-    private int code;
-    private String message;
+public class ErrorResult extends EndPointResponse {
+    private String response;
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
+    public String getResponse() {
+        return response;
     }
 }
