@@ -57,7 +57,7 @@
             android:paddingRight="@dimen/half_spacing"
             android:paddingStart="@dimen/half_spacing"
             android:text="@string/finish"
-            android:textColor="@android:color/holo_blue_light"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/body_text_size"
             android:theme="@style/FlatButton"/>
 

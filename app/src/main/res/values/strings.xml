@@ -15,4 +15,11 @@
     <string name="content">Content</string>
     <string name="subject">Subject</string>
     <string name="difficulty">Difficulty</string>
+    <string name="submit_for_score">Submit for score?</string>
+    <string name="you_will_not_be_able_to_go_back">You will not be able to go back and continue to do this exercise.</string>
+    <string name="submit">SUBMIT</string>
+    <string name="keep_doing">KEEP DOING</string>
+    <string name="go_back">Go back?</string>
+    <string name="your_choices_will_not_be_saved">Your choices will not be saved. If you start this exercise again, you will have to do it all over again.</string>
+    <string name="back">BACK</string>
 </resources>

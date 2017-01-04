@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,7 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemA
 import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
 import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandableItemManager;
 import com.thathustudio.spage.R;
+import com.thathustudio.spage.fragments.dialogs.Task4PromptDialogFragment;
 import com.thathustudio.spage.model.Question;
 import com.thathustudio.spage.utils.QuestionRecyclerViewAdapter;
 import com.turingtechnologies.materialscrollbar.TouchScrollBar;
@@ -27,7 +29,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener {
+public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener, Task4PromptDialogFragment.OnTask4PromptDialogInteractionListener {
+    private static final String SUBMIT_DIALOG = "Submit Dialog";
+    private static final String UP_DIALOG = "Up Dialog";
+    private static final String BACK_DIALOG = "Back Dialog";
     public static final String EXERCISE_ID = "Exercise ID";
     private QuestionRecyclerViewAdapter adapter;
 
@@ -72,6 +77,10 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         recyclerViewExpandableItemManager.attachRecyclerView(recyclerView);
     }
 
+    private void showGoBackDialog(String tag) {
+        Task4PromptDialogFragment.newInstance(R.string.go_back, R.string.your_choices_will_not_be_saved, R.string.back, R.string.keep_doing).show(getSupportFragmentManager(), tag);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +106,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                showGoBackDialog(UP_DIALOG);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -107,6 +116,21 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_finish:
+                Task4PromptDialogFragment.newInstance(R.string.submit_for_score, R.string.you_will_not_be_able_to_go_back, R.string.submit, R.string.keep_doing).show(getSupportFragmentManager(), SUBMIT_DIALOG);
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        showGoBackDialog(BACK_DIALOG);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        String tag = dialog.getTag();
+        switch (tag) {
+            case SUBMIT_DIALOG:
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBooleanArray(ResultActivity.RESULT, adapter.getResult());
@@ -114,6 +138,17 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 finish();
                 break;
+            case UP_DIALOG:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+            case BACK_DIALOG:
+                super.onBackPressed();
+                break;
         }
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // Do nothing
     }
 }
