@@ -1,0 +1,103 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingTop="@dimen/exercise_details_item_padding"
+              tools:context="com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment">
+
+    <TextView
+        android:id="@+id/txtV_dump"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one"
+        android:background="@color/dividerDark"/>
+
+    <ScrollView
+        android:id="@+id/srlV_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/half_spacing"
+            android:paddingEnd="@dimen/dialog_spacing"
+            android:paddingLeft="@dimen/dialog_spacing"
+            android:paddingRight="@dimen/dialog_spacing"
+            android:paddingStart="@dimen/dialog_spacing">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:gravity="bottom"
+                android:text="@string/name"
+                android:textColor="@color/primaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:id="@+id/txtV_exerciseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingBottom="@dimen/exercise_details_item_padding"
+                android:textColor="@color/secondaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:gravity="bottom"
+                android:text="@string/content"
+                android:textColor="@color/primaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:id="@+id/txtV_exerciseContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingBottom="@dimen/exercise_details_item_padding"
+                android:textColor="@color/secondaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:gravity="bottom"
+                android:text="@string/subject"
+                android:textColor="@color/primaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:id="@+id/txtV_exerciseSubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingBottom="@dimen/exercise_details_item_padding"
+                android:textColor="@color/secondaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:gravity="bottom"
+                android:text="@string/difficulty"
+                android:textColor="@color/primaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+            <TextView
+                android:id="@+id/txtV_exerciseDifficulty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingBottom="@dimen/exercise_details_item_padding"
+                android:textColor="@color/secondaryTextDark"
+                android:textSize="@dimen/subheading_text_size"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

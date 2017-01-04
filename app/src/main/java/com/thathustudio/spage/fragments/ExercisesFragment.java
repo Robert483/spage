@@ -26,6 +26,7 @@ import com.thathustudio.spage.R;
 import com.thathustudio.spage.activities.QuestionsActivity;
 import com.thathustudio.spage.app.CustomApplication;
 import com.thathustudio.spage.exception.SpageException;
+import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.model.responses.ExerciseListResponse;
@@ -162,8 +163,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
 
     @Override
     public void onExerciseInfoClick(Exercise exercise) {
-        // TODO
-        Log.v("My tag", "Exercise info with id = " + exercise.getId() + " clicked");
+        ExerciseDetailsDialogFragment.newInstance(exercise).show(getChildFragmentManager(), ExerciseDetailsDialogFragment.EXERCISE_DETAILS);
     }
 
     @Override

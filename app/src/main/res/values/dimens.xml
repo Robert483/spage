@@ -17,4 +17,6 @@
     <dimen name="display3_text_size">56sp</dimen>
     <dimen name="headline_text_size">24sp</dimen>
     <dimen name="result_bg_corner">50dp</dimen>
+    <dimen name="dialog_spacing">24dp</dimen>
+    <dimen name="exercise_details_item_padding">20dp</dimen>
 </resources>

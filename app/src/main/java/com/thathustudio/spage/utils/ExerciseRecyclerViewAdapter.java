@@ -154,7 +154,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             viewUnderContainer = itemView.findViewById(R.id.lnLyot_underContainer);
             viewContainer = itemView.findViewById(R.id.rltLyot_container);
             textViewExerciseName = (TextView) itemView.findViewById(R.id.txtV_exerciseName);
-            textViewExerciseDescription = (TextView) itemView.findViewById(R.id.txtV_exerciseDescription);
+            textViewExerciseDescription = (TextView) itemView.findViewById(R.id.txtV_exerciseContent);
             imageViewSubject = (ImageView) itemView.findViewById(R.id.imgV_exerciseSubject);
         }
 

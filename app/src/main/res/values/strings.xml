@@ -10,4 +10,9 @@
     <string name="question">Question</string>
     <string name="exercise">Exercise</string>
     <string name="result">Result</string>
+    <string name="exercise_id">Exercise ID</string>
+    <string name="name">Name</string>
+    <string name="content">Content</string>
+    <string name="subject">Subject</string>
+    <string name="difficulty">Difficulty</string>
 </resources>
