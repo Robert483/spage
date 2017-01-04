@@ -29,7 +29,7 @@ import com.thathustudio.spage.exception.SpageException;
 import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.responses.EndPointResponse;
-import com.thathustudio.spage.model.responses.ExerciseListResponse;
+import com.thathustudio.spage.model.responses.Task4ListResponse;
 import com.thathustudio.spage.service.retrofit.TranslateRetrofitException;
 import com.thathustudio.spage.utils.ExerciseRecyclerViewAdapter;
 
@@ -54,20 +54,13 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     private boolean dataInitialized;
     private List<Call> calls;
     private RecyclerView recyclerView;
+    private boolean reload;
 
     public static ExercisesFragment newInstance() {
         return new ExercisesFragment();
     }
 
-    private void updateRecyclerView(List<Exercise> exercises) {
-        if (!dataInitialized) {
-            recyclerViewInit(exercises);
-        } else {
-            adapter.replaceExercises(exercises);
-        }
-    }
-
-    private void recyclerViewInit(List<Exercise> exercises) {
+    private void recyclerViewInit(RecyclerView recyclerView) {
         // touch guard manager  (this class is required to suppress scrolling while swipe-dismiss animation is running)
         RecyclerViewTouchActionGuardManager touchActionGuardManager = new RecyclerViewTouchActionGuardManager();
         touchActionGuardManager.setInterceptVerticalScrollingWhileAnimationRunning(true);
@@ -77,7 +70,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         RecyclerViewSwipeManager swipeManager = new RecyclerViewSwipeManager();
 
         // adapter
-        adapter = new ExerciseRecyclerViewAdapter(getContext(), exercises, this);
+        adapter = new ExerciseRecyclerViewAdapter(getContext(), this);
         RecyclerView.Adapter wrappedAdapter = swipeManager.createWrappedAdapter(adapter); // wrap for swiping
 
         // Change animations are enabled by default since support-v7-recyclerview v22.
@@ -101,7 +94,6 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         // priority: TouchActionGuard > Swipe > DragAndDrop
         touchActionGuardManager.attachRecyclerView(recyclerView);
         swipeManager.attachRecyclerView(recyclerView);
-        dataInitialized = true;
     }
 
     @Override
@@ -113,6 +105,8 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         calls = new ArrayList<>();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exercises);
+        recyclerViewInit(recyclerView);
+
         swipeRefreshLayoutExercises = (SwipeRefreshLayout) view.findViewById(R.id.swpRfr_exercises);
         swipeRefreshLayoutExercises.setOnRefreshListener(this);
 
@@ -122,6 +116,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onResume() {
         super.onResume();
+        reload = false;
         swipeRefreshLayoutExercises.setRefreshing(false);
         if (!dataInitialized) {
             swipeRefreshLayoutExercises.setRefreshing(true);
@@ -132,6 +127,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onPause() {
         super.onPause();
+        reload = true;
 
         for (Call call : calls) {
             call.cancel();
@@ -156,7 +152,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
             dataInitialized = savedInstanceState.getBoolean(DATA_INITIALIZED, false);
             if (dataInitialized) {
                 List<Exercise> exercises = savedInstanceState.getParcelableArrayList(EXERCISES);
-                recyclerViewInit(exercises);
+                adapter.replaceExercises(exercises);
             }
         }
     }
@@ -177,18 +173,18 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onRefresh() {
         CustomApplication customApplication = (CustomApplication) getActivity().getApplication();
-        Call<ExerciseListResponse> exerciseListResponseCall = customApplication.getTask4Service().getExercises();
+        Call<Task4ListResponse<Exercise>> exerciseListResponseCall = customApplication.getTask4Service().getExercises();
         exerciseListResponseCall.enqueue(new GetExercisesCallback(this));
         calls.add(exerciseListResponseCall);
     }
 
-    public static class GetExercisesCallback extends ExercisesFragmentCallback<ExerciseListResponse> {
+    public static class GetExercisesCallback extends ExercisesFragmentCallback<Task4ListResponse<Exercise>> {
         public GetExercisesCallback(ExercisesFragment exercisesFragment) {
             super(exercisesFragment);
         }
 
         @Override
-        public void onResponse(Call<ExerciseListResponse> call, Response<ExerciseListResponse> response) {
+        public void onResponse(Call<Task4ListResponse<Exercise>> call, Response<Task4ListResponse<Exercise>> response) {
             ExercisesFragment exercisesFragment = weakReferenceExercisesFragment.get();
             if (exercisesFragment != null) {
                 SpageException spageException = TranslateRetrofitException.translateServiceException(call, response);
@@ -196,9 +192,11 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
                 try {
                     exercisesFragment.swipeRefreshLayoutExercises.setRefreshing(false);
                     if (spageException != null) {
-                        showToast(exercisesFragment.getContext(), spageException); // Fix warning
+                        showToast(exercisesFragment.getContext().getApplicationContext(), spageException); // Fix warning
+                        return;
                     }
-                    exercisesFragment.updateRecyclerView(response.body().getResponse());
+                    exercisesFragment.adapter.replaceExercises(response.body().getResponse());
+                    exercisesFragment.dataInitialized = true;
                 } catch (Exception ex) {
                     Log.e("SPage", ex.getMessage());
                 } finally {
@@ -209,7 +207,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     }
 
     public static abstract class ExercisesFragmentCallback<T extends EndPointResponse> implements Callback<T> {
-        protected WeakReference<ExercisesFragment> weakReferenceExercisesFragment;
+        protected final WeakReference<ExercisesFragment> weakReferenceExercisesFragment;
 
         public ExercisesFragmentCallback(ExercisesFragment exercisesFragment) {
             weakReferenceExercisesFragment = new WeakReference<>(exercisesFragment);
@@ -226,7 +224,9 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
                 try {
                     // Handle
                     exercisesFragment.swipeRefreshLayoutExercises.setRefreshing(false);
-                    showToast(exercisesFragment.getContext(), t);
+                    if (!exercisesFragment.reload) {
+                        showToast(exercisesFragment.getContext().getApplicationContext(), t);
+                    }
                 } catch (Exception ex) {
                     Log.e("SPage", ex.getMessage());
                 } finally {

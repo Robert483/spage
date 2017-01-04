@@ -2,6 +2,7 @@ package com.thathustudio.spage.utils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractSwipeableItemView
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Exercise;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ExerciseViewHolder> implements SwipeableItemAdapter<ExerciseRecyclerViewAdapter.ExerciseViewHolder>, View.OnClickListener {
     private int pinnedPosition;
@@ -24,8 +27,8 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     private final OnExerciseViewInteractionListener listener;
     private final SubjectIconFactory subjectIconFactory;
 
-    public ExerciseRecyclerViewAdapter(Context context, List<Exercise> exercises, OnExerciseViewInteractionListener listener) {
-        this.exercises = exercises;
+    public ExerciseRecyclerViewAdapter(Context context, OnExerciseViewInteractionListener listener) {
+        this.exercises = new ArrayList<>();
         this.listener = listener;
         this.pinnedPosition = RecyclerView.NO_POSITION;
         this.currentPosition = RecyclerView.NO_POSITION;
@@ -98,7 +101,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
     @Override
     public void onSetSwipeBackground(ExerciseViewHolder holder, int position, int type) {
-        // TODO
+        Log.v("SPage", String.format(Locale.US, "Set Swipe Background %d", position));
     }
 
     @Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,65 +8,80 @@
     android:layout_height="match_parent"
     tools:context="com.thathustudio.spage.activities.QuestionsActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rclrV_questions"
+    <ProgressBar
+        android:id="@+id/prgBr_questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rltLyot_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/lnLyot_ctrl"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/half_spacing"/>
+        android:visibility="invisible">
 
-    <com.turingtechnologies.materialscrollbar.TouchScrollBar
-        android:id="@+id/tchSrlBr"
-        android:layout_width="@dimen/half_spacing"
-        android:layout_height="match_parent"
-        android:layout_above="@id/lnLyot_ctrl"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:paddingEnd="@dimen/zero"
-        android:paddingLeft="@dimen/quarter_spacing"
-        android:paddingRight="@dimen/zero"
-        android:paddingStart="@dimen/quarter_spacing"
-        app:msb_lightOnTouch="false"
-        app:msb_recyclerView="@id/rclrV_questions"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rclrV_questions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/lnLyot_ctrl"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/half_spacing"/>
 
-    <LinearLayout
-        android:id="@id/lnLyot_ctrl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/footer_height"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        <com.turingtechnologies.materialscrollbar.TouchScrollBar
+            android:id="@+id/tchSrlBr"
+            android:layout_width="@dimen/half_spacing"
+            android:layout_height="match_parent"
+            android:layout_above="@id/lnLyot_ctrl"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingEnd="@dimen/zero"
+            android:paddingLeft="@dimen/quarter_spacing"
+            android:paddingRight="@dimen/zero"
+            android:paddingStart="@dimen/quarter_spacing"
+            app:msb_lightOnTouch="false"
+            app:msb_recyclerView="@id/rclrV_questions"/>
+
+        <LinearLayout
+            android:id="@id/lnLyot_ctrl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/footer_height"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="@dimen/half_spacing"
+                android:layout_marginRight="@dimen/half_spacing"
+                android:background="?attr/selectableItemBackground"
+                android:minWidth="88dp"
+                android:paddingEnd="@dimen/half_spacing"
+                android:paddingLeft="@dimen/half_spacing"
+                android:paddingRight="@dimen/half_spacing"
+                android:paddingStart="@dimen/half_spacing"
+                android:text="@string/finish"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/body_text_size"
+                android:theme="@style/FlatButton"/>
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one"
+            android:layout_alignTop="@id/lnLyot_ctrl"
+            android:background="@color/dividerDark"/>
 
-        <Button
-            android:id="@+id/btn_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginEnd="@dimen/half_spacing"
-            android:layout_marginRight="@dimen/half_spacing"
-            android:background="?attr/selectableItemBackground"
-            android:minWidth="88dp"
-            android:paddingEnd="@dimen/half_spacing"
-            android:paddingLeft="@dimen/half_spacing"
-            android:paddingRight="@dimen/half_spacing"
-            android:paddingStart="@dimen/half_spacing"
-            android:text="@string/finish"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/body_text_size"
-            android:theme="@style/FlatButton"/>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/one"
-        android:layout_alignTop="@id/lnLyot_ctrl"
-        android:background="@color/dividerDark"/>
-
-</RelativeLayout>
+</merge>

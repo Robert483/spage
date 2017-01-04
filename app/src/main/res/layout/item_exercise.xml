@@ -11,7 +11,7 @@
         android:layout_gravity="end"
         android:orientation="horizontal">
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/imgBtn_exerciseInfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             android:paddingRight="@dimen/spacing"
             app:srcCompat="@drawable/ic_info_outline"/>
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/imgBtn_exerciseStart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -34,13 +34,13 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/rltLyot_container"
+        android:id="@id/rltLyot_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:clickable="true">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imgV_exerciseSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:contentDescription="@string/exercise_subject"
             android:scaleType="fitStart"/>
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@id/txtV_exerciseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_marginStart="@dimen/item_size_2lines"
             android:visibility="invisible"/>
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@id/txtV_exerciseContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

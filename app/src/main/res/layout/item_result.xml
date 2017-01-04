@@ -9,7 +9,7 @@
               android:layout_marginStart="@dimen/spacing"
               android:background="@drawable/bg_it_result">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txtV_questionNo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

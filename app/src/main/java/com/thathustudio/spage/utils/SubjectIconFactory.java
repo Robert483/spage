@@ -8,8 +8,8 @@ import android.support.v4.util.SparseArrayCompat;
 import com.thathustudio.spage.R;
 
 public class SubjectIconFactory {
-    private SparseArrayCompat<Drawable> icons;
-    private Drawable defaultIcon;
+    private final SparseArrayCompat<Drawable> icons;
+    private final Drawable defaultIcon;
 
     public SubjectIconFactory(Context context) {
         defaultIcon = ContextCompat.getDrawable(context, R.drawable.ic_sbj_unknown);

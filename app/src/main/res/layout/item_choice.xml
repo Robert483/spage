@@ -26,7 +26,7 @@
              android:background="@android:color/white"
              android:focusable="true">
 
-    <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.AppCompatRadioButton
                  android:id="@+id/rdBtn_choice"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"

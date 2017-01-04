@@ -16,8 +16,9 @@ public class TempActivity extends AppCompatActivity {
         // Redirect or show fragment
 
         // - Redirect
-        /*Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), QuestionsActivity.class);
         Bundle bundle = new Bundle();
+        bundle.putInt(QuestionsActivity.EXERCISE_ID, 1);
         Random random = new Random(System.currentTimeMillis());
         boolean[] results = new boolean[40];
         for (int i = 0, len = results.length; i < len; i++) {

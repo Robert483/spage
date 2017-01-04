@@ -16,23 +16,25 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractExpandableItemVie
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<QuestionRecyclerViewAdapter.QuestionContentViewHolder, QuestionRecyclerViewAdapter.ChoiceViewHolder> implements View.OnClickListener {
-    private RecyclerViewExpandableItemManager manager;
+    private final RecyclerViewExpandableItemManager manager;
     private final List<Question> questions;
     private final int fakeCardColor;
     private final Drawable fakeCardBottomDrawable;
     private final String questionPrefix;
     private final Locale locale;
+    private final GradientDrawable fakeCardTopDrawable;
 
-    public QuestionRecyclerViewAdapter(Context context, RecyclerViewExpandableItemManager manager, List<Question> questions) {
+    public QuestionRecyclerViewAdapter(Context context, RecyclerViewExpandableItemManager manager) {
         this.manager = manager;
-        this.questions = questions;
+        this.questions = new ArrayList<>();
 
         int fakeCardTopColor = ContextCompat.getColor(context, R.color.colorPrimaryDark);
-        GradientDrawable fakeCardTopDrawable = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.fake_card_top);
+        fakeCardTopDrawable = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.fake_card_top);
         fakeCardTopDrawable.setColor(fakeCardTopColor);
 
         this.fakeCardColor = ContextCompat.getColor(context, android.R.color.white);
@@ -61,12 +63,27 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
         return alphabetId;
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void replaceQuestions(List<Question> questions) {
+        this.questions.clear();
+        this.questions.addAll(questions);
+        notifyDataSetChanged();
+    }
+
     public boolean[] getResult() {
-        boolean[] result = new boolean[questions.size()];
-        for (int i = 0, len = questions.size(); i < len; i++) {
-            result[i] = questions.get(i).isCorrect();
+        int size = questions.size();
+        if (size != 0) {
+            boolean[] result = new boolean[size];
+            for (int i = 0; i < size; i++) {
+                result[i] = questions.get(i).isCorrect();
+            }
+            return result;
         }
-        return result;
+
+        return null;
     }
 
     @Override
@@ -92,6 +109,7 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     @Override
     public QuestionContentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_question, parent, false);
+        view.setBackground(fakeCardTopDrawable);
         return new QuestionContentViewHolder(view);
     }
 
