@@ -1,6 +1,5 @@
 package com.thathustudio.spage.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,34 +24,34 @@ import com.thathustudio.spage.app.CustomApplication;
 import com.thathustudio.spage.exception.SpageException;
 import com.thathustudio.spage.fragments.dialogs.Task4PromptDialogFragment;
 import com.thathustudio.spage.model.Question;
-import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
+import com.thathustudio.spage.service.callback.Task4ActivityCallback;
 import com.thathustudio.spage.service.retrofit.TranslateRetrofitException;
 import com.thathustudio.spage.utils.QuestionRecyclerViewAdapter;
 import com.turingtechnologies.materialscrollbar.TouchScrollBar;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
-public class QuestionsActivity extends AppCompatActivity implements View.OnClickListener, Task4PromptDialogFragment.OnTask4PromptDialogInteractionListener {
+public class QuestionsActivity extends Task4Activity implements View.OnClickListener, Task4PromptDialogFragment.OnTask4PromptDialogInteractionListener {
     private static final String SUBMIT_DIALOG = "Submit Dialog";
     private static final String UP_DIALOG = "Up Dialog";
     private static final String BACK_DIALOG = "Back Dialog";
     private static final String DATA_INITIALIZED = "Data Initialized";
     private static final String QUESTIONS = "Questions";
+    private static final int NO_EXERCISE = -1;
+    private static final int NO_USER = -1;
+    public static final String USER_ID = "User ID";
     public static final String EXERCISE_ID = "Exercise ID";
     private QuestionRecyclerViewAdapter adapter;
     private boolean dataInitialized;
     private int exerciseId;
-    private ArrayList<Call> calls;
-    private boolean reload;
+    private int userId;
 
     private static void shuffleQuestions(List<Question> questions) {
         Collections.shuffle(questions);
@@ -107,6 +105,13 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        exerciseId = getIntent().getIntExtra(EXERCISE_ID, NO_EXERCISE);
+        if (exerciseId == NO_EXERCISE) {
+            finish();
+            Toast.makeText(getApplicationContext(), "No exercise ID", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         setContentView(R.layout.activity_questions);
 
         ActionBar actionBar = getSupportActionBar();
@@ -115,8 +120,7 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         }
 
         dataInitialized = false;
-        calls = new ArrayList<>();
-        exerciseId = getIntent().getIntExtra(QuestionsActivity.EXERCISE_ID, -1);
+        userId = getIntent().getIntExtra(USER_ID, NO_USER);
 
         TouchScrollBar touchScrollBar = (TouchScrollBar) findViewById(R.id.tchSrlBr);
         touchScrollBar.setHideDuration(1000);
@@ -127,12 +131,11 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        reload = false;
         if (!dataInitialized) {
             CustomApplication customApplication = (CustomApplication) getApplication();
             Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exerciseId);
             exerciseListResponseCall.enqueue(new GetQuestionsCallback(this));
-            calls.add(exerciseListResponseCall);
+            addCall(exerciseListResponseCall);
         }
     }
 
@@ -155,22 +158,11 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 View viewContainer = findViewById(R.id.rltLyot_container);
                 if (viewContainer.getVisibility() == View.INVISIBLE) {
                     viewContainer.setVisibility(View.VISIBLE);
-                    findViewById(R.id.prgBr_questions).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.prgBr_questions).setVisibility(View.GONE);
                 }
                 adapter.replaceQuestions(questions);
             }
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        reload = true;
-
-        for (Call call : calls) {
-            call.cancel();
-        }
-        calls.clear();
     }
 
     @Override
@@ -208,12 +200,13 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        String tag = dialog.getTag();
-        switch (tag) {
+        switch (dialog.getTag()) {
             case SUBMIT_DIALOG:
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBooleanArray(ResultActivity.RESULT, adapter.getResult());
+                bundle.putInt(ResultActivity.USER_ID, userId);
+                bundle.putInt(ResultActivity.EXERCISE_ID, exerciseId);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -232,25 +225,25 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
         Log.v("SPage", String.format(Locale.US, "Cancel dialog: %s", dialog.getTag()));
     }
 
-    public static class GetQuestionsCallback extends ResultActivityCallback<Task4ListResponse<Question>> {
-        public GetQuestionsCallback(QuestionsActivity questionsActivity) {
-            super(questionsActivity);
+    public static class GetQuestionsCallback extends Task4ActivityCallback<Task4ListResponse<Question>, QuestionsActivity> {
+        public GetQuestionsCallback(QuestionsActivity task4Activity) {
+            super(task4Activity);
         }
 
         @Override
         public void onResponse(Call<Task4ListResponse<Question>> call, Response<Task4ListResponse<Question>> response) {
-            QuestionsActivity questionsActivity = weakReferenceQuestionsActivity.get();
+            QuestionsActivity questionsActivity = weakReferenceTask4Activity.get();
             if (questionsActivity != null) {
                 SpageException spageException = TranslateRetrofitException.translateServiceException(call, response);
 
                 if (spageException != null) {
                     try {
                         questionsActivity.finish();
-                        showToast(questionsActivity.getApplicationContext(), spageException);
+                        showExceptionToast(questionsActivity.getApplicationContext(), spageException);
                     } catch (Exception ex) {
                         Log.e("SPage", ex.getMessage());
                     }
-                    questionsActivity.calls.remove(call);
+                    questionsActivity.removeCall(call);
                     return;
                 }
 
@@ -267,42 +260,30 @@ public class QuestionsActivity extends AppCompatActivity implements View.OnClick
                 } catch (Exception ex1) {
                     try {
                         questionsActivity.finish();
-                        showToast(questionsActivity.getApplicationContext(), ex1);
+                        showExceptionToast(questionsActivity.getApplicationContext(), ex1);
                     } catch (Exception ex2) {
                         Log.e("SPage", ex2.getMessage());
                     }
                 } finally {
-                    questionsActivity.calls.remove(call);
+                    questionsActivity.removeCall(call);
                 }
             }
         }
-    }
-
-    public static abstract class ResultActivityCallback<T extends EndPointResponse> implements Callback<T> {
-        protected final WeakReference<QuestionsActivity> weakReferenceQuestionsActivity;
-
-        public ResultActivityCallback(QuestionsActivity questionsActivity) {
-            weakReferenceQuestionsActivity = new WeakReference<>(questionsActivity);
-        }
-
-        protected void showToast(Context context, Throwable throwable) {
-            Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_LONG).show();
-        }
 
         @Override
-        public void onFailure(Call<T> call, Throwable t) {
-            QuestionsActivity questionsActivity = weakReferenceQuestionsActivity.get();
-            if (questionsActivity != null) {
+        public void onFailure(Call<Task4ListResponse<Question>> call, Throwable t) {
+            Task4Activity task4Activity = weakReferenceTask4Activity.get();
+            if (task4Activity != null) {
                 try {
                     // Handle
-                    if (!questionsActivity.reload) {
-                        questionsActivity.finish();
-                        showToast(questionsActivity.getApplicationContext(), t);
+                    if (!task4Activity.isReloadable()) {
+                        task4Activity.finish();
+                        showExceptionToast(task4Activity.getApplicationContext(), t);
                     }
                 } catch (Exception ex) {
                     Log.e("SPage", ex.getMessage());
                 } finally {
-                    questionsActivity.calls.remove(call);
+                    task4Activity.removeCall(call);
                 }
             }
         }

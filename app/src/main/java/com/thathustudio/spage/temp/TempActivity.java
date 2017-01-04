@@ -16,9 +16,10 @@ public class TempActivity extends AppCompatActivity {
         // Redirect or show fragment
 
         // - Redirect
-        /*Intent intent = new Intent(getApplicationContext(), QuestionsActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt(QuestionsActivity.EXERCISE_ID, 1);
+        bundle.putInt(ResultActivity.EXERCISE_ID, 1);
+        bundle.putInt(ResultActivity.USER_ID, 1);
         Random random = new Random(System.currentTimeMillis());
         boolean[] results = new boolean[40];
         for (int i = 0, len = results.length; i < len; i++) {
@@ -30,7 +31,7 @@ public class TempActivity extends AppCompatActivity {
         finish();*/
 
         // - Show fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExercisesFragment.newInstance()).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExercisesFragment.newInstance(1)).commitAllowingStateLoss();
 
         // -------------------------
     }

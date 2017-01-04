@@ -47,6 +47,7 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerViewAdapter.OnExerciseViewInteractionListener, SwipeRefreshLayout.OnRefreshListener {
+    private static final String USER_ID = "User ID";
     private static final String EXERCISES = "Exercises";
     private static final String DATA_INITIALIZED = "Data Initialized";
     private ExerciseRecyclerViewAdapter adapter;
@@ -54,10 +55,15 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     private boolean dataInitialized;
     private List<Call> calls;
     private RecyclerView recyclerView;
-    private boolean reload;
+    private boolean reloadable;
+    private int userId;
 
-    public static ExercisesFragment newInstance() {
-        return new ExercisesFragment();
+    public static ExercisesFragment newInstance(int userId) {
+        ExercisesFragment fragment = new ExercisesFragment();
+        Bundle args = new Bundle();
+        args.putInt(USER_ID, userId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private void recyclerViewInit(RecyclerView recyclerView) {
@@ -97,6 +103,14 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userId = getArguments().getInt(USER_ID);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exercises, container, false);
@@ -116,7 +130,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onResume() {
         super.onResume();
-        reload = false;
+        reloadable = false;
         swipeRefreshLayoutExercises.setRefreshing(false);
         if (!dataInitialized) {
             swipeRefreshLayoutExercises.setRefreshing(true);
@@ -127,7 +141,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onPause() {
         super.onPause();
-        reload = true;
+        reloadable = true;
 
         for (Call call : calls) {
             call.cancel();
@@ -167,6 +181,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         adapter.unpinPinnedExercise();
         Intent intent = new Intent(getContext().getApplicationContext(), QuestionsActivity.class);
         intent.putExtra(QuestionsActivity.EXERCISE_ID, exercise.getId());
+        intent.putExtra(QuestionsActivity.USER_ID, userId);
         startActivity(intent);
     }
 
@@ -224,7 +239,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
                 try {
                     // Handle
                     exercisesFragment.swipeRefreshLayoutExercises.setRefreshing(false);
-                    if (!exercisesFragment.reload) {
+                    if (!exercisesFragment.reloadable) {
                         showToast(exercisesFragment.getContext().getApplicationContext(), t);
                     }
                 } catch (Exception ex) {

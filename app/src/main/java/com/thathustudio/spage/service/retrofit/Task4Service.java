@@ -2,10 +2,14 @@ package com.thathustudio.spage.service.retrofit;
 
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.Question;
+import com.thathustudio.spage.model.Result;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
+import com.thathustudio.spage.model.responses.Task4Response;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface Task4Service {
@@ -16,4 +20,7 @@ public interface Task4Service {
 
     @GET("exercise/{id}/questions")
     Call<Task4ListResponse<Question>> getQuestions(@Path("id") int exerciseId);
+
+    @POST("result")
+    Call<Task4Response<Integer>> postResult(@Body Result result);
 }

@@ -25,10 +25,10 @@ public class Task4PromptDialogFragment extends BaseDialogFragment implements Dia
     private static final String MESSAGE = "Message";
     private static final String POSITIVE = "Positive";
     private static final String NEGATIVE = "Negative";
-    public static final int NO_BUTTON = -1;
+    public static final int DONT_USE = -1;
     public static final String TASK4_PROMPT = "Task4 Prompt";
     // Use this instance of the interface to deliver action events
-    OnTask4PromptDialogInteractionListener listener;
+    private OnTask4PromptDialogInteractionListener listener;
     private int title;
     private int message;
     private int positive;
@@ -69,13 +69,16 @@ public class Task4PromptDialogFragment extends BaseDialogFragment implements Dia
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(title)
-                .setMessage(message);
-
-        if (positive != NO_BUTTON) {
+        if (title != DONT_USE) {
+            builder.setTitle(title);
+        }
+        if (message != DONT_USE) {
+            builder.setMessage(message);
+        }
+        if (positive != DONT_USE) {
             builder.setPositiveButton(positive, this);
         }
-        if (negative != NO_BUTTON) {
+        if (negative != DONT_USE) {
             builder.setNegativeButton(negative, this);
         }
 

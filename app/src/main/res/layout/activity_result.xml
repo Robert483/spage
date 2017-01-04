@@ -1,70 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:app="http://schemas.android.com/apk/res-auto"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:id="@+id/activity_result"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       tools:context="com.thathustudio.spage.activities.ResultActivity">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:id="@+id/activity_result"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            tools:context="com.thathustudio.spage.activities.ResultActivity">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-7dp"
-        android:indeterminate="true"/>
+        android:layout_height="wrap_content">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <android.support.percent.PercentFrameLayout
+            android:id="@+id/frmLyot_container"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingTop="@dimen/spacing"
+            app:layout_aspectRatio="133%"
+            app:layout_widthPercent="100%">
 
-        <android.support.percent.PercentRelativeLayout
+            <requestFocus/>
+
+            <com.thathustudio.spage.widgets.ArcProgressBar
+                android:id="@+id/arPrgrBr_result"
+                android:layout_gravity="center"
+                app:arc_angle="270"
+                app:arc_bottom_text_color="@color/secondaryTextDark"
+                app:arc_bottom_text_size="@dimen/display3_text_size"
+                app:arc_finished_color_end="@color/excellentResult"
+                app:arc_finished_color_middle="@color/goodResult"
+                app:arc_finished_color_start="@color/badResult"
+                app:arc_progress_text_color="@color/primaryTextDark"
+                app:arc_stroke_width="20dp"
+                app:arc_text_size="@dimen/headline_text_size"
+                app:arc_unfinished_color="@color/dividerDark"
+                app:layout_aspectRatio="100%"
+                app:layout_heightPercent="100%"/>
+
+        </android.support.percent.PercentFrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rclrV_result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/frmLyot_container"
+            android:nestedScrollingEnabled="false"
+            android:paddingBottom="@dimen/quarter_spacing"
+            android:paddingTop="@dimen/half_spacing"
+            tools:ignore="UnusedAttribute"/>
 
-            <android.support.percent.PercentFrameLayout
-                android:id="@+id/frmLyot_container"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:paddingTop="@dimen/spacing"
-                app:layout_aspectRatio="133%"
-                app:layout_widthPercent="100%">
+    </android.support.percent.PercentRelativeLayout>
 
-                <requestFocus/>
-
-                <com.thathustudio.spage.widgets.ArcProgressBar
-                    android:id="@+id/arPrgrBr_result"
-                    android:layout_gravity="center"
-                    app:arc_angle="270"
-                    app:arc_bottom_text_color="@color/secondaryTextDark"
-                    app:arc_bottom_text_size="@dimen/display3_text_size"
-                    app:arc_finished_color_end="@color/excellentResult"
-                    app:arc_finished_color_middle="@color/goodResult"
-                    app:arc_finished_color_start="@color/badResult"
-                    app:arc_progress_text_color="@color/primaryTextDark"
-                    app:arc_stroke_width="20dp"
-                    app:arc_text_size="@dimen/headline_text_size"
-                    app:arc_unfinished_color="@color/dividerDark"
-                    app:layout_aspectRatio="100%"
-                    app:layout_heightPercent="100%"/>
-
-            </android.support.percent.PercentFrameLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rclrV_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/frmLyot_container"
-                android:nestedScrollingEnabled="false"
-                android:paddingBottom="@dimen/quarter_spacing"
-                android:paddingTop="@dimen/half_spacing"
-                tools:ignore="UnusedAttribute"/>
-
-        </android.support.percent.PercentRelativeLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-</merge>
+</android.support.v4.widget.NestedScrollView>
 
 
     <!--<ProgressBar
