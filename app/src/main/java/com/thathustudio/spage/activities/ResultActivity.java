@@ -6,11 +6,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.app.CustomApplication;
+import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
+import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.Result;
 import com.thathustudio.spage.model.responses.Task4Response;
 import com.thathustudio.spage.service.callback.Task4ActivityCallback;
@@ -26,15 +30,17 @@ import retrofit2.Response;
 
 public class ResultActivity extends Task4Activity {
     private static final int NO_USER = -1;
-    private static final int NO_EXERCISE = -1;
     private static final String SENT = "SENT";
-    public static final String EXERCISE_ID = "Exercise ID";
+    public static final String EXERCISE = "Exercise";
     public static final String USER_ID = "User ID";
     public static final String RESULT = "Result";
-    private Result result;
     private boolean sent;
+    private Exercise exercise;
+    private int userId;
+    private int score;
 
     private String grade(float score) {
+        this.score = (int) (score * 100);
         if (score >= 0.925) {
             return "A+";
         } else if (score >= 0.825) {
@@ -73,14 +79,14 @@ public class ResultActivity extends Task4Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int userId = getIntent().getIntExtra(USER_ID, NO_USER);
+        userId = getIntent().getIntExtra(USER_ID, NO_USER);
         if (userId == NO_USER) {
             showToastAndFinish("No user ID");
             return;
         }
-        int exerciseId = getIntent().getIntExtra(EXERCISE_ID, NO_EXERCISE);
-        if (exerciseId == NO_EXERCISE) {
-            showToastAndFinish("No exercise ID");
+        exercise = getIntent().getParcelableExtra(EXERCISE);
+        if (exercise == null) {
+            showToastAndFinish("No exercise");
             return;
         }
         boolean[] results = getIntent().getBooleanArrayExtra(ResultActivity.RESULT);
@@ -105,18 +111,25 @@ public class ResultActivity extends Task4Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ResultRecyclerViewAdapter(this, resultList));
 
-        int total = resultList.size();
-        int progress = Collections.frequency(resultList, true);
-        float score = 1f * progress / total;
-        result = new Result(userId, exerciseId, (int) (score * 100));
-
         ArcProgressBar arcProgressBar = (ArcProgressBar) findViewById(R.id.arPrgrBr_result);
-        arcProgressBar.setMax(total);
-        arcProgressBar.setProgress(progress);
-        arcProgressBar.setBottomText(grade(score));
+        arcProgressBar.setMax(resultList.size());
+        arcProgressBar.setProgress(Collections.frequency(resultList, true));
+        arcProgressBar.setBottomText(grade(1f * arcProgressBar.getProgress() / arcProgressBar.getMax()));
 
         /*ImageView imageView = (ImageView) findViewById(R.id.imgV_background);
         imageView.setImageBitmap(getScaledBackground());*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!sent) {
+            CustomApplication customApplication = (CustomApplication) getApplication();
+            Call<Task4Response<Integer>> exerciseListResponseCall = customApplication.getTask4Service().postResult(new Result(userId, exercise.getId(), score));
+            exerciseListResponseCall.enqueue(new PostResultCallback(this));
+            addCall(exerciseListResponseCall);
+            sent = true;
+        }
     }
 
     /*private Bitmap getScaledBackground() {
@@ -141,18 +154,6 @@ public class ResultActivity extends Task4Activity {
     }*/
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!sent) {
-            CustomApplication customApplication = (CustomApplication) getApplication();
-            Call<Task4Response<Integer>> exerciseListResponseCall = customApplication.getTask4Service().postResult(result);
-            exerciseListResponseCall.enqueue(new PostResultCallback(this));
-            addCall(exerciseListResponseCall);
-            sent = true;
-        }
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SENT, sent);
@@ -167,11 +168,21 @@ public class ResultActivity extends Task4Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.exercise_info, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.act_exerciseInfo:
+                ExerciseDetailsDialogFragment.newInstance(exercise).show(getSupportFragmentManager(), ExerciseDetailsDialogFragment.EXERCISE_DETAILS);
                 return true;
         }
         return super.onOptionsItemSelected(item);

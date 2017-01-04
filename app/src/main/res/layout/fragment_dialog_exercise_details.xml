@@ -27,7 +27,7 @@
             android:paddingRight="@dimen/dialog_spacing"
             android:paddingStart="@dimen/dialog_spacing">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:gravity="bottom"
@@ -35,7 +35,7 @@
                 android:textColor="@color/primaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txtV_exerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:textColor="@color/secondaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:gravity="bottom"
@@ -52,7 +52,7 @@
                 android:textColor="@color/primaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txtV_exerciseContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:textColor="@color/secondaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:gravity="bottom"
@@ -69,7 +69,7 @@
                 android:textColor="@color/primaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txtV_exerciseSubject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:textColor="@color/secondaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:gravity="bottom"
@@ -86,7 +86,7 @@
                 android:textColor="@color/primaryTextDark"
                 android:textSize="@dimen/subheading_text_size"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txtV_exerciseDifficulty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -12,5 +12,5 @@
                                              android:background="@drawable/fake_card_top"
                                              android:orientation="vertical"
                                              android:padding="@dimen/spacing"
-                                             android:textColor="@android:color/white"
+                                             android:textColor="@color/primaryTextLight"
                                              android:textSize="@dimen/subheading_text_size"/>

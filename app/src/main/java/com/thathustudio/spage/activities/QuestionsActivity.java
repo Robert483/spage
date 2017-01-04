@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,7 +24,9 @@ import com.h6ah4i.android.widget.advrecyclerview.expandable.RecyclerViewExpandab
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.app.CustomApplication;
 import com.thathustudio.spage.exception.SpageException;
+import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
 import com.thathustudio.spage.fragments.dialogs.Task4PromptDialogFragment;
+import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.Question;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
 import com.thathustudio.spage.service.callback.Task4ActivityCallback;
@@ -44,13 +48,12 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     private static final String BACK_DIALOG = "Back Dialog";
     private static final String DATA_INITIALIZED = "Data Initialized";
     private static final String QUESTIONS = "Questions";
-    private static final int NO_EXERCISE = -1;
     private static final int NO_USER = -1;
+    public static final String EXERCISE = "Exercise";
     public static final String USER_ID = "User ID";
-    public static final String EXERCISE_ID = "Exercise ID";
     private QuestionRecyclerViewAdapter adapter;
     private boolean dataInitialized;
-    private int exerciseId;
+    private Exercise exercise;
     private int userId;
 
     private static void shuffleQuestions(List<Question> questions) {
@@ -105,10 +108,10 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        exerciseId = getIntent().getIntExtra(EXERCISE_ID, NO_EXERCISE);
-        if (exerciseId == NO_EXERCISE) {
+        exercise = getIntent().getParcelableExtra(EXERCISE);
+        if (exercise == null) {
             finish();
-            Toast.makeText(getApplicationContext(), "No exercise ID", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No exercise", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -133,7 +136,7 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
         super.onResume();
         if (!dataInitialized) {
             CustomApplication customApplication = (CustomApplication) getApplication();
-            Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exerciseId);
+            Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exercise.getId());
             exerciseListResponseCall.enqueue(new GetQuestionsCallback(this));
             addCall(exerciseListResponseCall);
         }
@@ -166,6 +169,13 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.exercise_info, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -175,6 +185,9 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
                 } else {
                     NavUtils.navigateUpFromSameTask(this);
                 }
+                return true;
+            case R.id.act_exerciseInfo:
+                ExerciseDetailsDialogFragment.newInstance(exercise).show(getSupportFragmentManager(), ExerciseDetailsDialogFragment.EXERCISE_DETAILS);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -206,7 +219,7 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
                 Bundle bundle = new Bundle();
                 bundle.putBooleanArray(ResultActivity.RESULT, adapter.getResult());
                 bundle.putInt(ResultActivity.USER_ID, userId);
-                bundle.putInt(ResultActivity.EXERCISE_ID, exerciseId);
+                bundle.putParcelable(ResultActivity.EXERCISE, exercise);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();

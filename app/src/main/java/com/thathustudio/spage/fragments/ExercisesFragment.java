@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
@@ -46,17 +47,18 @@ import retrofit2.Response;
  * Use the {@link ExercisesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerViewAdapter.OnExerciseViewInteractionListener, SwipeRefreshLayout.OnRefreshListener {
+public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerViewAdapter.OnExerciseViewInteractionListener, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private static final String USER_ID = "User ID";
     private static final String EXERCISES = "Exercises";
     private static final String DATA_INITIALIZED = "Data Initialized";
+    private static final String HINT = "Hint";
     private ExerciseRecyclerViewAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayoutExercises;
     private boolean dataInitialized;
     private List<Call> calls;
-    private RecyclerView recyclerView;
     private boolean reloadable;
     private int userId;
+    private Button buttonHint;
 
     public static ExercisesFragment newInstance(int userId) {
         ExercisesFragment fragment = new ExercisesFragment();
@@ -118,9 +120,10 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         dataInitialized = false;
         calls = new ArrayList<>();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exercises);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rclrV_exercises);
         recyclerViewInit(recyclerView);
-
+        buttonHint = (Button) view.findViewById(R.id.btn_hint);
+        buttonHint.setOnClickListener(this);
         swipeRefreshLayoutExercises = (SwipeRefreshLayout) view.findViewById(R.id.swpRfr_exercises);
         swipeRefreshLayoutExercises.setOnRefreshListener(this);
 
@@ -153,6 +156,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(HINT, buttonHint.getVisibility());
         outState.putBoolean(DATA_INITIALIZED, dataInitialized);
         if (dataInitialized) {
             outState.putParcelableArrayList(EXERCISES, new ArrayList<>(adapter.getExercises()));
@@ -163,6 +167,8 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
+            //noinspection WrongConstant
+            buttonHint.setVisibility(savedInstanceState.getInt(HINT, View.GONE));
             dataInitialized = savedInstanceState.getBoolean(DATA_INITIALIZED, false);
             if (dataInitialized) {
                 List<Exercise> exercises = savedInstanceState.getParcelableArrayList(EXERCISES);
@@ -180,8 +186,10 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     public void onExerciseStartClick(Exercise exercise) {
         adapter.unpinPinnedExercise();
         Intent intent = new Intent(getContext().getApplicationContext(), QuestionsActivity.class);
-        intent.putExtra(QuestionsActivity.EXERCISE_ID, exercise.getId());
-        intent.putExtra(QuestionsActivity.USER_ID, userId);
+        Bundle bundle = new Bundle();
+        bundle.putInt(QuestionsActivity.USER_ID, userId);
+        bundle.putParcelable(QuestionsActivity.EXERCISE, exercise);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -191,6 +199,15 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
         Call<Task4ListResponse<Exercise>> exerciseListResponseCall = customApplication.getTask4Service().getExercises();
         exerciseListResponseCall.enqueue(new GetExercisesCallback(this));
         calls.add(exerciseListResponseCall);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_hint:
+                v.setVisibility(View.GONE);
+                break;
+        }
     }
 
     public static class GetExercisesCallback extends ExercisesFragmentCallback<Task4ListResponse<Exercise>> {

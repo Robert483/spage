@@ -10,4 +10,6 @@
     <color name="excellentResult">#00E676</color>
     <color name="goodResult">#00C853</color>
     <color name="badResult">#F44336</color>
+    <color name="primaryTextLight">@android:color/white</color>
+    <color name="snackbar_color">#323232</color>
 </resources>

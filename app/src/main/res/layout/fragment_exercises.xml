@@ -1,8 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.thathustudio.spage.fragments.ExercisesFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.thathustudio.spage.fragments.ExercisesFragment">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_hint"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/snackbar_color"
+        android:drawableEnd="@drawable/ic_clear"
+        android:drawablePadding="@dimen/dialog_spacing"
+        android:drawableRight="@drawable/ic_clear"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/dialog_spacing"
+        android:text="@string/swipe_down_to_refresh_swipe_right_for_more_action"
+        android:textAllCaps="false"
+        android:textColor="@color/primaryTextLight"
+        android:textSize="@dimen/body_text_size"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swpRfr_exercises"
@@ -19,4 +35,4 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</FrameLayout>
+</LinearLayout>
