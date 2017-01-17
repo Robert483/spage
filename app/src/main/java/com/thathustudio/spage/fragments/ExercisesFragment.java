@@ -28,6 +28,7 @@ import com.thathustudio.spage.activities.QuestionsActivity;
 import com.thathustudio.spage.app.CustomApplication;
 import com.thathustudio.spage.exception.SpageException;
 import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
+import com.thathustudio.spage.fragments.dialogs.ExerciseRankDialogFragment;
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
@@ -204,7 +205,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
 
     @Override
     public void onExerciseRankClick(Exercise exercise) {
-        // TODO: load rank
+        ExerciseRankDialogFragment.newInstance(exercise.getId()).show(getChildFragmentManager(), ExerciseRankDialogFragment.EXERCISE_RANK);
     }
 
     @Override
@@ -258,7 +259,7 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
                     };
                     for (Exercise exercise : response.body().getResponse())
                     {
-                        exercise.setContent(lorem.getWords(10, 30));
+                        exercise.setContent(lorem.getWords(10, 50));
                         Call<Task4Response<Integer>> temp2 = temp1.putExercise(exercise.getId(), exercise);
                         temp2.enqueue(temp3);
                     }

@@ -4,6 +4,11 @@ public class Result {
     private int userId;
     private int exerciseId;
     private int score;
+    private String userName;
+
+    public Result(String userName) {
+        this.userName = userName;
+    }
 
     public Result(int userId, int exerciseId, int score) {
         this.userId = userId;
@@ -33,5 +38,13 @@ public class Result {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

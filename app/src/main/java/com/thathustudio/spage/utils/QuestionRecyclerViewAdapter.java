@@ -109,7 +109,6 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     @Override
     public QuestionContentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_question, parent, false);
-        view.setBackground(fakeCardTopDrawable);
         return new QuestionContentViewHolder(view);
     }
 
@@ -124,6 +123,7 @@ public class QuestionRecyclerViewAdapter extends AbstractExpandableItemAdapter<Q
     public void onBindGroupViewHolder(QuestionContentViewHolder holder, int groupPosition, int viewType) {
         holder.question = questions.get(groupPosition);
         holder.textViewQuestionContent.setText(String.format(locale, "%s %d: %s", questionPrefix, groupPosition + 1, holder.question.getContent()));
+        holder.itemView.setBackground(fakeCardTopDrawable);
     }
 
     @Override

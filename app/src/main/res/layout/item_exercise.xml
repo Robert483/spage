@@ -84,7 +84,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/primaryTextDark"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/subheading_text_size"/>
 
         <TextView
             android:id="@id/txtV_dump"
@@ -109,7 +109,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/secondaryTextDark"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/body_text_size"/>
 
         <TextView
             android:layout_width="match_parent"

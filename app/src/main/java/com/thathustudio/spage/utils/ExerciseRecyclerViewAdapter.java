@@ -67,6 +67,8 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise, parent, false);
         view.findViewById(R.id.imgBtn_exerciseInfo).setOnClickListener(this);
         view.findViewById(R.id.imgBtn_exerciseStart).setOnClickListener(this);
+        view.findViewById(R.id.imgBtn_exerciseDownload).setOnClickListener(this);
+        view.findViewById(R.id.imgBtn_exerciseRank).setOnClickListener(this);
         return new ExerciseViewHolder(view);
     }
 

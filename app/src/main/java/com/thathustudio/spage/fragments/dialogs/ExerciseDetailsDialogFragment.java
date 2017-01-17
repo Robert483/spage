@@ -106,7 +106,7 @@ public class ExerciseDetailsDialogFragment extends BaseDialogFragment implements
             getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
             WindowManager.LayoutParams params = dialog1.getWindow().getAttributes();
-            int size = 3 * (metrics.heightPixels > metrics.widthPixels ? metrics.heightPixels : metrics.widthPixels) / 4;
+            int size = 7 * (metrics.heightPixels > metrics.widthPixels ? metrics.heightPixels : metrics.widthPixels) / 10;
             if (scrollView.getHeight() > size) {
                 params.height = size;
                 dialog1.getWindow().setAttributes(params);
