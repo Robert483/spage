@@ -14,7 +14,7 @@ public class SubjectIconFactory {
     public SubjectIconFactory(Context context) {
         defaultIcon = ContextCompat.getDrawable(context, R.drawable.ic_sbj_unknown);
 
-        int[] ids = {R.drawable.ic_sbj_literature, R.drawable.ic_sbj_physics};
+        int[] ids = { R.drawable.ic_sbj_literature, R.drawable.ic_sbj_physics, R.drawable.ic_sbj_chemistry, R.drawable.ic_sbj_mathematics, R.drawable.ic_sbj_biology, R.drawable.ic_sbj_english };
         icons = new SparseArrayCompat<>(ids.length);
         for (int i = 0, len = ids.length; i < len; i++) {
             icons.put(i + 1, ContextCompat.getDrawable(context, ids[i]));

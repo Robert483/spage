@@ -48,6 +48,14 @@ public class ExerciseDetailsDialogFragment extends BaseDialogFragment implements
                 return "Tiếng việt";
             case 2:
                 return "Vật lý";
+            case 3:
+                return "Hóa học";
+            case 4:
+                return "Toán học";
+            case 5:
+                return "Sinh học";
+            case 6:
+                return "Tiếng Anh";
             default:
                 return "Unknown";
         }

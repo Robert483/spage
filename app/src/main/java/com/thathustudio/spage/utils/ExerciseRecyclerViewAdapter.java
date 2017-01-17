@@ -130,6 +130,12 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
                 case R.id.imgBtn_exerciseStart:
                     listener.onExerciseStartClick(exercise);
                     break;
+                case  R.id.imgBtn_exerciseDownload:
+                    listener.onExerciseDownloadClick(exercise);
+                    break;
+                case R.id.imgBtn_exerciseRank:
+                    listener.onExerciseRankClick(exercise);
+                    break;
             }
         }
     }
@@ -142,6 +148,10 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         void onExerciseInfoClick(Exercise exercise);
 
         void onExerciseStartClick(Exercise exercise);
+
+        void onExerciseDownloadClick(Exercise exercise);
+
+        void onExerciseRankClick(Exercise exercise);
     }
 
     public static class ExerciseViewHolder extends AbstractSwipeableItemViewHolder {

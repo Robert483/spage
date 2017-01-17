@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -135,10 +136,28 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         if (!dataInitialized) {
-            CustomApplication customApplication = (CustomApplication) getApplication();
-            Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exercise.getId());
-            exerciseListResponseCall.enqueue(new GetQuestionsCallback(this));
-            addCall(exerciseListResponseCall);
+            boolean isDownloaded = new Random().nextInt(1) != 0;
+
+            // TODO: check if exercise's questions has been already downloaded by using this.exercise info.
+            if (isDownloaded) {
+                try {
+                    // TODO: If yes, load them from local database
+                    List<Question> questions = new ArrayList<>();
+                    loadQuestionsIntoRecyclerView(questions);
+                } catch (Exception ex1) {
+                    try {
+                        finish();
+                        Toast.makeText(getApplicationContext(), ex1.getMessage(), Toast.LENGTH_LONG).show();
+                    } catch (Exception ex2) {
+                        Log.e("SPage", ex2.getMessage());
+                    }
+                }
+            } else {
+                CustomApplication customApplication = (CustomApplication) getApplication();
+                Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exercise.getId());
+                exerciseListResponseCall.enqueue(new GetQuestionsCallback(this));
+                addCall(exerciseListResponseCall);
+            }
         }
     }
 
@@ -238,6 +257,19 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
         Log.v("SPage", String.format(Locale.US, "Cancel dialog: %s", dialog.getTag()));
     }
 
+    private void loadQuestionsIntoRecyclerView(List<Question> questions) throws Exception
+    {
+        findViewById(R.id.prgBr_questions).setVisibility(View.GONE);
+        findViewById(R.id.rltLyot_container).setVisibility(View.VISIBLE);
+
+        if (questions.size() == 0) {
+            throw new Exception("No questions available");
+        }
+        shuffleQuestions(questions);
+        adapter.replaceQuestions(questions);
+        dataInitialized = true;
+    }
+
     public static class GetQuestionsCallback extends Task4ActivityCallback<Task4ListResponse<Question>, QuestionsActivity> {
         public GetQuestionsCallback(QuestionsActivity task4Activity) {
             super(task4Activity);
@@ -261,15 +293,8 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
                 }
 
                 try {
-                    questionsActivity.findViewById(R.id.prgBr_questions).setVisibility(View.GONE);
-                    questionsActivity.findViewById(R.id.rltLyot_container).setVisibility(View.VISIBLE);
                     List<Question> questions = response.body().getResponse();
-                    if (questions.size() == 0) {
-                        throw new Exception("No questions available");
-                    }
-                    shuffleQuestions(questions);
-                    questionsActivity.adapter.replaceQuestions(questions);
-                    questionsActivity.dataInitialized = true;
+                    questionsActivity.loadQuestionsIntoRecyclerView(questions);
                 } catch (Exception ex1) {
                     try {
                         questionsActivity.finish();

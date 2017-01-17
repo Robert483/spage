@@ -22,5 +22,7 @@
     <string name="go_back">Go back?</string>
     <string name="your_choices_will_not_be_saved">Your choices will not be saved. If you start this exercise again, you will have to do it all over again.</string>
     <string name="back">BACK</string>
-    <string name="swipe_down_to_refresh_swipe_right_for_more_action">Swipe down to refresh. Swipe right for more action</string>
+    <string name="swipe_down_to_refresh_swipe_right_for_more_action">Swipe down to refresh. Swipe right on item for more action</string>
+    <string name="exercise_rank">Exercise rank</string>
+    <string name="download_exercise">Download exercise</string>
 </resources>

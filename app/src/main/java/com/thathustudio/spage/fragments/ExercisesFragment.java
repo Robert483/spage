@@ -31,8 +31,12 @@ import com.thathustudio.spage.fragments.dialogs.ExerciseDetailsDialogFragment;
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
+import com.thathustudio.spage.model.responses.Task4Response;
+import com.thathustudio.spage.service.retrofit.Task4Service;
 import com.thathustudio.spage.service.retrofit.TranslateRetrofitException;
 import com.thathustudio.spage.utils.ExerciseRecyclerViewAdapter;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -194,6 +198,16 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
     }
 
     @Override
+    public void onExerciseDownloadClick(Exercise exercise) {
+        // TODO: download questions for exercise
+    }
+
+    @Override
+    public void onExerciseRankClick(Exercise exercise) {
+        // TODO: load rank
+    }
+
+    @Override
     public void onRefresh() {
         CustomApplication customApplication = (CustomApplication) getActivity().getApplication();
         Call<Task4ListResponse<Exercise>> exerciseListResponseCall = customApplication.getTask4Service().getExercises();
@@ -227,6 +241,29 @@ public class ExercisesFragment extends BaseFragment implements ExerciseRecyclerV
                         showToast(exercisesFragment.getContext().getApplicationContext(), spageException); // Fix warning
                         return;
                     }
+
+                    /*// Content gernerator
+                    Lorem lorem = LoremIpsum.getInstance();
+                    Task4Service temp1 = ((CustomApplication) exercisesFragment.getActivity().getApplication()).getTask4Service();
+                    Callback<Task4Response<Integer>> temp3 = new Callback<Task4Response<Integer>>() {
+                        @Override
+                        public void onResponse(Call<Task4Response<Integer>> call, Response<Task4Response<Integer>> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Task4Response<Integer>> call, Throwable t) {
+
+                        }
+                    };
+                    for (Exercise exercise : response.body().getResponse())
+                    {
+                        exercise.setContent(lorem.getWords(10, 30));
+                        Call<Task4Response<Integer>> temp2 = temp1.putExercise(exercise.getId(), exercise);
+                        temp2.enqueue(temp3);
+                    }
+                    //----------------*/
+
                     exercisesFragment.adapter.replaceExercises(response.body().getResponse());
                     exercisesFragment.dataInitialized = true;
                 } catch (Exception ex) {

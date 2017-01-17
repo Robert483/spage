@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface Task4Service {
@@ -23,4 +24,7 @@ public interface Task4Service {
 
     @POST("result")
     Call<Task4Response<Integer>> postResult(@Body Result result);
+
+    @PUT("exercise/{id}")
+    Call<Task4Response<Integer>> putExercise(@Path("id") int exerciseId, @Body Exercise exercise);
 }
