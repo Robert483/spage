@@ -16,6 +16,7 @@ public class ShareReferrentHelper {
         editor.putInt("id", user.getId());
         editor.putString("username", user.getUsername());
         editor.putString("password", user.getPassword());
+        editor.putString("email", user.getEmail());
         editor.putInt("role", user.getRole());
         editor.commit();
         return true;

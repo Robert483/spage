@@ -94,17 +94,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         viewPager.setCurrentItem(tab.getPosition());
-//        if(viewPager.getCurrentItem() == 0) {
-//            BagTabFragment bagTabFragment = (BagTabFragment) viewPager.getAdapter().instantiateItem(viewPager, viewPager.getCurrentItem());
-//            bagTabFragment.updateGridView();
-//            bagTabFragment.setOnSaleListener(this);
-//
-//
-//        }
-//        else {
-//            StoreTabFragment storeTabFragment = (StoreTabFragment) viewPager.getAdapter().instantiateItem(viewPager,1);
-//            storeTabFragment.setOnSaleListener(this);
-//        }
     }
 
     @Override

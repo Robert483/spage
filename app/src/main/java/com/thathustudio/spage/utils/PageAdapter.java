@@ -52,7 +52,7 @@ public class PageAdapter extends FragmentPagerAdapter {
                 ExercisesFragment exercisesFragment = ExercisesFragment.newInstance(id);
                 return exercisesFragment;
             case 2:
-                ProfileFragment profileFragment = ProfileFragment.newInstance("","");
+                ProfileFragment profileFragment = ProfileFragment.newInstance(user.getId(),user.getUsername(),user.getEmail());
                 return  profileFragment;
         }
         return null;

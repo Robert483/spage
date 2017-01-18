@@ -1,6 +1,7 @@
 package com.thathustudio.spage.service.retrofit;
 
 import com.thathustudio.spage.model.Exercise;
+import com.thathustudio.spage.model.Post;
 import com.thathustudio.spage.model.Question;
 import com.thathustudio.spage.model.Result;
 import com.thathustudio.spage.model.User;
@@ -32,4 +33,7 @@ public interface Task4Service {
 
     @POST("api/user")
     Call<Task4Response<Integer>> registerUser (@Header("Content-Type") String token, @Body User user);
+
+    @GET("api/user/{id}/subscriptions")
+    Call<Task4ListResponse<Post>> GetSubject(@Path("id") int userID);
 }
