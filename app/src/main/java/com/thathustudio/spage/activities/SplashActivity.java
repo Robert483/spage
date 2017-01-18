@@ -1,12 +1,10 @@
 package com.thathustudio.spage.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -47,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                User user = ShareReferrentHelper.getTempUser(getApplicationContext());
+                User user = ShareReferrentHelper.getCurrentUser(getApplicationContext());
                 if(user == null){
                     Intent mainIntent = new Intent(SplashActivity.this.getApplicationContext(), LoginActivity.class);
                     SplashActivity.this.startActivity(mainIntent);

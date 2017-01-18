@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.thathustudio.spage">
+    package="com.thathustudio.spage">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.CustomApplication"
@@ -14,50 +14,47 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
 
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="www.app-spage.com"
-                    android:scheme="http"/>
+                    android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity">
-        </activity>
-        <activity android:name=".activities.RegisterActivity">
-        </activity>
-        <activity android:name=".activities.HomeActivity">
-        </activity>
-        <activity android:name=".activities.CommentsActivity">
-        </activity>
-        <activity android:name=".activities.PostingActivity">
-        </activity>
-        <activity android:name=".activities.SubjectPostsActivity">
-        </activity>
+        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.RegisterActivity"></activity>
+        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.CommentsActivity"></activity>
+        <activity android:name=".activities.PostingActivity"></activity>
+        <activity android:name=".activities.SubjectPostsActivity"></activity>
         <activity
             android:name=".activities.QuestionsActivity"
             android:label="@string/exercise">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HomeActivity"/>
+                android:value=".activities.HomeActivity" />
         </activity>
         <activity
             android:name=".activities.ResultActivity"
             android:label="@string/result">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.HomeActivity"/>
+                android:value=".activities.HomeActivity" />
         </activity>
-        <!--<activity android:name=".temp.TempActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+        <!-- <activity android:name=".temp.TempActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN"/> -->
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
+
+        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
     </application>
 
 </manifest>

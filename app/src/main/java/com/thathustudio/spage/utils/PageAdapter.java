@@ -39,7 +39,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // get user -> get id user
-        User user = ShareReferrentHelper.getTempUser(context);
+        User user = ShareReferrentHelper.getCurrentUser(context);
         int id = user.getId();
 
 
