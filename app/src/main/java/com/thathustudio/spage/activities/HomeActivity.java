@@ -1,14 +1,11 @@
 package com.thathustudio.spage.activities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.utils.PageAdapter;
@@ -21,17 +18,6 @@ public class HomeActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PageAdapter pageAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        initData();
-
-        initLayout();
-
-    }
 
     private void initLayout() {
         initTabLayout();
@@ -55,7 +41,8 @@ public class HomeActivity extends AppCompatActivity
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(pageAdapter.getTabView(i));
+            if (tab != null)
+                tab.setCustomView(pageAdapter.getTabView(i));
         }
 
 
@@ -66,6 +53,17 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void initData() {
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        initData();
+
+        initLayout();
 
     }
 

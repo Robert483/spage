@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
@@ -96,7 +97,18 @@ public class Task4PromptDialogFragment extends BaseDialogFragment implements Dia
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
             listener = (OnTask4PromptDialogInteractionListener) context;
-        } catch (ClassCastException e) {
+        } catch (ClassCastException e1) {
+            Fragment fragment = getParentFragment();
+            if (fragment != null) {
+                try {
+                    listener = (OnTask4PromptDialogInteractionListener) fragment;
+                    return;
+                } catch (ClassCastException e2) {
+                    throw new ClassCastException(fragment.toString()
+                            + " must implement OnPlayerSelectionSetListener");
+                }
+            }
+
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
                     + " must implement OnTask4PromptDialogInteractionListener");

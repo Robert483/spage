@@ -125,9 +125,9 @@ public class ResultActivity extends Task4Activity {
         super.onResume();
         if (!sent) {
             CustomApplication customApplication = (CustomApplication) getApplication();
-            Call<Task4Response<Integer>> exerciseListResponseCall = customApplication.getTask4Service().postResult(new Result(userId, exercise.getId(), score));
-            exerciseListResponseCall.enqueue(new PostResultCallback(this));
-            addCall(exerciseListResponseCall);
+            Call<Task4Response<Integer>> resultResponseCall = customApplication.getTask4Service().postResult(new Result(userId, exercise.getId(), score));
+            resultResponseCall.enqueue(new PostResultCallback(this));
+            addCall(resultResponseCall);
             sent = true;
         }
     }

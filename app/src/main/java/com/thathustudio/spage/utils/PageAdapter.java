@@ -11,14 +11,10 @@ import android.widget.TextView;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.fragments.ExercisesFragment;
-import com.thathustudio.spage.fragments.PostsFragment;
 import com.thathustudio.spage.fragments.ProfileFragment;
 import com.thathustudio.spage.fragments.SubjectsFragment;
 import com.thathustudio.spage.model.User;
 
-/**
- * Created by SonPham on 1/16/2017.
- */
 public class PageAdapter extends FragmentPagerAdapter {
 
     //integer to count number of tabs
@@ -46,14 +42,11 @@ public class PageAdapter extends FragmentPagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                SubjectsFragment subjectsFragment = SubjectsFragment.newInstance("","");
-                return subjectsFragment;
+                return SubjectsFragment.newInstance("", "");
             case 1:
-                ExercisesFragment exercisesFragment = ExercisesFragment.newInstance(id);
-                return exercisesFragment;
+                return ExercisesFragment.newInstance(id);
             case 2:
-                ProfileFragment profileFragment = ProfileFragment.newInstance("","");
-                return  profileFragment;
+                return ProfileFragment.newInstance("", "");
         }
         return null;
     }

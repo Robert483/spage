@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Task4Service {
     String SERVICE_ADDRESS = "https://forumflow.herokuapp.com/api/";
@@ -25,6 +26,10 @@ public interface Task4Service {
     @POST("result")
     Call<Task4Response<Integer>> postResult(@Body Result result);
 
+    // for generate content purpose
     @PUT("exercise/{id}")
     Call<Task4Response<Integer>> putExercise(@Path("id") int exerciseId, @Body Exercise exercise);
+
+    @GET("challenge")
+    Call<Task4ListResponse<Question>> getDuelQuestions(@Query("limit") int limit);
 }

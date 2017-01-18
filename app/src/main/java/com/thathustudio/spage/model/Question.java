@@ -4,10 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.List;
 
 public class Question implements Parcelable {
     public final static int NO_CHOICE_SELECTED = RecyclerView.NO_POSITION;
+
     public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
         @Override
         public Question createFromParcel(Parcel source) {
@@ -19,10 +22,11 @@ public class Question implements Parcelable {
             return new Question[size];
         }
     };
-    private String content;
+
     private List<String> choices;
     private int userChoice;
     private String answer;
+    private String content;
     public String a;
     public String b;
     public String c;
@@ -55,14 +59,17 @@ public class Question implements Parcelable {
         this.choices = choices;
     }
 
+    @Exclude
     public boolean isCorrect() {
         return userChoice != NO_CHOICE_SELECTED && choices.get(userChoice).equals(answer);
     }
 
+    @Exclude
     public int getUserChoice() {
         return userChoice;
     }
 
+    @Exclude
     public void setUserChoice(int userChoice) {
         this.userChoice = userChoice;
     }

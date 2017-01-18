@@ -60,17 +60,21 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     private static void shuffleQuestions(List<Question> questions) {
         Collections.shuffle(questions);
         for (Question question : questions) {
-            String[] temps = new String[]{question.a, question.b, question.c, question.d};
-            List<String> choices = new ArrayList<>();
-            for (String temp : temps) {
-                if (temp != null && !temp.equals("")) {
-                    choices.add(temp);
-                }
-            }
-            question.setAnswer(choices.get(0));
-            Collections.shuffle(choices);
-            question.setChoices(choices);
+            shuffleQuestion(question);
         }
+    }
+
+    public static void shuffleQuestion(Question question) {
+        String[] temps = new String[]{question.a, question.b, question.c, question.d};
+        List<String> choices = new ArrayList<>();
+        for (String temp : temps) {
+            if (temp != null && !temp.equals("")) {
+                choices.add(temp);
+            }
+        }
+        question.setAnswer(choices.get(0));
+        Collections.shuffle(choices);
+        question.setChoices(choices);
     }
 
     private void recyclerViewInit() {
@@ -104,6 +108,18 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
 
     private void showGoBackDialog(String tag) {
         Task4PromptDialogFragment.newInstance(R.string.go_back, R.string.your_choices_will_not_be_saved, R.string.back, R.string.keep_doing).show(getSupportFragmentManager(), tag);
+    }
+
+    private void loadQuestionsIntoRecyclerView(List<Question> questions) throws Exception {
+        findViewById(R.id.prgBr_questions).setVisibility(View.GONE);
+        findViewById(R.id.rltLyot_container).setVisibility(View.VISIBLE);
+
+        if (questions.size() == 0) {
+            throw new Exception("No questions available");
+        }
+        shuffleQuestions(questions);
+        adapter.replaceQuestions(questions);
+        dataInitialized = true;
     }
 
     @Override
@@ -154,9 +170,9 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
                 }
             } else {
                 CustomApplication customApplication = (CustomApplication) getApplication();
-                Call<Task4ListResponse<Question>> exerciseListResponseCall = customApplication.getTask4Service().getQuestions(exercise.getId());
-                exerciseListResponseCall.enqueue(new GetQuestionsCallback(this));
-                addCall(exerciseListResponseCall);
+                Call<Task4ListResponse<Question>> questionListResponseCall = customApplication.getTask4Service().getQuestions(exercise.getId());
+                questionListResponseCall.enqueue(new GetQuestionsCallback(this));
+                addCall(questionListResponseCall);
             }
         }
     }
@@ -255,19 +271,6 @@ public class QuestionsActivity extends Task4Activity implements View.OnClickList
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         Log.v("SPage", String.format(Locale.US, "Cancel dialog: %s", dialog.getTag()));
-    }
-
-    private void loadQuestionsIntoRecyclerView(List<Question> questions) throws Exception
-    {
-        findViewById(R.id.prgBr_questions).setVisibility(View.GONE);
-        findViewById(R.id.rltLyot_container).setVisibility(View.VISIBLE);
-
-        if (questions.size() == 0) {
-            throw new Exception("No questions available");
-        }
-        shuffleQuestions(questions);
-        adapter.replaceQuestions(questions);
-        dataInitialized = true;
     }
 
     public static class GetQuestionsCallback extends Task4ActivityCallback<Task4ListResponse<Question>, QuestionsActivity> {

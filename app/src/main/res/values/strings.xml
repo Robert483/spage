@@ -25,4 +25,20 @@
     <string name="swipe_down_to_refresh_swipe_right_for_more_action">Swipe down to refresh. Swipe right on item for more action</string>
     <string name="exercise_rank">Exercise rank</string>
     <string name="download_exercise">Download exercise</string>
+    <string name="room_of">Room of</string>
+    <string name="current_number_of_players">Current number of players</string>
+    <string name="create">Create</string>
+    <string name="go_into_this_room">Go into this room?</string>
+    <string name="go">Go</string>
+    <string name="cancel">Cancel</string>
+    <string name="duel_room">Duel Room</string>
+    <string name="you">You</string>
+    <string name="next">Next</string>
+    <string name="waiting_for_player">Waiting for player…</string>
+    <string name="wait_for_your_opponent">Wait for your opponent…</string>
+    <string name="you_win">You win!</string>
+    <string name="draw">Draw</string>
+    <string name="you_lose">You lose!</string>
+    <string name="you_are_in_middle_of_the_game">You are in middle of the game. If you out, this room will be destroyed and there no way to come back later.</string>
+    <string name="keep_playing">Keep playing</string>
 </resources>

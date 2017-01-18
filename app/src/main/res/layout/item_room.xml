@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@id/rltLyot_container"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_size_2lines"
-                android:orientation="vertical"
-                android:paddingEnd="@dimen/spacing"
-                android:paddingLeft="@dimen/spacing"
-                android:paddingRight="@dimen/spacing"
-                android:paddingStart="@dimen/spacing">
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/txtV_rankUserName"
+        android:id="@+id/txtV_roomOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/txtV_dump"
+        android:layout_alignEnd="@id/txtV_dump"
+        android:layout_alignLeft="@id/txtV_dump"
+        android:layout_alignRight="@id/txtV_dump"
+        android:layout_alignStart="@id/txtV_dump"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/primaryTextDark"
@@ -23,16 +26,30 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/spacing"
+        android:layout_marginLeft="@dimen/spacing"
+        android:layout_marginRight="@dimen/spacing"
+        android:layout_marginStart="@dimen/spacing"
         android:visibility="invisible"/>
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/txtV_rankScore"
+        android:id="@+id/txtV_roomNPlayers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/txtV_dump"
+        android:layout_alignLeft="@id/txtV_dump"
+        android:layout_alignRight="@id/txtV_dump"
+        android:layout_alignStart="@id/txtV_dump"
         android:layout_below="@id/txtV_dump"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/secondaryTextDark"
         android:textSize="@dimen/body_text_size"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one"
+        android:layout_alignParentBottom="true"
+        android:background="@color/dividerDark"/>
 
 </RelativeLayout>

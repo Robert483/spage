@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.thathustudio.spage.R;
-import com.thathustudio.spage.fragments.ExercisesFragment;
+import com.thathustudio.spage.fragments.RoomsFragment;
 
 public class TempActivity extends AppCompatActivity {
 
@@ -16,7 +16,7 @@ public class TempActivity extends AppCompatActivity {
         // Redirect or show fragment
 
         // - Redirect
-        /*Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt(ResultActivity.EXERCISE_ID, 1);
         bundle.putInt(ResultActivity.USER_ID, 1);
@@ -31,7 +31,8 @@ public class TempActivity extends AppCompatActivity {
         finish();*/
 
         // - Show fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExercisesFragment.newInstance(1)).commitAllowingStateLoss();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, ExercisesFragment.newInstance(1)).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_temp, RoomsFragment.newInstance("Windows")).commitAllowingStateLoss();
 
         // -------------------------
     }

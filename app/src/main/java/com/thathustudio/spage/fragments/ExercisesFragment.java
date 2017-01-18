@@ -32,12 +32,8 @@ import com.thathustudio.spage.fragments.dialogs.ExerciseRankDialogFragment;
 import com.thathustudio.spage.model.Exercise;
 import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.model.responses.Task4ListResponse;
-import com.thathustudio.spage.model.responses.Task4Response;
-import com.thathustudio.spage.service.retrofit.Task4Service;
 import com.thathustudio.spage.service.retrofit.TranslateRetrofitException;
 import com.thathustudio.spage.utils.ExerciseRecyclerViewAdapter;
-import com.thedeanda.lorem.Lorem;
-import com.thedeanda.lorem.LoremIpsum;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

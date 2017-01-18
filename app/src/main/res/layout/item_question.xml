@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:id="@+id/txtV_questionContent"
+                                             android:id="@id/txtV_questionContent"
                                              style="@style/FakeCard"
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content"
