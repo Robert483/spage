@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.utils.PageAdapter;
+import com.thathustudio.spage.widgets.NonSwipeableViewPager;
 
 
 public class HomeActivity extends AppCompatActivity
@@ -19,7 +20,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private NonSwipeableViewPager viewPager;
     private PageAdapter pageAdapter;
 
     @Override
@@ -42,7 +43,7 @@ public class HomeActivity extends AppCompatActivity
         //Adding toolbar to the activity
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
         pageAdapter = new PageAdapter(getSupportFragmentManager(), HomeActivity.this);
         viewPager.setAdapter(pageAdapter);
 

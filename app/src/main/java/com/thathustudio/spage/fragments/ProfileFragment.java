@@ -81,8 +81,6 @@ public class ProfileFragment extends BaseFragment {
 
     @BindView(R.id.txtUserName) TextView  txtUserName;
     @BindView(R.id.txtEmail) TextView  txtEmail;
-    @BindView(R.id.txtNumberSubject) TextView  txtNumberSubject;
-    @BindView(R.id.txtNumberBadge) TextView  txtNumberBadge;
 
 
     @Override

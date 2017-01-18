@@ -36,7 +36,6 @@
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
-
             <TextView
                 android:id="@+id/txtUserName"
                 android:layout_width="wrap_content"
@@ -58,6 +57,16 @@
                 android:text="Android free tutorials and example"
                 android:textColor="#fff"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/drop_down_option_menu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_alignBottom="@id/txtUserName"
+                android:layout_toRightOf="@id/txtUserName"
+                android:src="@drawable/ic_action_user_edit" />
+
         </RelativeLayout>
 
 
@@ -72,23 +81,36 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Number Subjects: ..."
-                android:id="@+id/txtNumberSubject"/>
+                android:elevation="4dp"
+                android:text="SUBJECT"
+                android:textSize="20sp"/>
+
+            <fragment android:name="com.thathustudio.spage.fragments.PostsFragment"
+                android:id="@+id/subject_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
                 android:padding="20dp"
-                android:text="Number Badge: ..."
-                android:id="@+id/txtNumberBadge"/>
+                android:text="BADGE"
+                android:textSize="20sp"/>
+
+            <fragment android:name="com.thathustudio.spage.fragments.PostsFragment"
+                android:id="@+id/badge_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="20dp"
+                android:text="USER POST"
+                android:textSize="20sp"/>
 
             <fragment android:name="com.thathustudio.spage.fragments.PostsFragment"
                 android:id="@+id/post_fragment"

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1036674329303",
+    "firebase_url": "https://spage-1f633.firebaseio.com",
+    "project_id": "spage-1f633",
+    "storage_bucket": "spage-1f633.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036674329303:android:1d9e2932f1b8436d",
+        "android_client_info": {
+          "package_name": "com.thathustudio.spage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036674329303-99v4f6d728jhhcu29js4v4fqb79r361k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANIgkflCsN9mMTMSQ-mFMuYdyTfUcnTtE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
