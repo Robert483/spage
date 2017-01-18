@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Exercise;
 
@@ -78,14 +80,30 @@ public class ExerciseDetailsDialogFragment extends BaseDialogFragment implements
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View view = View.inflate(getContext(), R.layout.fragment_dialog_exercise_details, null);
+
         TextView textView = (TextView) view.findViewById(R.id.txtV_exerciseName);
         textView.setText(exercise.getName());
+        YoYo.with(Techniques.ZoomIn)
+                .duration(2000)
+                .playOn(textView);
+
         textView = (TextView) view.findViewById(R.id.txtV_exerciseContent);
         textView.setText(exercise.getContent());
+        YoYo.with(Techniques.ZoomIn)
+                .duration(2000)
+                .playOn(textView);
+
         textView = (TextView) view.findViewById(R.id.txtV_exerciseSubject);
         textView.setText(getSubjectName(exercise.getSubjectId()));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(2000)
+                .playOn(textView);
+
         textView = (TextView) view.findViewById(R.id.txtV_exerciseDifficulty);
         textView.setText(exercise.getDifficulty());
+        YoYo.with(Techniques.ZoomIn)
+                .duration(2500)
+                .playOn(textView);
 
         builder.setTitle(String.format(Locale.getDefault(), "%s: %d", getContext().getResources().getString(R.string.exercise_id), exercise.getId()))
                 .setView(view);

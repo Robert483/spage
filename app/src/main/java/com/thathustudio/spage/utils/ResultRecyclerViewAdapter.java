@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thathustudio.spage.R;
 
 import java.util.List;
@@ -56,6 +58,8 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
             super(itemView);
             textViewQuestionNo = (TextView) itemView.findViewById(R.id.txtV_questionNo);
             textViewCorrect = (TextView) itemView.findViewById(R.id.txtV_correct);
+            YoYo.with(Techniques.SlideInLeft).duration(5000).playOn(textViewQuestionNo);
+            YoYo.with(Techniques.SlideInRight).duration(5000).playOn(textViewCorrect);
         }
     }
 }
