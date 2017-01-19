@@ -13,16 +13,16 @@ import com.thathustudio.spage.R;
 import com.thathustudio.spage.fragments.ExercisesFragment;
 import com.thathustudio.spage.fragments.PostsFragment;
 import com.thathustudio.spage.fragments.ProfileFragment;
+import com.thathustudio.spage.fragments.RoomsFragment;
 import com.thathustudio.spage.fragments.SubjectsFragment;
 import com.thathustudio.spage.model.User;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
     //integer to count number of tabs
-    final int PAGE_COUNT = 4;
-    //private String tabTitles[] = new String[] { "Subjects", "Exams", "Profile" };
+    final int PAGE_COUNT = 5;
     private Context context;
-    private int[] imageResId = {R.drawable.ic_sbj_informatics,R.drawable.ic_sbj_technology , R.drawable.ic_sbj_literature, R.drawable.ic_sbj_english};
+    private int[] imageResId = {R.drawable.tab_home,R.drawable.tab_subject , R.drawable.tab_exercise,R.drawable.tab_challenge, R.drawable.tab_profile};
 
     //Constructor to the class
     public PageAdapter(FragmentManager fm, Context context) {
@@ -49,6 +49,8 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 2:
                 return ExercisesFragment.newInstance(id);
             case 3:
+                return RoomsFragment.newInstance(user.getUsername());
+            case 4:
                 return ProfileFragment.newInstance(user.getId(),user.getUsername(),user.getEmail());
         }
         return null;

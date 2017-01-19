@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.activities.LoginActivity;
 import com.thathustudio.spage.app.CustomApplication;
@@ -90,6 +91,7 @@ public class ProfileFragment extends BaseFragment implements UploadCallback {
             mUserID = getArguments().getInt(USERID);
             mUserName = getArguments().getString(USERNAME);
             mEmail = getArguments().getString(EMAIL);
+
         }
     }
 
@@ -214,11 +216,6 @@ public class ProfileFragment extends BaseFragment implements UploadCallback {
             call.cancel();
         }
         calls.clear();
-//        FragmentManager fm = getChildFragmentManager();
-//        Fragment post_fragment1 = (fm.findFragmentById(R.id.post_fragment));
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.remove(post_fragment1);
-//        ft.commit();
 
     }
 
@@ -249,7 +246,8 @@ public class ProfileFragment extends BaseFragment implements UploadCallback {
         // display image to ImageView
         try
         {
-            Storage.displayImage(getContext(), this.imgBtn_userAvatar, "" + mUserID);
+            Picasso.with(getContext()).load(url).placeholder(R.drawable.profile_circular_border_imageview).into(this.imgBtn_userAvatar);
+            //Storage.displayImage(getContext(), this.imgBtn_userAvatar, "" + mUserID);
         }
         catch (Exception e)
         {

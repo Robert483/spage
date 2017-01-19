@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         calls = new ArrayList<>();
 
         //init Layout
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static class RegisterCallback extends RegisterActivityCallback<Task4Response<Integer>> {

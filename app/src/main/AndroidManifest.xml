@@ -40,6 +40,7 @@
         <activity android:name=".activities.RegisterActivity"></activity>
         <activity android:name=".activities.HomeActivity"></activity>
         <activity android:name=".activities.CommentsActivity"></activity>
+        <activity android:name=".activities.RoomActivity"></activity>
         <activity
             android:name=".activities.PostingActivity"
             android:screenOrientation="portrait"></activity>

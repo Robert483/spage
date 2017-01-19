@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.thathustudio.spage.R;
 import com.thathustudio.spage.app.Global;
 
 import java.io.File;
@@ -81,7 +82,7 @@ public class Storage
 
         Glide.with(context).using(new FirebaseImageLoader())
                 .load(storageRef.child("images/" + imageName))
-                .into(imageView);
+                        .into(imageView);
     }
 
 }

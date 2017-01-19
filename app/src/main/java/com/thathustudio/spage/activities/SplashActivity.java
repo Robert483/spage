@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         ImageView iv = (ImageView) findViewById(R.id.splash);
         iv.clearAnimation();
         iv.startAnimation(anim);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
