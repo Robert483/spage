@@ -4,6 +4,7 @@ package com.thathustudio.spage.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
 
     private void setupView(View rootView) {
         rvSubjects = (RecyclerView) rootView.findViewById(R.id.rvSubjects);
-        rvSubjects.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvSubjects.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         adapter = new SubjectAdapter(getActivity(), subjectList);
         adapter.setOnItemClickListener(this);
         rvSubjects.setAdapter(adapter);
