@@ -58,8 +58,6 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
             super(itemView);
             textViewQuestionNo = (TextView) itemView.findViewById(R.id.txtV_questionNo);
             textViewCorrect = (TextView) itemView.findViewById(R.id.txtV_correct);
-            YoYo.with(Techniques.SlideInLeft).duration(5000).playOn(textViewQuestionNo);
-            YoYo.with(Techniques.SlideInRight).duration(5000).playOn(textViewCorrect);
         }
     }
 }

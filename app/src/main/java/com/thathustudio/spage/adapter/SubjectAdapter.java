@@ -1,6 +1,7 @@
 package com.thathustudio.spage.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Subject;
 import com.thathustudio.spage.utils.SubjectIconFactory;
@@ -48,10 +51,19 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         return new ViewHolder(itemView);
     }
 
+    String[] fakeBg = new String[]{"#8BC34A", "#0E7886", "#FF757C", "#0E7886", "#FF757C", "#0E7886"};
+    int f = 0;
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.ivSubjectIcon.setImageDrawable(subjectIconFactory.getSubjectIcon(subjectList.get(position).getId()));
         holder.tvSubjectName.setText(subjectList.get(position).getName());
+
+
+        holder.ivSubjectIcon.setBackgroundColor(Color.parseColor(fakeBg[f]));
+        f++;
+        if (f == 6)
+            f = 0;
     }
 
     @Override
@@ -92,10 +104,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                     if (btnSubscribe.isSelected()) {
                         btnSubscribe.setSelected(false);
                         listener.onSubscribeChange(getAdapterPosition(), false);
+                        YoYo.with(Techniques.Tada).duration(1500).playOn(btnSubscribe);
                     }
                     else {
                         btnSubscribe.setSelected(true);
                         listener.onSubscribeChange(getAdapterPosition(), true);
+                        YoYo.with(Techniques.Tada).duration(1500).playOn(btnSubscribe);
                     }
                 }
             });

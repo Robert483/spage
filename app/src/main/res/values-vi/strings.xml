@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">SPage</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exercise_info">Thông tin bài thi</string>
+    <string name="start_exercise">Bắt đầu thi</string>
+    <string name="exercise_subject">Chủ đề bài thi</string>
+    <string name="finish">Kết thúc</string>
+    <string name="question">Câu hỏi</string>
+    <string name="exercise">Bài thi</string>
+    <string name="result">Kết quả</string>
+    <string name="exercise_id">Mã số bài thi</string>
+    <string name="name">Tên</string>
+    <string name="content">Nội dung</string>
+    <string name="subject">Môn học</string>
+    <string name="difficulty">Độ khó</string>
+    <string name="submit_for_score">Nộp bài và tính điểm</string>
+    <string name="you_will_not_be_able_to_go_back">Bạn sẽ không thể quay trở lại để làm bài thi này nữa</string>
+    <string name="submit">NỘP BÀI</string>
+    <string name="keep_doing">TIẾP TỤC LÀM</string>
+    <string name="go_back">Quay trở lại ?</string>
+    <string name="your_choices_will_not_be_saved">Đáp án của bạn sẽ không được lưu. Nếu bạn làm bài kiểm tra này lại thì bạn sẽ phải trả lời lại tất cả các câu hỏi</string>
+    <string name="back">Quay về</string>
+    <string name="swipe_down_to_refresh_swipe_right_for_more_action">Kéo trượt xuống để tải mới. Kéo trượt qua phải để chọn chức năng</string>
+    <string name="exercise_rank">Xếp hạng bài thi</string>
+    <string name="download_exercise">Download bài thi</string>
+    <string name="room_of">Phòng của</string>
+    <string name="current_number_of_players">Số người chơi hiện tại</string>
+    <string name="create">Tạo mới</string>
+    <string name="go_into_this_room">Xác nhận vào phòng ?</string>
+    <string name="go">Vào</string>
+    <string name="cancel">Thoát</string>
+    <string name="duel_room">Vào đấu đôi</string>
+    <string name="you">Bạn</string>
+    <string name="next">Tiếp</string>
+    <string name="waiting_for_player">Chờ người chơi. . .</string>
+    <string name="wait_for_your_opponent">Chờ đối thủ. . .</string>
+    <string name="you_win">Bạn thắng!</string>
+    <string name="draw">Hòa</string>
+    <string name="you_lose">Bạn thua!</string>
+    <string name="you_are_in_middle_of_the_game">Bạn đang thi đấu. Nếu thoát, phòng này sẽ bị hủy và không thể quay lại được nữa.</string>
+    <string name="keep_playing">Tiếp tục chơi</string>
+
+
+    <string name="activity_posting_title">Đăng bài</string>
+    <string name="activity_posting_button_post">Bài đăng</string>
+    <string name="activity_posting_hint_post">Viết gì đó cho bài đăng này...</string>
+    <string name="activity_posting_notify_post_error">Hãy viết gì đó trước khi đi tiếp...</string>
+
+
+    <!--String for Post Fragment-->
+    <string name="fragment_post_action_delete">Xóa</string>
+    <string name="fragment_post_action_edit">Chỉnh sửa</string>
+
+
+    <string name="fragment_post_dialog_delete_title">Bạn có chắc là muốn xóa bài này ?</string>
+    <string name="action_yes">OK</string>
+    <string name="action_cancel">HỦY</string>
+
+
+</resources>
