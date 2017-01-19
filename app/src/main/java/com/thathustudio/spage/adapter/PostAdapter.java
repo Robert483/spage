@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.firebase.Storage;
+import com.thathustudio.spage.fragments.PostsFragment;
 import com.thathustudio.spage.interfaces.OnClickImageListener;
 import com.thathustudio.spage.interfaces.OnCommentClickListener;
 import com.thathustudio.spage.interfaces.OnCreatePostClickListener;
@@ -198,6 +199,11 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if(viewType==HEADER){
             final View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.content_create_post, parent, false);
+            if(PostsFragment.isHideHeader){
+                Log.d("Thai","isHideHeader");
+                v.setVisibility(View.GONE);
+            }
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

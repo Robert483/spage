@@ -75,6 +75,8 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
     Subject mSubject;
     User mUser;
 
+    public  static boolean isHideHeader = false;
+
 
     public PostsFragment() {
         // Required empty public constructor
@@ -111,7 +113,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         PostsFragment fragment = new PostsFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_USER, user);
-        args.putInt(ARG_USER, page);
+        args.putInt(ARG_PAGE_TYPE, page);
         fragment.setArguments(args);
         return fragment;
     }
@@ -123,6 +125,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         Bundle args = new Bundle();
         // RYANVU: args.putSerializable(ARG_USER, user);
         args.putSerializable(ARG_SUBJECT, subject);
+        args.putParcelable(ARG_USER, user);
         args.putInt(ARG_USER, page);
         fragment.setArguments(args);
 
@@ -266,6 +269,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
             mSubject = (Subject) getArguments().getSerializable(ARG_SUBJECT);
             mUser = (User) getArguments().getParcelable(ARG_USER);
             PAGE = getArguments().getInt(ARG_PAGE_TYPE);
+            isHideHeader = (PAGE==PAGE_MYPOST);
         }
 
     }
@@ -278,7 +282,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_posts, container, false);
         bindView(v);
-        createTestData();
+//        createTestData();
 //        deleteData();
 
         getListData();
@@ -517,6 +521,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
     private void updateLike(final AppCompatImageView btnLike, final int pos, final boolean liked){
 
          final Post post = lstPost.get(pos);
+        Log.e("Son",post.toString());
         if(liked)
             post.setRating(post.getRating()+1);
         else

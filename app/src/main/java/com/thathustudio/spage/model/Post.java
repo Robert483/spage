@@ -11,6 +11,11 @@ public class Post implements Serializable {
     int subjectId;
     int userId;
     int commentCount;
+    String content;
+    String username;
+    int date;
+    String image;
+
 
     public Post clone(){
         Post p =  new Post();
@@ -47,8 +52,6 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    int date;
-
     public String getImage() {
         return image;
     }
@@ -56,8 +59,6 @@ public class Post implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
-
-    String image;
 
     public int getRating() {
         return rating;
@@ -128,7 +129,7 @@ public class Post implements Serializable {
     }
 
 
-    String content;
+
 
     public String getUsername() {
         return username;
@@ -138,6 +139,6 @@ public class Post implements Serializable {
         this.username = username;
     }
 
-    String username;
+
 
 }

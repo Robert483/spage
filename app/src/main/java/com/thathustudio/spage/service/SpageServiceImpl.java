@@ -46,6 +46,9 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public class SpageServiceImpl implements SpageService {
     private Context context;
@@ -326,6 +329,8 @@ public class SpageServiceImpl implements SpageService {
             }
         });
     }
+
+
 
     @Override
     public void updatePost(@NonNull int postID, @NonNull Post newPost, @NonNull final SpageServiceCallback<PostResponse> callback) {

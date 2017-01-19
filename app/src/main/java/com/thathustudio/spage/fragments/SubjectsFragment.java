@@ -1,6 +1,7 @@
 package com.thathustudio.spage.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +18,10 @@ import com.thathustudio.spage.activities.SubjectPostsActivity;
 import com.thathustudio.spage.adapter.SubjectAdapter;
 import com.thathustudio.spage.model.Subject;
 import com.thathustudio.spage.model.Subscription;
+import com.thathustudio.spage.model.User;
 import com.thathustudio.spage.model.responses.EndPointResponse;
 import com.thathustudio.spage.service.callback.ForegroundTaskDelegate;
+import com.thathustudio.spage.utils.ShareReferrentHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +38,10 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
     private RecyclerView rvSubjects;
     private SubjectAdapter adapter;
     private List<Subject> subjectList = new ArrayList<>();
+    User mUser;
 
     //Fake userId
+
     int userId = 1;
 
     public static SubjectsFragment newInstance() {
@@ -62,6 +67,9 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
         setupView(rootView);
         setupEvent();
         getSubjectList();
+        mUser = ShareReferrentHelper.getCurrentUser(getContext());
+//        User m
+
         return rootView;
     }
 
@@ -69,6 +77,7 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
         rvSubjects = (RecyclerView) rootView.findViewById(R.id.rvSubjects);
         rvSubjects.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new SubjectAdapter(getActivity(), subjectList);
+        adapter.setOnItemClickListener(this);
         rvSubjects.setAdapter(adapter);
     }
 
@@ -79,6 +88,11 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
     @Override
     public void onItemClick(int position) {
         //TODO: go to posts of this subject
+        Subject subject = subjectList.get(position);
+        Intent  i= new Intent(getActivity(),SubjectPostsActivity.class);
+        i.putExtra("POST",subject);
+        i.putExtra("USER",mUser);
+        startActivity(i);
     }
 
     @Override
@@ -87,7 +101,7 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
             Subscription subscription = new Subscription();
             subscription.setSubjectId(subjectList.get(position).getId());
             subscription.setUserId(userId);
-            ((SubjectPostsActivity) getActivity()).getSpageService().
+            ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
                     createSubscription(subscription, new CreateSubscriptionCallback((SpageActivity) getActivity()));
         }
     }

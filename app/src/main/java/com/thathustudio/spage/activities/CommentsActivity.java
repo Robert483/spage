@@ -14,8 +14,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -61,9 +63,10 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
     private CommentListAdapter adapter;
 
     private EditText etAddComment;
-    private ImageButton btnChooseImage, btnSend, btnDeletePhoto, tvPostContent;
+    private ImageButton btnChooseImage, btnSend, btnDeletePhoto;
     private ImageView ivAttachedPhoto;
     private RelativeLayout layout_attachment;
+    private TextView tvPostContent;
 
     private Uri selectedImageUri;
 
@@ -83,11 +86,29 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getExtraData();
         setUpView();
-
+        setupToolbar();
         setUpEvent();
 
         readCommentsOfPost();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void setupToolbar(){
+       // Find the toolbar view inside the activity layout
+       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // Sets the Toolbar to act as the ActionBar for this Activity window.
+       // Make sure the toolbar exists in the activity and is not null
+       setSupportActionBar(toolbar);
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       getSupportActionBar().setDisplayShowHomeEnabled(true);
+   }
 
 
     private void getExtraData(){
@@ -101,16 +122,17 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
     }
 
     void setPostInfo(){
+//        postHeader.setPhoto();
+        postHeader.setImage(post.getImage());
         postHeader.setUserName(post.getUsername());
         postHeader.setTime(DateTimeUtil.timestampToString(post.getDate()));
-
+        tvPostContent.setText(post.getContent());
     }
 
     private void setUpView() {
         rvComments = (RecyclerView) findViewById(R.id.rvComments);
         postHeader = (UserHeader) findViewById(R.id.postHeader);
 //        postHeader.setPhoto();
-
         rvComments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvComments.setLayoutManager(layoutManager);
@@ -123,6 +145,9 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
         ivAttachedPhoto = (ImageView) findViewById(R.id.ivAttachedPhoto);
         btnDeletePhoto = (ImageButton) findViewById(R.id.btnDeletePhoto);
         layout_attachment = (RelativeLayout) findViewById(R.id.layout_attachment);
+        tvPostContent = (TextView) findViewById(R.id.tvPostContent);
+        setPostInfo();
+
     }
 
     @Override
@@ -131,12 +156,12 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
     }
 
     private void readCommentsOfPost() {
-        spageService.readCommentsOfPost(3, new ReadCommentsOfPostCallback(this));
+        spageService.readCommentsOfPost(post.getId(), new ReadCommentsOfPostCallback(this));
     }
 
     private void createComment() {
 //        currentComment = new Comment();
-        currentComment.setPostId(3);
+        currentComment.setPostId(post.getId());
         currentComment.setRating(0);
         currentComment.setContent(etAddComment.getText().toString());
         currentComment.setUserId(userId);
@@ -146,7 +171,7 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
     }
 
     public void updateComment(Comment comment) {
-        comment.setPostId(3);
+        comment.setPostId(post.getId());
         spageService.updateComment(comment.getId(), comment, new UpdateCommentCallback(this));
 
     }

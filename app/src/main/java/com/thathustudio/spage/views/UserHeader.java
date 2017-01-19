@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.thathustudio.spage.R;
 
 /**
@@ -28,6 +29,9 @@ public class UserHeader extends LinearLayout {
         init(context, attrs);
     }
 
+    public void setImage(String url){
+        Glide.with(getContext()).load(url).into(ivPhoto);
+    }
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.UserHeader, 0, 0);
         try {

@@ -45,4 +45,7 @@ public interface Task4Service {
 
     @GET("api/user/{id}/subscriptions")
     Call<Task4ListResponse<Post>> GetSubject(@Path("id") int userID);
+
+    @PUT("api/user/{id}")
+    Call<Task4Response<Integer>> editProflie(@Path("id") int userID,@Body User newUser);
 }

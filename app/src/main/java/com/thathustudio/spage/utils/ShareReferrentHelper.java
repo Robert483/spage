@@ -42,4 +42,16 @@ public class ShareReferrentHelper {
         return  user;
     }
 
+    static public boolean removeCurrentUser(Context context){
+        SharedPreferences.Editor editor = context.getSharedPreferences("USER", context.MODE_PRIVATE).edit();
+
+        editor.remove("id");
+        editor.remove("username");
+        editor.remove("password");
+        editor.remove("email");
+        editor.remove("role");
+        editor.apply();
+        return true;
+    }
+
 }
