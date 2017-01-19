@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             if (loginActivity != null) {
                 try {
                     // Handle
-                    showToast(loginActivity.getApplicationContext(), t);
+                    Toast.makeText(loginActivity.getApplicationContext(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
                 } catch (Exception ex) {
                     Log.e("SPage", ex.getMessage());
                 } finally {

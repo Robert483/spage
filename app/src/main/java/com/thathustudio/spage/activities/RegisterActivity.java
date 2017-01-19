@@ -125,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (registerActivity != null) {
                 try {
                     // Handle
-                    showToast(registerActivity.getApplicationContext(), t);
+                    //showToast(registerActivity.getApplicationContext(), t);
                 } catch (Exception ex) {
                     Log.e("SPage", ex.getMessage());
                 } finally {
