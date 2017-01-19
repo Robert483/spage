@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">SPage</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exercise_info">Exercise info</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="exercise_subject">Exercise Subject</string>
+    <string name="finish">Finish</string>
+    <string name="question">Question</string>
+    <string name="exercise">Exercise</string>
+    <string name="result">Result</string>
+    <string name="exercise_id">Exercise ID</string>
+    <string name="name">Name</string>
+    <string name="content">Content</string>
+    <string name="subject">Subject</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="submit_for_score">Submit for score?</string>
+    <string name="you_will_not_be_able_to_go_back">You will not be able to go back and continue to do this exercise.</string>
+    <string name="submit">SUBMIT</string>
+    <string name="keep_doing">KEEP DOING</string>
+    <string name="go_back">Go back?</string>
+    <string name="your_choices_will_not_be_saved">Your choices will not be saved. If you start this exercise again, you will have to do it all over again.</string>
+    <string name="back">BACK</string>
+    <string name="swipe_down_to_refresh_swipe_right_for_more_action">Swipe down to refresh. Swipe right on item for more action</string>
+    <string name="exercise_rank">Exercise rank</string>
+    <string name="download_exercise">Download exercise</string>
+    <string name="room_of">Room of</string>
+    <string name="current_number_of_players">Current number of players</string>
+    <string name="create">Create</string>
+    <string name="go_into_this_room">Go into this room?</string>
+    <string name="go">Go</string>
+    <string name="cancel">Cancel</string>
+    <string name="duel_room">Duel Room</string>
+    <string name="you">You</string>
+    <string name="next">Next</string>
+    <string name="waiting_for_player">Waiting for player…</string>
+    <string name="wait_for_your_opponent">Wait for your opponent…</string>
+    <string name="you_win">You win!</string>
+    <string name="draw">Draw</string>
+    <string name="you_lose">You lose!</string>
+    <string name="you_are_in_middle_of_the_game">You are in middle of the game. If you out, this room will be destroyed and there no way to come back later.</string>
+    <string name="keep_playing">Keep playing</string>
+
+
+    <string name="activity_posting_title">Post to Spage</string>
+    <string name="activity_posting_button_post">Post</string>
+    <string name="activity_posting_hint_post">Say something about this post...</string>
+    <string name="activity_posting_notify_post_error">Please write something before posting...</string>
+
+
+    <!--String for Post Fragment-->
+    <string name="fragment_post_action_delete">Delete</string>
+    <string name="fragment_post_action_edit">Edit</string>
+
+
+    <string name="fragment_post_dialog_delete_title">Do you want to delete this post?</string>
+    <string name="action_yes">OK</string>
+    <string name="action_cancel">CANCEL</string>
+
+
+</resources>
