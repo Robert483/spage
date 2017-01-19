@@ -200,8 +200,11 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             final View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.content_create_post, parent, false);
             if(PostsFragment.isHideHeader){
-                Log.d("Thai","isHideHeader");
+                Log.e("Thai","isHideHeader");
                 v.setVisibility(View.GONE);
+                ViewGroup.LayoutParams params = v.getLayoutParams();
+                params.height = 0;
+                v.setLayoutParams(params);
             }
 
             v.setOnClickListener(new View.OnClickListener() {

@@ -99,7 +99,7 @@ public class ProfileFragment extends BaseFragment implements UploadCallback {
     @BindView(R.id.txtEmail) TextView  txtEmail;
     @BindView(R.id.imgBtn_userAvatar) ImageButton imgBtn_userAvatar;
     @BindView(R.id.imgUserLogout) ImageView imgUserLogout;
-    @BindView(R.id.imgUserProfileEdit) ImageView imgUserProfileEdit;
+    //@BindView(R.id.imgUserProfileEdit) CircleImageView imgUserProfileEdit;
     View progressbarView = null;
     Dialog dialogEditProfile = null;
 
@@ -246,7 +246,7 @@ public class ProfileFragment extends BaseFragment implements UploadCallback {
         // display image to ImageView
         try
         {
-            Picasso.with(getContext()).load(url).placeholder(R.drawable.profile_circular_border_imageview).into(this.imgBtn_userAvatar);
+            Picasso.with(getContext()).load(url).placeholder(R.drawable.ic_profile).into(this.imgBtn_userAvatar);
             //Storage.displayImage(getContext(), this.imgBtn_userAvatar, "" + mUserID);
         }
         catch (Exception e)

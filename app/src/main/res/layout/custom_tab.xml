@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/textView"
         android:layout_toStartOf="@+id/textView"
-        android:layout_marginRight="10dp" />
+        android:padding="3dp"/>
 
     <TextView
         android:layout_width="wrap_content"
