@@ -20,4 +20,30 @@
     <dimen name="dialog_spacing">24dp</dimen>
     <dimen name="exercise_details_item_padding">20dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="view_vertical_margin">10dp</dimen>
+    <dimen name="view_horizontal_margin">10dp</dimen>
+    <dimen name="user_photo_size">70dp</dimen>
+    <dimen name="username_text_size">20sp</dimen>
+    <dimen name="time_text_size">16sp</dimen>
+    <dimen name="content_text_size">16sp</dimen>
+
+    <dimen name="button_rating_size">30dp</dimen>
+    <dimen name="button_in_comment_size">40dp</dimen>
+    <dimen name="add_comment_block_padding">5dp</dimen>
+    <dimen name="comment_image_size">100dp</dimen>
+    <dimen name="comment_image_size_large">300dp</dimen>
+    <dimen name="subject_icon_size">100dp</dimen>
+    <dimen name="favorite_button_size">50dp</dimen>
+    <dimen name="subscribe_button_size">50dp</dimen>
+
+      <!--Setting for Posting Activity-->
+
+    <dimen name="activity_posting_margin">16dp</dimen>
+    <dimen name="activity_posting_delete_photo">24dp</dimen>
+
+    <dimen name="photo_viewer_item_margin">8dp</dimen>
+
+    <!--Setting for Post Fragment-->
+    <dimen name="post_item_profile_icon">36dp</dimen>
+    <dimen name="post_item_comment_icon">24dp</dimen>
 </resources>

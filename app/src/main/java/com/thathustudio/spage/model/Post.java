@@ -1,36 +1,98 @@
 package com.thathustudio.spage.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class Post  implements Parcelable{
-    private int id;
-    private int userId;
-    private String content;
-    private int rating;
+/**
+ * Created by apple on 1/4/17.
+ */
 
+public class Post implements Serializable {
+    int id;
+    int subjectId;
+    int userId;
+    int commentCount;
 
-    public Post(int id, int userId, String content, int rating) {
-        this.id = id;
-        this.userId = userId;
-        this.content = content;
+    public Post clone(){
+        Post p =  new Post();
+        p.setId(id);
+        p.setUsername(username);
+        p.setCommentCount(commentCount);
+        p.setSubjectId(subjectId);
+        p.setContent(content);
+        p.setDate(date);
+        p.setImage(image);
+        p.setRating(rating);
+        p.setUserId(userId);
+        return p;
+    }
+
+    public void clone(Post p){
+        id = p.getId();
+        userId = p.getUserId();
+        username = p.getUsername();
+        commentCount = p.getCommentCount();
+        subjectId = p.getSubjectId();
+        content = p.getContent();
+        date = p.getDate();
+        image = p.getImage();
+        rating = p.getRating();
+
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    int date;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    String image;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
-    public int getId() {
-        return id;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setId(int id) {
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    int rating;
+
+    public Post(int id, int subjectId, int userId, int comments, String content) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
+        this.subjectId = subjectId;
         this.userId = userId;
+        this.commentCount = comments;
+        this.content = content;
+    }
+    public Post(int subjectId, int userId, int comments, String content) {
+        this.subjectId = subjectId;
+        this.userId = userId;
+        this.commentCount = comments;
+        this.content = content;
+    }
+
+    public  Post(){
+
     }
 
     public String getContent() {
@@ -41,44 +103,41 @@ public class Post  implements Parcelable{
         this.content = content;
     }
 
-    public int getRating() {
-        return rating;
+    public int getId() {
+        return id;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
-        @Override
-        public Post createFromParcel(Parcel source) {
-            return new Post(source);
-        }
-
-        @Override
-        public Post[] newArray(int size) {
-            return new Post[size];
-        }
-    };
-
-    protected Post(Parcel in) {
-
-        this.id = in.readInt();
-        this.userId = in.readInt();
-        this.content = in.readString();
-        this.rating = in.readInt();
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeInt(this.userId);
-        dest.writeString(this.content);
-        dest.writeInt(this.rating);
+    public int getUserId() {
+        return userId;
     }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
+    String content;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    String username;
+
 }

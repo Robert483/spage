@@ -26,4 +26,10 @@
     <declare-styleable name="Themes">
         <attr name="arcProgressStyle" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="UserHeader">
+        <attr name="photo" format="integer"/>
+        <attr name="username" format="string"/>
+        <attr name="time" format="string"/>
+    </declare-styleable>
 </resources>

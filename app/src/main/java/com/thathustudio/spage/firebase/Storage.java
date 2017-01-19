@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.thathustudio.spage.utils.Global;
+import com.thathustudio.spage.app.Global;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +35,7 @@ public class Storage
         {
            /* FileInputStream stream = new FileInputStream(new File(filePath));
             UploadTask uploadTask = mountainImagesRef.putStream(stream);*/
-            UploadTask     uploadTask = mountainImagesRef.putFile(uri);
+            UploadTask uploadTask = mountainImagesRef.putFile(uri);
             uploadTask.addOnFailureListener(new OnFailureListener()
             {
                 @Override

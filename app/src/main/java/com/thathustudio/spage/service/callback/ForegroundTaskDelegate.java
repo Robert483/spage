@@ -2,7 +2,6 @@ package com.thathustudio.spage.service.callback;
 
 import android.os.AsyncTask;
 import android.widget.Toast;
-
 import com.thathustudio.spage.activities.SpageActivity;
 import com.thathustudio.spage.service.SpageServiceCallback;
 
@@ -13,9 +12,8 @@ import retrofit2.Call;
 
 public class ForegroundTaskDelegate<Result> implements SpageServiceCallback<Result> {
 
-    private AsyncTask task;
-    private Call call;
     protected final WeakReference<SpageActivity> activityWeakReference;
+    private Call call;
 
     private ForegroundTaskDelegate() {
         // Don't allow default constructor outside
@@ -26,42 +24,6 @@ public class ForegroundTaskDelegate<Result> implements SpageServiceCallback<Resu
         activityWeakReference = new WeakReference<>(activity);
     }
 
-    protected void cancelAsyncTask() {
-        if (task != null && !task.isCancelled()) {
-            task.cancel(true);
-        }
-    }
-
-    protected void cancelCall() {
-        if (call != null && !call.isCanceled()) {
-            call.cancel();
-        }
-    }
-
-    protected boolean shouldHandleResultForActivity() {
-        SpageActivity activity = activityWeakReference.get();
-        return activity != null && !activity.getSupportFragmentManager().isDestroyed() && !activity.isFinishing();
-    }
-
-    protected void showProgress() {
-        if (shouldHandleResultForActivity()) {
-            SpageActivity activity = activityWeakReference.get();
-            activity.showProgressDialog();
-        }
-    }
-
-    protected void dismissProgress() {
-        if (shouldHandleResultForActivity()) {
-            SpageActivity activity = activityWeakReference.get();
-            activity.dismissProgressDialog();
-        }
-    }
-
-    public void setAsyncTask(AsyncTask task) {
-        cancelAsyncTask();
-        this.task = task;
-    }
-
     @Override
     public void setCall(Call call) {
         cancelCall();
@@ -70,7 +32,6 @@ public class ForegroundTaskDelegate<Result> implements SpageServiceCallback<Resu
 
     @Override
     public void cancel() {
-        cancelAsyncTask();
         cancelCall();
     }
 
@@ -88,6 +49,33 @@ public class ForegroundTaskDelegate<Result> implements SpageServiceCallback<Resu
                 SpageActivity activity = activityWeakReference.get();
                 Toast.makeText(activity, throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    protected void cancelCall() {
+        if (call != null && !call.isCanceled()) {
+            call.cancel();
+        }
+    }
+
+    protected boolean shouldHandleResultForActivity() {
+        SpageActivity activity = activityWeakReference.get();
+        if (activity != null && !activity.isDestroyed() && !activity.isFinishing())
+            return true;
+        return false;
+    }
+
+    protected void showProgress() {
+        if (shouldHandleResultForActivity()) {
+            SpageActivity activity = activityWeakReference.get();
+            activity.showProgressDialog();
+        }
+    }
+
+    protected void dismissProgress() {
+        if (shouldHandleResultForActivity()) {
+            SpageActivity activity = activityWeakReference.get();
+            activity.dismissProgressDialog();
         }
     }
 }

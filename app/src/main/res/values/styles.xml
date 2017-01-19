@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="radioButtonStyle">@style/RadioButton</item>
         <item name="alertDialogTheme">@style/FlatButton.Dialog</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="FlatButton.Dialog" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
@@ -56,5 +57,30 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <!--Content text style-->
+    <style name="ContentTextStyle">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/content_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!--Username text style-->
+    <style name="UsernameTextStyle">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/username_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--Time text style-->
+    <style name="TimeTextStyle">
+        <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:textSize">@dimen/time_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
 </resources>

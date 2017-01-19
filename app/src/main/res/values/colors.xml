@@ -13,4 +13,7 @@
     <color name="primaryTextLight">@android:color/white</color>
     <color name="snackbar_color">#323232</color>
     <color name="colorBackgoundProgressBar">#454545</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorLight">#99000000</color>
+    <color name="colorCommentList">#f6f7f9</color>
 </resources>

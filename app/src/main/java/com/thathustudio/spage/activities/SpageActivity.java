@@ -23,6 +23,7 @@ import java.util.Vector;
 import butterknife.ButterKnife;
 
 public abstract class SpageActivity extends AppCompatActivity {
+    protected SpageService spageService;
     protected View rootLayout;
     protected SpageService amadService;
     protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
@@ -48,7 +49,7 @@ public abstract class SpageActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        amadService = getCustomApplication().getSpageService();
+        spageService = getCustomApplication().getSpageService();
         listOfForegroundTaskDelegates = new Vector<>();
     }
 

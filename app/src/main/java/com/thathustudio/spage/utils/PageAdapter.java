@@ -43,7 +43,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                return SubjectsFragment.newInstance("", "");
+                return SubjectsFragment.newInstance();
             case 1:
                 return ExercisesFragment.newInstance(id);
             case 2:

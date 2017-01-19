@@ -41,4 +41,22 @@
     <string name="you_lose">You lose!</string>
     <string name="you_are_in_middle_of_the_game">You are in middle of the game. If you out, this room will be destroyed and there no way to come back later.</string>
     <string name="keep_playing">Keep playing</string>
+
+
+    <string name="activity_posting_title">Post to Spage</string>
+    <string name="activity_posting_button_post">Post</string>
+    <string name="activity_posting_hint_post">Say something about this post...</string>
+    <string name="activity_posting_notify_post_error">Please write something before posting...</string>
+
+
+    <!--String for Post Fragment-->
+    <string name="fragment_post_action_delete">Delete</string>
+    <string name="fragment_post_action_edit">Edit</string>
+
+
+    <string name="fragment_post_dialog_delete_title">Do you want to delete this post?</string>
+    <string name="action_yes">OK</string>
+    <string name="action_cancel">CANCEL</string>
+
+
 </resources>

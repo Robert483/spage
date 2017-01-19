@@ -3,12 +3,10 @@ package com.thathustudio.spage.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
-    private int id;
+import java.io.Serializable;
+
+public class User implements Parcelable, Serializable {
     private String username;
-    private String password;
-    private String email;
-    private int role;
 
     public User(int id, String username, String password, String email, int role) {
         this.id = id;
@@ -101,5 +99,26 @@ public class User implements Parcelable {
         dest.writeInt(this.role);
     }
 
+    public User(String userName, String password, String email, int id, int role) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.id = id;
+        this.role = role;
+    }
 
+    public User(int id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private String userName,password,email;
+    int id,role;
 }
