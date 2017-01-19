@@ -110,7 +110,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
     public static PostsFragment newInstance(User user,int page) {
         PostsFragment fragment = new PostsFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_USER, user);
+        args.putParcelable(ARG_USER, user);
         args.putInt(ARG_USER, page);
         fragment.setArguments(args);
         return fragment;
@@ -264,7 +264,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mSubject = (Subject) getArguments().getSerializable(ARG_SUBJECT);
-            mUser = (User) getArguments().getSerializable(ARG_USER);
+            mUser = (User) getArguments().getParcelable(ARG_USER);
             PAGE = getArguments().getInt(ARG_PAGE_TYPE);
         }
 
@@ -297,8 +297,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         post.setSubjectId(mSubject.getId());
         post.setUserId(mUser.getId());
         i.putExtra(PostingActivity.KEY_POST,post);
-        Serializable sUser = mUser;
-        i.putExtra(PostingActivity.KEY_USER, sUser);
+        i.putExtra(PostingActivity.KEY_USER, mUser);
 
         if(mSubject==null){
             mSubject = new Subject();
@@ -390,7 +389,11 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
 
     @Override
     public void onCommentClick(Post post) {
-        startActivity(new Intent(getActivity(), CommentsActivity.class));
+
+        Intent i= new Intent(getActivity(),CommentsActivity.class);
+        i.putExtra("POST",post);
+
+        startActivity(i);
     }
 
     @Override
@@ -406,8 +409,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
             // RYANVU: mUser =  new User();
         }
 
-        Serializable sUser = mUser;
-        i.putExtra(PostingActivity.KEY_USER, sUser);
+        i.putExtra(PostingActivity.KEY_USER, mUser);
 
 
 

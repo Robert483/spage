@@ -12,7 +12,7 @@ import com.thathustudio.spage.utils.PageAdapter;
 import com.thathustudio.spage.widgets.NonSwipeableViewPager;
 
 
-public class HomeActivity extends AppCompatActivity
+public class HomeActivity extends SpageActivity
         implements TabLayout.OnTabSelectedListener {
 
 
@@ -55,6 +55,11 @@ public class HomeActivity extends AppCompatActivity
 
     private void initData() {
 
+    }
+
+    @Override
+    protected int getRootLayoutRes() {
+        return R.layout.activity_home;
     }
 
     @Override

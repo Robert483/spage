@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.thathustudio.spage.R;
+import com.thathustudio.spage.activities.HomeActivity;
 import com.thathustudio.spage.activities.SpageActivity;
 import com.thathustudio.spage.activities.SubjectPostsActivity;
 import com.thathustudio.spage.adapter.SubjectAdapter;
@@ -50,7 +51,8 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
     }
 
     private void getSubjectList() {
-        ((SubjectPostsActivity) getActivity()).getSpageService().getSubjectList(new GetSubjectListCallback((SpageActivity) getActivity()));
+        //((SubjectPostsActivity) getActivity()).getSpageService().getSubjectList(new GetSubjectListCallback((SpageActivity) getActivity()));
+        ((HomeActivity) getActivity()).getCustomApplication().getSpageService().getSubjectList(new GetSubjectListCallback((SpageActivity) getActivity()));
     }
 
     @Override

@@ -32,8 +32,9 @@ import com.thathustudio.spage.firebase.Storage;
 import com.thathustudio.spage.firebase.UploadCallback;
 import com.thathustudio.spage.model.Comment;
 import com.thathustudio.spage.model.responses.EndPointResponse;
-import com.thathustudio.spage.model.responses.Post;
+import com.thathustudio.spage.model.Post;
 import com.thathustudio.spage.service.callback.ForegroundTaskDelegate;
+import com.thathustudio.spage.util.DateTimeUtil;
 import com.thathustudio.spage.views.UserHeader;
 
 import java.io.ByteArrayOutputStream;
@@ -60,7 +61,7 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
     private CommentListAdapter adapter;
 
     private EditText etAddComment;
-    private ImageButton btnChooseImage, btnSend, btnDeletePhoto;
+    private ImageButton btnChooseImage, btnSend, btnDeletePhoto, tvPostContent;
     private ImageView ivAttachedPhoto;
     private RelativeLayout layout_attachment;
 
@@ -80,12 +81,17 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
+        getExtraData();
         setUpView();
 
         setUpEvent();
 
         readCommentsOfPost();
+    }
+
+
+    private void getExtraData(){
+        post = (Post)getIntent().getSerializableExtra("POST");
     }
 
     private void setUpEvent() {
@@ -94,9 +100,16 @@ public class CommentsActivity extends SpageActivity implements View.OnClickListe
         btnDeletePhoto.setOnClickListener(this);
     }
 
+    void setPostInfo(){
+        postHeader.setUserName(post.getUsername());
+        postHeader.setTime(DateTimeUtil.timestampToString(post.getDate()));
+
+    }
+
     private void setUpView() {
         rvComments = (RecyclerView) findViewById(R.id.rvComments);
         postHeader = (UserHeader) findViewById(R.id.postHeader);
+//        postHeader.setPhoto();
 
         rvComments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

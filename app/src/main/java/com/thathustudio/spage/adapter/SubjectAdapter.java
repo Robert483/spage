@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.model.Subject;
+import com.thathustudio.spage.utils.SubjectIconFactory;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
 
+    private final SubjectIconFactory subjectIconFactory;
     private List<Subject> subjectList;
     private Activity context;
     private OnSubjectItemClickListener listener;
@@ -37,6 +39,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
     public SubjectAdapter(Activity context, List<Subject> subjects) {
         this.context = context;
         this.subjectList = subjects;
+        subjectIconFactory = new SubjectIconFactory(context);
     }
 
     @Override
@@ -47,6 +50,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.ivSubjectIcon.setImageDrawable(subjectIconFactory.getSubjectIcon(subjectList.get(position).getId()));
         holder.tvSubjectName.setText(subjectList.get(position).getName());
     }
 

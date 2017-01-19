@@ -19,10 +19,10 @@ import com.thathustudio.spage.model.User;
 public class PageAdapter extends FragmentPagerAdapter {
 
     //integer to count number of tabs
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Subjects", "Exams", "Profile" };
+    final int PAGE_COUNT = 4;
+    //private String tabTitles[] = new String[] { "Subjects", "Exams", "Profile" };
     private Context context;
-    private int[] imageResId = {R.drawable.ic_sbj_informatics, R.drawable.ic_sbj_literature, R.drawable.ic_sbj_english};
+    private int[] imageResId = {R.drawable.ic_sbj_informatics,R.drawable.ic_sbj_technology , R.drawable.ic_sbj_literature, R.drawable.ic_sbj_english};
 
     //Constructor to the class
     public PageAdapter(FragmentManager fm, Context context) {
@@ -43,10 +43,12 @@ public class PageAdapter extends FragmentPagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                return SubjectsFragment.newInstance();
+                return PostsFragment.newInstance(user,PostsFragment.PAGE_NEWFEED);
             case 1:
-                return ExercisesFragment.newInstance(id);
+                return SubjectsFragment.newInstance();
             case 2:
+                return ExercisesFragment.newInstance(id);
+            case 3:
                 return ProfileFragment.newInstance(user.getId(),user.getUsername(),user.getEmail());
         }
         return null;
@@ -62,7 +64,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
         View v = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
         TextView tv = (TextView) v.findViewById(R.id.textView);
-        tv.setText(tabTitles[position]);
+        tv.setText("");
         ImageView img = (ImageView) v.findViewById(R.id.imgIconPage);
         img.setImageResource(imageResId[position]);
         return v;
