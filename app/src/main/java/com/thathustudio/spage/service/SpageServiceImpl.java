@@ -332,6 +332,7 @@ public class SpageServiceImpl implements SpageService {
 
 
 
+
     @Override
     public void updatePost(@NonNull int postID, @NonNull Post newPost, @NonNull final SpageServiceCallback<PostResponse> callback) {
         Call<PostResponse> callUpdateComment = getService().updatePost(postID, newPost);
@@ -345,12 +346,14 @@ public class SpageServiceImpl implements SpageService {
 
                 if (exception == null && responseObject != null) {
                     callback.onPostExcute(responseObject, null);
-                } else {
+                }
+                else {
                     callback.onPostExcute(null, exception);
                 }
             }
         });
     }
+
 
     @Override
     public void deletePost(@NonNull int postId, @NonNull final SpageServiceCallback<Post> callback) {

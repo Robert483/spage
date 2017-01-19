@@ -182,14 +182,17 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
-    public PostAdapter(List<Post> lstPost, Context context) {
+    public PostAdapter(List<Post> lstPost, Context context,boolean isHideHeader) {
         this.lstPost = lstPost;
+        this.isHideHeader = isHideHeader;
         mContext = context;
     }
 
     public void setOnCreatePostClickListener(OnCreatePostClickListener onCreatePostClickListener) {
         this.onCreatePostClickListener = onCreatePostClickListener;
     }
+
+    boolean isHideHeader;
 
     OnCreatePostClickListener onCreatePostClickListener;
 
@@ -199,7 +202,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if(viewType==HEADER){
             final View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.content_create_post, parent, false);
-            if(PostsFragment.isHideHeader){
+            if(isHideHeader){
                 Log.d("Thai","isHideHeader");
                 v.setVisibility(View.GONE);
             }

@@ -75,7 +75,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
     Subject mSubject;
     User mUser;
 
-    public  static boolean isHideHeader = false;
+    boolean isHideHeader = false;
 
 
     public PostsFragment() {
@@ -126,7 +126,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         // RYANVU: args.putSerializable(ARG_USER, user);
         args.putSerializable(ARG_SUBJECT, subject);
         args.putParcelable(ARG_USER, user);
-        args.putInt(ARG_USER, page);
+        args.putInt(ARG_PAGE_TYPE, page);
         fragment.setArguments(args);
 
 
@@ -149,7 +149,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
 
 
     private void setupRecyclerView(){
-        mAdapter = new PostAdapter(lstPost,getContext());
+        mAdapter = new PostAdapter(lstPost,getContext(),isHideHeader);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         mAdapter.setOnCreatePostClickListener(this);
         mAdapter.setOnLoadmorePostListener(this);
@@ -229,7 +229,9 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
                     Log.d("Thai","null");
                     return;
                 }
-                Log.d("Thai","Size of list post = "+posts.size());
+                for(int i=0;i<posts.size();++i){
+                    posts.get(i).setUsername(mUser.getUserName());
+                }
                 lstPost.clear();
                 lstPost.addAll(posts);
                 mAdapter.notifyDataSetChanged();
@@ -298,6 +300,8 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         Intent i =  new Intent(getActivity(),PostingActivity.class);
         i.putExtra(PostingActivity.KEY_ACTION,PostingActivity.ACTION_CREATE);
         Post post = new Post();
+        if(mSubject==null)
+            mSubject = new Subject();
         post.setSubjectId(mSubject.getId());
         post.setUserId(mUser.getId());
         i.putExtra(PostingActivity.KEY_POST,post);
@@ -318,6 +322,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
                 switch (resultCode){
                     case Activity.RESULT_OK:{
                         Post newPost = (Post) data.getSerializableExtra("Post");
+                        newPost.setUsername(mUser.getUsername());
                         if(newPost!=null){
                             lstPost.add(0,newPost);
                             mAdapter.notifyDataSetChanged();
@@ -332,6 +337,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
                 switch (resultCode){
                     case Activity.RESULT_OK:{
                         Post updatePost = (Post) data.getSerializableExtra("Post");
+                        updatePost.setUsername(mUser.getUsername());
                         if(updatePost!=null){
                             lstPost.get(selectedPos).clone(updatePost);
                             mAdapter.notifyDataSetChanged();
@@ -372,6 +378,9 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
                     Log.d("Thai","null");
                     return;
                 }
+//                for(int i=0;i<posts.size();++i){
+//                    posts.get(i).setUsername(mUser.getUserName());
+//                }
                 Log.d("Thai","Size of list post = "+posts.size());
                 lstPost.clear();
                 lstPost.addAll(posts);
@@ -409,9 +418,7 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
         i.putExtra(PostingActivity.KEY_ACTION,PostingActivity.ACTION_EDIT);
         i.putExtra(PostingActivity.KEY_POST,post);
 
-        if(mUser==null){
-            // RYANVU: mUser =  new User();
-        }
+
 
         i.putExtra(PostingActivity.KEY_USER, mUser);
 
@@ -438,12 +445,13 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
 
             @Override
             public void onPreExcute() {
-
+                prbLoading.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onPostExcute(Post post, Throwable throwable) {
-                lstPost.remove(post);
+                prbLoading.setVisibility(View.GONE);
+                lstPost.remove(selectedPos);
                 mAdapter.notifyDataSetChanged();
             }
         });
@@ -546,8 +554,6 @@ public class PostsFragment extends BaseFragment implements OnCreatePostClickList
 
             @Override
             public void onPostExcute(PostResponse postResponse, Throwable throwable) {
-//                btnLike.setImageResource(liked?R.drawable.liked:R.drawable.like);
-//                lstPost.get(pos).setRating(lstPost.get(pos).getRating()+1);
 
                 prbLoadingLike.setVisibility(View.GONE);
                 btnLike.setVisibility(View.VISIBLE);

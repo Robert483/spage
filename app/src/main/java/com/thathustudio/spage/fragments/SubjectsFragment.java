@@ -103,6 +103,8 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
             subscription.setUserId(userId);
             ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
                     createSubscription(subscription, new CreateSubscriptionCallback((SpageActivity) getActivity()));
+        }else{
+
         }
     }
 
