@@ -39,15 +39,15 @@ public class Post implements Serializable {
 
     }
 
-    public int getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
-    int date;
+    long date;
 
     public String getImage() {
         return image;

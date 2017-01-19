@@ -30,6 +30,7 @@ public class HomeActivity extends SpageActivity
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         viewPager = (NonSwipeableViewPager) findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(5);
         pageAdapter = new PageAdapter(getSupportFragmentManager(), HomeActivity.this);
         viewPager.setAdapter(pageAdapter);
 

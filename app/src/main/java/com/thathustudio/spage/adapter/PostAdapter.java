@@ -276,7 +276,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     OnLikeClickListener onLikeClickListener;
 
-    String formatTime(int time)
+    String formatTime(long time)
     {
         return DateTimeUtil.timestampToString(time);
     }
