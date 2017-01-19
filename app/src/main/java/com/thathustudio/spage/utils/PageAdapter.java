@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.thathustudio.spage.R;
 import com.thathustudio.spage.fragments.ExercisesFragment;
+import com.thathustudio.spage.fragments.PostsFragment;
 import com.thathustudio.spage.fragments.ProfileFragment;
 import com.thathustudio.spage.fragments.SubjectsFragment;
 import com.thathustudio.spage.model.User;
@@ -35,7 +36,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // get user -> get id user
-        User user = ShareReferrentHelper.getTempUser(context);
+        User user = ShareReferrentHelper.getCurrentUser(context);
         int id = user.getId();
 
 
@@ -46,7 +47,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return ExercisesFragment.newInstance(id);
             case 2:
-                return ProfileFragment.newInstance("", "");
+                return ProfileFragment.newInstance(user.getId(),user.getUsername(),user.getEmail());
         }
         return null;
     }

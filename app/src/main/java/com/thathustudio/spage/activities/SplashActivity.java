@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                User user = ShareReferrentHelper.getTempUser(getApplicationContext());
+                User user = ShareReferrentHelper.getCurrentUser(getApplicationContext());
                 if(user == null){
                     Intent mainIntent = new Intent(SplashActivity.this.getApplicationContext(), LoginActivity.class);
                     SplashActivity.this.startActivity(mainIntent);
