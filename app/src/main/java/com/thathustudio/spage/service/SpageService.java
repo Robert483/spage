@@ -2,6 +2,7 @@ package com.thathustudio.spage.service;
 
 import android.support.annotation.NonNull;
 
+import com.thathustudio.spage.fragments.SubjectsFragment;
 import com.thathustudio.spage.model.Comment;
 import com.thathustudio.spage.model.Post;
 import com.thathustudio.spage.model.Subject;
@@ -34,6 +35,7 @@ public interface SpageService {
     void createSubscription(Subscription subscription, SpageServiceCallback<EndPointResponse> callback);
     //end region
 
+    void deleteSubscription(Subscription subscription, SpageServiceCallback<EndPointResponse> callback);
 
     //region Post
     void createPost(@NonNull final Post post, @NonNull final SpageServiceCallback<PostResponse> callback);

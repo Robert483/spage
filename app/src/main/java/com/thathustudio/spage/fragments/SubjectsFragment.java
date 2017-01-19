@@ -112,6 +112,12 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
             subscription.setUserId(userId);
             ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
                     createSubscription(subscription, new CreateSubscriptionCallback((SpageActivity) getActivity()));
+        } else {
+            Subscription subscription = new Subscription();
+            subscription.setSubjectId(subjectList.get(position).getId());
+            subscription.setUserId(userId);
+            ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
+                    deleteSubscription(subscription, new DeleteSubscriptionCallback((SpageActivity) getActivity()));
         }
     }
 
@@ -145,6 +151,21 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
             super.onPostExcute(endPointResponse, throwable);
             if (throwable != null) {
                 Toast.makeText(getActivity().getApplicationContext(), "Cannot create subscription", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class DeleteSubscriptionCallback extends ForegroundTaskDelegate<EndPointResponse> {
+
+        public DeleteSubscriptionCallback(SpageActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onPostExcute(EndPointResponse endPointResponse, Throwable throwable) {
+            super.onPostExcute(endPointResponse, throwable);
+            if (throwable != null) {
+                Toast.makeText(getActivity().getApplicationContext(), "Cannot delete subscription", Toast.LENGTH_SHORT).show();
             }
         }
     }

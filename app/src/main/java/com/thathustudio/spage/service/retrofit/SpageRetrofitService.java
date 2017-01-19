@@ -98,5 +98,8 @@ public interface SpageRetrofitService {
     //region Subscription
     @POST("subscription")
     Call<EndPointResponse> createSubcription(@Body Subscription subcription);
+
+    @DELETE("Subscription/{subId}")
+    Call<EndPointResponse> deleteSubcription(@Path("subId") int subId);
     //end region
 }

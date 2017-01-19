@@ -444,4 +444,24 @@ public class SpageServiceImpl implements SpageService {
         });
     }
 
+    @Override
+    public void deleteSubscription(Subscription subscription, final SpageServiceCallback<EndPointResponse> callback) {
+        Call<EndPointResponse> callDeleteSubcription = getService().deleteSubcription(subscription.getId());
+        callback.setCall(callDeleteSubcription);
+        callback.onPreExcute();
+        callDeleteSubcription.enqueue(new TranslateRetrofitCallback<EndPointResponse>() {
+            @Override
+            public void onFinish(Call<EndPointResponse> call, EndPointResponse responseObject, SpageException exception) {
+                super.onFinish(call, responseObject, exception);
+                if (exception == null && responseObject != null) {
+                    if (exception == null && responseObject != null) {
+                        callback.onPostExcute(responseObject, null);
+                    } else {
+                        callback.onPostExcute(null, exception);
+                    }
+                }
+            }
+        });
+    }
+
 }
