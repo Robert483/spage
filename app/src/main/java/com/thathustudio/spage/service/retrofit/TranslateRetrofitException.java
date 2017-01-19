@@ -2,12 +2,12 @@ package com.thathustudio.spage.service.retrofit;
 
 import android.util.Log;
 
+
 import com.google.gson.Gson;
 import com.thathustudio.spage.exception.NetworkException;
 import com.thathustudio.spage.exception.ServiceException;
 import com.thathustudio.spage.exception.SpageException;
 import com.thathustudio.spage.model.responses.EndPointResponse;
-import com.thathustudio.spage.model.responses.ErrorResult;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +16,12 @@ import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Response;
+
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
+/**
+ * Created by btloc on 12/2/16.
+ */
 
 public class TranslateRetrofitException {
 
@@ -30,35 +36,34 @@ public class TranslateRetrofitException {
         LOG.trace(Log.getStackTraceString(throwable));
 
         if (throwable instanceof IOException) {
-            return new NetworkException(throwable.getMessage(), throwable);
-        } else {
+            NetworkException exception = new NetworkException("", throwable);
+            return exception;
+        }
+        else {
             return new SpageException("Undefined Exception", throwable);
         }
     }
 
     public static <T extends EndPointResponse> ServiceException translateServiceException(Call<T> call,
                                                                                           Response<T> response) {
-        T body = response.body();
-        if (body == null) {
+        if (response.body() == null) {
             // This case should not happen. You must have something wrong!
+            String msg = "There is something wrong with request. Please check your request again";
+
             try {
-                ErrorResult errorResult = new Gson().fromJson(response.errorBody().string(), ErrorResult.class);
-                return new ServiceException(errorResult.getCode(),
-                        errorResult.getResponse(),
+                EndPointResponse endPointResponse = new Gson().fromJson(response.errorBody().string(), EndPointResponse.class);
+                return new ServiceException(endPointResponse.getError().getCode(),
+                        endPointResponse.getError().getMessage(),
                         null);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 LOG.error(e.getMessage());
                 LOG.trace(Log.getStackTraceString(e));
 
-                return new ServiceException(response.code(),
-                        "There is something wrong with request. Please check your request again.",
-                        null);
+                return new ServiceException(response.code(), msg, null);
             }
-        } else if (body.getCode() != 200) {
-            return new ServiceException(body.getCode(),
-                    "Server return mismatch code",
-                    null);
-        } else {
+        }
+        else {
             return null;
         }
     }

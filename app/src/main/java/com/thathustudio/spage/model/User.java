@@ -8,6 +8,9 @@ import java.io.Serializable;
 public class User implements Parcelable {
     private String username;
 
+    public User() {
+    }
+
     public User(int id, String username, String password, String email, int role) {
         this.id = id;
         this.username = username;

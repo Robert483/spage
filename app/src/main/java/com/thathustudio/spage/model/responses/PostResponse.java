@@ -9,8 +9,9 @@ import com.thathustudio.spage.model.Post;
 
 public final class PostResponse extends EndPointResponse {
 
-    int code,response;
+    int response;
 
+    int code;
     public int getCode() {
         return code;
     }

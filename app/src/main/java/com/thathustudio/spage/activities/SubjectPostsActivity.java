@@ -58,7 +58,7 @@ public class SubjectPostsActivity extends SpageActivity {
 
     void getExtraData(){
         mSubject = (Subject) getIntent().getSerializableExtra("POST");
-        mUser = (User) getIntent().getSerializableExtra("USER");
+        mUser = (User) getIntent().getParcelableExtra("USER");
     }
 
     @Override

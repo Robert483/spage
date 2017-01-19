@@ -173,7 +173,7 @@ public class PostingActivity extends SpageActivity implements View.OnClickListen
     //Get data
     private void getExtraData(){
         mActionMode = getIntent().getIntExtra(KEY_ACTION,ACTION_CREATE);
-        mUser = (User) getIntent().getSerializableExtra(KEY_USER);
+        mUser = (User) getIntent().getParcelableExtra(KEY_USER);
         mPost = (Post) getIntent().getSerializableExtra(KEY_POST);
         mSubject = (Subject)getIntent().getSerializableExtra(KEY_SUBJECT);
         edtStatus.setText(mPost.getContent());
@@ -484,6 +484,10 @@ public class PostingActivity extends SpageActivity implements View.OnClickListen
                 prbLoading.setVisibility(View.GONE);
                 edtStatus.setEnabled(true);
                 btnPost.setEnabled(true);
+                if(postResponse==null){
+                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(postResponse.getCode()==200){
                     closeActivity(Activity.RESULT_OK);
                 }else{
