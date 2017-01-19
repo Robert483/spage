@@ -18,6 +18,7 @@ public class TempActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
+        finish();
 
         // Redirect or show fragment
 

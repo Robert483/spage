@@ -67,11 +67,19 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
         View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
         setupView(rootView);
         setupEvent();
-        getSubjectList();
         mUser = ShareReferrentHelper.getCurrentUser(getContext());
 //        User m
 
         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getSubjectList();
+        }else{
+        }
     }
 
     private void setupView(View rootView) {

@@ -167,7 +167,7 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
             if (!generateQuestions) {
                 CustomApplication customApplication = (CustomApplication) getApplication();
                 Call<Task4ListResponse<Question>> duelResponseCall = customApplication.getTask4Service().getDuelQuestions(10);
-                duelResponseCall.enqueue(new GetDuelQuestionsCallback(key, intent.getStringExtra(USER_NAME)));
+                duelResponseCall.enqueue(new GetDuelQuestionsCallback(this, key, intent.getStringExtra(USER_NAME)));
                 Log.v("SPage", "Sent");
                 generateQuestions = true;
             }
@@ -299,10 +299,12 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
     public static class GetDuelQuestionsCallback implements Callback<Task4ListResponse<Question>> {
         private final String key;
         private final String userName;
+        public WeakReference<RoomActivity> weakReferenceRoomActivity;
 
-        public GetDuelQuestionsCallback(String key, String userName) {
+        public GetDuelQuestionsCallback(RoomActivity roomActivity, String key, String userName) {
             this.key = key;
             this.userName = userName;
+            weakReferenceRoomActivity = new WeakReference<>(roomActivity);
         }
 
         private boolean isException(SpageException spageException) {
@@ -327,6 +329,10 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
                 database.setValue(null);
                 return;
             }
+
+            RoomActivity roomActivity = weakReferenceRoomActivity.get();
+            if (roomActivity == null || roomActivity.destroyed)
+                return;
 
             database.child("currentQuestionIndex").setValue(questions.size() - 1);
             database = database.child("questions");
