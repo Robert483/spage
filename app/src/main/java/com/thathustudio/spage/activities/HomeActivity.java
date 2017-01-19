@@ -46,8 +46,6 @@ public class HomeActivity extends SpageActivity
                 tab.setCustomView(pageAdapter.getTabView(i));
         }
 
-
-        viewPager.setCurrentItem(1);
         viewPager.setCurrentItem(0);
         //tabLayout.getTabAt(0).getCustomView().setBackgroundColor(Color.WHITE);
 
