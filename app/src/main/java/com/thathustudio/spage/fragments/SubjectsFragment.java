@@ -43,7 +43,7 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
 
     //Fake userId
 
-    int userId = 1;
+    int userId;
 
     public static SubjectsFragment newInstance() {
         SubjectsFragment fragment = new SubjectsFragment();
@@ -68,7 +68,7 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
         setupView(rootView);
         setupEvent();
         mUser = ShareReferrentHelper.getCurrentUser(getContext());
-//        User m
+        userId = mUser.getId();
 
         return rootView;
     }
