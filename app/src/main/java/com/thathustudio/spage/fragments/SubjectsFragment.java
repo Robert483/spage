@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnSubjectItemClickListener {
 
+    private boolean loaded = false;
     private final String TAG = SubjectsFragment.class.getSimpleName();
 
     private RecyclerView rvSubjects;
@@ -76,9 +77,9 @@ public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnS
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
+        if (isVisibleToUser && !loaded) {
+            loaded = true;
             getSubjectList();
-        }else{
         }
     }
 
