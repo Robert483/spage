@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    card_view:cardCornerRadius="1dp">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="@dimen/photo_viewer_item_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <include layout="@layout/content_profile_info"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:gravity="left|center_vertical"
+            android:textStyle="normal"
+            android:text="This is sample content of this post. You can share anything you want here. Write something and post it on Spage"
+            android:id="@+id/tvContent" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/imvImage" />
+
+        <include layout="@layout/content_comment_like"/>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

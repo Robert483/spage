@@ -2,17 +2,18 @@ package com.thathustudio.spage.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
 import com.thathustudio.spage.R;
+import com.thathustudio.spage.fragments.dialogs.BaseDialogFragment;
 
 
-public class SpageProgressDialogFragment extends AppCompatDialogFragment {
+public class SpageProgressDialogFragment extends BaseDialogFragment {
 
     public static SpageProgressDialogFragment newInstance() {
         SpageProgressDialogFragment frag = new SpageProgressDialogFragment();
@@ -21,10 +22,14 @@ public class SpageProgressDialogFragment extends AppCompatDialogFragment {
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.requestFeature(Window.FEATURE_NO_TITLE);
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+        }
         return dialog;
     }
 

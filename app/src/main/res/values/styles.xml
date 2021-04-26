@@ -1,11 +1,89 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="radioButtonStyle">@style/RadioButton</item>
+        <item name="alertDialogTheme">@style/FlatButton.Dialog</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoTitle">
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="FlatButton.Dialog" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorControlHighlight">@color/colorAccentLight</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="colorControlNormal">@color/secondaryTextDark</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="FlatButton">
+        <item name="colorControlHighlight">@color/colorAccentLight</item>
+    </style>
+
+    <style name="FakeCard"/>
+
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <!--<item name="tabPaddingStart">12dp</item>-->
+        <!--<item name="tabPaddingEnd">12dp</item>-->
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="DefaultButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#979797</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">#f9f9f9</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <!--Content text style-->
+    <style name="ContentTextStyle">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/content_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!--Username text style-->
+    <style name="UsernameTextStyle">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/username_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--Time text style-->
+    <style name="TimeTextStyle">
+        <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:textSize">@dimen/time_text_size</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
 </resources>

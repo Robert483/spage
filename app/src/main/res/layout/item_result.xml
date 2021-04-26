@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/quarter_spacing"
+              android:layout_marginEnd="@dimen/spacing"
+              android:layout_marginLeft="@dimen/spacing"
+              android:layout_marginRight="@dimen/spacing"
+              android:layout_marginStart="@dimen/spacing"
+              android:background="@drawable/bg_it_result">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtV_questionNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/primaryTextDark"
+        android:textSize="@dimen/subheading_text_size"/>
+
+    <TextView
+        android:id="@+id/txtV_correct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg_it_result_correct"
+        android:gravity="center"
+        android:minHeight="@dimen/button_height"/>
+
+</LinearLayout>

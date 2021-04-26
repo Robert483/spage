@@ -2,4 +2,48 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="spacing">16dp</dimen>
+    <dimen name="item_size_2lines">72dp</dimen>
+    <dimen name="half_spacing">8dp</dimen>
+    <dimen name="subheading_text_size">16sp</dimen>
+    <dimen name="body_text_size">14sp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="one">1dp</dimen>
+    <dimen name="quarter_spacing">4dp</dimen>
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="footer_height">48dp</dimen>
+    <dimen name="fake_card_radius">2dp</dimen>
+    <dimen name="fake_card_elevation">2dp</dimen>
+    <dimen name="display3_text_size">56sp</dimen>
+    <dimen name="headline_text_size">24sp</dimen>
+    <dimen name="result_bg_corner">50dp</dimen>
+    <dimen name="dialog_spacing">24dp</dimen>
+    <dimen name="exercise_details_item_padding">20dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="view_vertical_margin">10dp</dimen>
+    <dimen name="view_horizontal_margin">10dp</dimen>
+    <dimen name="user_photo_size">70dp</dimen>
+    <dimen name="username_text_size">20sp</dimen>
+    <dimen name="time_text_size">16sp</dimen>
+    <dimen name="content_text_size">16sp</dimen>
+
+    <dimen name="button_rating_size">30dp</dimen>
+    <dimen name="button_in_comment_size">40dp</dimen>
+    <dimen name="add_comment_block_padding">5dp</dimen>
+    <dimen name="comment_image_size">100dp</dimen>
+    <dimen name="comment_image_size_large">300dp</dimen>
+    <dimen name="subject_icon_size">100dp</dimen>
+    <dimen name="favorite_button_size">50dp</dimen>
+    <dimen name="subscribe_button_size">50dp</dimen>
+
+      <!--Setting for Posting Activity-->
+
+    <dimen name="activity_posting_margin">16dp</dimen>
+    <dimen name="activity_posting_delete_photo">24dp</dimen>
+
+    <dimen name="photo_viewer_item_margin">8dp</dimen>
+
+    <!--Setting for Post Fragment-->
+    <dimen name="post_item_profile_icon">36dp</dimen>
+    <dimen name="post_item_comment_icon">24dp</dimen>
 </resources>

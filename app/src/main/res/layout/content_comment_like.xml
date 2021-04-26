@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="@dimen/post_item_comment_icon"
+        android:layout_height="@dimen/post_item_comment_icon"
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:src="@drawable/like"
+        android:id="@+id/imvLike" />
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="@dimen/post_item_comment_icon"
+        android:layout_height="@dimen/post_item_comment_icon"
+        android:id="@+id/prbLoadingLike"
+        tools:visibility="gone"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:gravity="left|center_vertical"
+        android:textStyle="bold"
+        android:textColor="@drawable/custom_animate_press_text"
+        android:text="7 Likes"
+        android:id="@+id/tvLike" />
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="@dimen/post_item_comment_icon"
+        android:layout_height="@dimen/post_item_comment_icon"
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:src="@drawable/comment"/>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:gravity="left|center_vertical"
+        android:textStyle="bold"
+        android:textColor="@drawable/custom_animate_press_text"
+        android:text="3 comments"
+        android:id="@+id/tvComment" />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:layout_width="@dimen/post_item_comment_icon"
+        android:layout_height="@dimen/post_item_comment_icon"
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:src="@drawable/more"
+        android:id="@+id/btnMore" />
+
+</LinearLayout>

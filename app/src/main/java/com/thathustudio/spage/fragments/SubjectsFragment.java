@@ -1,66 +1,173 @@
 package com.thathustudio.spage.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.thathustudio.spage.R;
+import com.thathustudio.spage.activities.HomeActivity;
+import com.thathustudio.spage.activities.SpageActivity;
+import com.thathustudio.spage.activities.SubjectPostsActivity;
+import com.thathustudio.spage.adapter.SubjectAdapter;
+import com.thathustudio.spage.model.Subject;
+import com.thathustudio.spage.model.Subscription;
+import com.thathustudio.spage.model.User;
+import com.thathustudio.spage.model.responses.EndPointResponse;
+import com.thathustudio.spage.service.callback.ForegroundTaskDelegate;
+import com.thathustudio.spage.utils.ShareReferrentHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SubjectsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SubjectsFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SubjectsFragment extends BaseFragment implements SubjectAdapter.OnSubjectItemClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private boolean loaded = false;
+    private final String TAG = SubjectsFragment.class.getSimpleName();
 
+    private RecyclerView rvSubjects;
+    private SubjectAdapter adapter;
+    private List<Subject> subjectList = new ArrayList<>();
+    User mUser;
 
-    public SubjectsFragment() {
-        // Required empty public constructor
-    }
+    //Fake userId
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SubjectsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SubjectsFragment newInstance(String param1, String param2) {
+    int userId;
+
+    public static SubjectsFragment newInstance() {
         SubjectsFragment fragment = new SubjectsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+    }
+
+    private void getSubjectList() {
+        //((SubjectPostsActivity) getActivity()).getSpageService().getSubjectList(new GetSubjectListCallback((SpageActivity) getActivity()));
+        ((HomeActivity) getActivity()).getCustomApplication().getSpageService().getSubjectList(new GetSubjectListCallback((SpageActivity) getActivity()));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subjects, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_subjects, container, false);
+        setupView(rootView);
+        setupEvent();
+        mUser = ShareReferrentHelper.getCurrentUser(getContext());
+        userId = mUser.getId();
+
+        return rootView;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && !loaded) {
+            loaded = true;
+            getSubjectList();
+        }
+    }
+
+    private void setupView(View rootView) {
+        rvSubjects = (RecyclerView) rootView.findViewById(R.id.rvSubjects);
+        rvSubjects.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        adapter = new SubjectAdapter(getActivity(), subjectList);
+        adapter.setOnItemClickListener(this);
+        rvSubjects.setAdapter(adapter);
+    }
+
+    private void setupEvent() {
+        adapter.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        //TODO: go to posts of this subject
+        Subject subject = subjectList.get(position);
+        Intent  i= new Intent(getActivity(),SubjectPostsActivity.class);
+        i.putExtra("POST",subject);
+        i.putExtra("USER",mUser);
+        startActivity(i);
+    }
+
+    @Override
+    public void onSubscribeChange(int position, boolean subscribed) {
+        if (subscribed) {
+            Subscription subscription = new Subscription();
+            subscription.setSubjectId(subjectList.get(position).getId());
+            subscription.setUserId(userId);
+            ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
+                    createSubscription(subscription, new CreateSubscriptionCallback((SpageActivity) getActivity()));
+        } else {
+            Subscription subscription = new Subscription();
+            subscription.setSubjectId(subjectList.get(position).getId());
+            subscription.setUserId(userId);
+            ((HomeActivity) getActivity()).getCustomApplication().getSpageService().
+                    deleteSubscription(subscription, new DeleteSubscriptionCallback((SpageActivity) getActivity()));
+        }
+    }
+
+    private class GetSubjectListCallback extends ForegroundTaskDelegate<List<Subject>> {
+        public GetSubjectListCallback(SpageActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onPostExcute(List<Subject> subjects, Throwable throwable) {
+            super.onPostExcute(subjects, throwable);
+            if (subjects != null) {
+                subjectList.clear();
+                subjectList.addAll(subjects);
+                adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(getActivity().getApplicationContext(), "Cannot get subject list", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class CreateSubscriptionCallback extends ForegroundTaskDelegate<EndPointResponse> {
+
+        public CreateSubscriptionCallback(SpageActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onPostExcute(EndPointResponse endPointResponse, Throwable throwable) {
+            super.onPostExcute(endPointResponse, throwable);
+            if (throwable != null) {
+                Toast.makeText(getActivity().getApplicationContext(), "Cannot create subscription", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class DeleteSubscriptionCallback extends ForegroundTaskDelegate<EndPointResponse> {
+
+        public DeleteSubscriptionCallback(SpageActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onPostExcute(EndPointResponse endPointResponse, Throwable throwable) {
+            super.onPostExcute(endPointResponse, throwable);
+            if (throwable != null) {
+                Toast.makeText(getActivity().getApplicationContext(), "Cannot delete subscription", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

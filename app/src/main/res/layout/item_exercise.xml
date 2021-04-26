@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/item_size_2lines">
+
+    <LinearLayout
+        android:id="@+id/lnLyot_underContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imgBtn_exerciseRank"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_exercise_rank"
+            android:contentDescription="@string/exercise_rank"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            app:srcCompat="@drawable/ic_equalizer"/>
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imgBtn_exerciseDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_download_exercise"
+            android:contentDescription="@string/download_exercise"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            app:srcCompat="@drawable/ic_file_download"/>
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imgBtn_exerciseInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_exercise_info"
+            android:contentDescription="@string/exercise_info"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            app:srcCompat="@drawable/ic_info_outline"/>
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imgBtn_exerciseStart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_start_exercise"
+            android:contentDescription="@string/start_exercise"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            app:srcCompat="@drawable/ic_play_arrow"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/rltLyot_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imgV_exerciseSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing"
+            android:layout_marginStart="@dimen/spacing"
+            android:layout_toLeftOf="@id/txtV_exerciseName"
+            android:layout_toStartOf="@id/txtV_exerciseName"
+            android:contentDescription="@string/exercise_subject"
+            android:scaleType="fitStart"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@id/txtV_exerciseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/txtV_dump"
+            android:layout_alignEnd="@id/txtV_dump"
+            android:layout_alignLeft="@id/txtV_dump"
+            android:layout_alignRight="@id/txtV_dump"
+            android:layout_alignStart="@id/txtV_dump"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/primaryTextDark"
+            android:textSize="@dimen/subheading_text_size"/>
+
+        <TextView
+            android:id="@id/txtV_dump"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/spacing"
+            android:layout_marginLeft="@dimen/item_size_2lines"
+            android:layout_marginRight="@dimen/spacing"
+            android:layout_marginStart="@dimen/item_size_2lines"
+            android:visibility="invisible"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@id/txtV_exerciseContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/txtV_dump"
+            android:layout_alignLeft="@id/txtV_dump"
+            android:layout_alignRight="@id/txtV_dump"
+            android:layout_alignStart="@id/txtV_dump"
+            android:layout_below="@id/txtV_dump"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/secondaryTextDark"
+            android:textSize="@dimen/body_text_size"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/item_size_2lines"
+            android:layout_marginStart="@dimen/item_size_2lines"
+            android:background="@color/dividerDark"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

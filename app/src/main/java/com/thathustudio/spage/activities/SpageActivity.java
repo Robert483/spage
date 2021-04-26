@@ -22,30 +22,18 @@ import java.util.Vector;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by Phung on 16/12/2016.
- */
-
 public abstract class SpageActivity extends AppCompatActivity {
+    protected SpageService spageService;
+    protected View rootLayout;
+    protected SpageService amadService;
+    protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
+    protected boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    protected final String TAG_PROGRESS_DIALOG = "progressDialog";
 
     @LayoutRes
     protected int getRootLayoutRes() {
         return 0;
-    }
-
-    protected View rootLayout;
-
-    protected final boolean FORCE_SCREEN_ORIENTATION_PORTRAIT = true;
-
-    protected final String TAG_PROGRESS_DIALOG = "progressDialog";
-
-    protected SpageService amadService;
-
-    protected List<ForegroundTaskDelegate> listOfForegroundTaskDelegates;
-
-    public final CustomApplication getCustomApplication() {
-        return (CustomApplication)getApplication();
     }
 
     @Override
@@ -61,13 +49,13 @@ public abstract class SpageActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        amadService = getCustomApplication().getSpageService();
+        spageService = getCustomApplication().getSpageService();
         listOfForegroundTaskDelegates = new Vector<>();
     }
 
     @Override
     protected void onDestroy() {
-        for (ForegroundTaskDelegate delegate: listOfForegroundTaskDelegates) {
+        for (ForegroundTaskDelegate delegate : listOfForegroundTaskDelegates) {
             if (delegate != null) {
                 delegate.cancel();
             }
@@ -100,5 +88,9 @@ public abstract class SpageActivity extends AppCompatActivity {
             }
         }
         ft.commitAllowingStateLoss();
+    }
+
+    public final CustomApplication getCustomApplication() {
+        return (CustomApplication) getApplication();
     }
 }

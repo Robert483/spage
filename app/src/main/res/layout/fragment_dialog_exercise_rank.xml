@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:context="com.thathustudio.spage.fragments.dialogs.ExerciseRankDialogFragment">
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/prgBr_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/exercise_details_item_padding">
+
+        <TextView
+            android:id="@id/txtV_dump"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one"
+            android:background="@color/dividerDark"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:scrollbars="vertical"
+            android:id="@+id/rclrV_exerciseRank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/half_spacing"
+            android:paddingTop="@dimen/half_spacing"/>
+
+    </LinearLayout>
+
+</FrameLayout>
+
+

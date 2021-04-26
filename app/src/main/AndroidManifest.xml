@@ -2,6 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.thathustudio.spage">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".app.CustomApplication"
         android:allowBackup="true"
@@ -9,39 +23,51 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoTitle">
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="www.app-spage.com"
                     android:scheme="http"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.ImageViewerActivity"></activity>
+        <activity android:theme="@style/AppTheme" android:name=".activities.RegisterActivity"></activity>
+        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".activities.CommentsActivity"></activity>
+        <activity android:name=".activities.RoomActivity"></activity>
+        <activity
+            android:name=".activities.PostingActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.SubjectPostsActivity"></activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".activities.QuestionsActivity"
+            android:label="@string/exercise">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity"/>
         </activity>
-        <activity android:name=".activities.RegisterActivity">
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".activities.ResultActivity"
+            android:label="@string/result">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity"/>
         </activity>
-        <activity android:name=".activities.HomeActivity">
-        </activity>
-        <activity android:name=".activities.CommentsActivity">
-        </activity>
-        <activity android:name=".activities.PostingActivity">
-        </activity>
-        <activity android:name=".activities.SubjectPostsActivity">
-        </activity>
-        <activity android:name=".activities.QuestionsActivity">
-        </activity>
-        <activity android:name=".activities.ResultActivity">
-        </activity>
-        <activity android:name=".temp.TempActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+         <activity android:name=".temp.TempActivity">
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+             <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>
+         </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/white"/>
+
+    <stroke
+        android:width="@dimen/one"
+        android:color="@color/dividerDark"/>
+
+    <corners
+        android:bottomLeftRadius="@dimen/result_bg_corner"
+        android:bottomRightRadius="@dimen/result_bg_corner"
+        android:topLeftRadius="@dimen/result_bg_corner"
+        android:topRightRadius="@dimen/result_bg_corner"/>
+</shape>

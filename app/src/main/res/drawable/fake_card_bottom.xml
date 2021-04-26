@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/white"/>
+
+    <padding android:bottom="@dimen/half_spacing"/>
+
+    <corners
+        android:bottomLeftRadius="@dimen/fake_card_radius"
+        android:bottomRightRadius="@dimen/fake_card_radius"/>
+</shape>

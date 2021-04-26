@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/rdBtn_choice"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/secondaryTextDark"
+             android:textSize="@dimen/body_text_size"
+             android:layout_marginRight="@dimen/spacing"
+             android:layout_marginEnd="@dimen/spacing"
+             android:paddingLeft="28dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginStart="10dp"
+             android:minHeight="36dp"
+             android:theme="@style/RadioButton">
+
+</RadioButton>-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             style="@style/FakeCard"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="@dimen/half_spacing"
+             android:layout_marginLeft="@dimen/half_spacing"
+             android:layout_marginRight="@dimen/half_spacing"
+             android:layout_marginStart="@dimen/half_spacing"
+             android:background="@android:color/white"
+             android:focusable="true">
+
+    <android.support.v7.widget.AppCompatRadioButton
+                 android:id="@+id/rdBtn_choice"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginEnd="@dimen/half_spacing"
+                 android:layout_marginLeft="@dimen/half_spacing"
+                 android:layout_marginRight="@dimen/half_spacing"
+                 android:layout_marginStart="@dimen/half_spacing"
+                 android:layout_marginTop="@dimen/half_spacing"
+                 android:minHeight="@dimen/button_height"
+                 android:paddingEnd="@dimen/half_spacing"
+                 android:paddingLeft="@dimen/half_spacing"
+                 android:paddingRight="@dimen/half_spacing"
+                 android:paddingStart="@dimen/half_spacing"
+                 android:textColor="@color/primaryTextDark"
+                 android:textSize="@dimen/body_text_size"
+                 android:theme="@style/RadioButton"/>
+
+</FrameLayout>
+
